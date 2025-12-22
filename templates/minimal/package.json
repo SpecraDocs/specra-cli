@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run generate:redirects && NEXT_BUILD_MODE=default next build",
-    "build:export": "npm run generate:redirects && NEXT_BUILD_MODE=export next build",
+    "build:export": "npm run generate:redirects && NEXT_BUILD_MODE=export next build && npm run generate:static-redirects",
     "start": "next start",
     "lint": "eslint .",
     "generate:redirects": "node scripts/generate-redirects.mjs",
+    "generate:static-redirects": "node scripts/generate-static-redirects.mjs",
     "index:search": "tsx scripts/index-search.ts",
     "test:search": "tsx scripts/test-search.ts"
   },
@@ -17,7 +18,7 @@
     "next": "^16.1.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "specra": "^0.1.0"
+    "specra": "^0.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.9",

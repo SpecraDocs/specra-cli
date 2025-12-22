@@ -4,8 +4,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 
-import { initConfig, getConfig, getAssetPath, SpecraConfig } from "specra/lib"
-import { TabProvider } from "specra/components"
+import { getConfig, getAssetPath, SpecraConfig, initConfig } from "specra/lib"
+import { TabProvider, ConfigProvider } from "specra/components"
 
 import specraConfig from "../specra.config.json"
 import "./globals.css"
@@ -80,9 +80,11 @@ export default function RootLayout({
         // className={`${geist.className} ${geistMono.className} antialiased`}
         className={`font-sans antialiased`}
       >
-        <TabProvider defaultTab={defaultTab}>
-          {children}
-        </TabProvider>
+        <ConfigProvider config={config}>
+          <TabProvider defaultTab={defaultTab}>
+            {children}
+          </TabProvider>
+        </ConfigProvider>
       </body>
     </html>
   )

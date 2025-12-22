@@ -1,13 +1,13 @@
 {
   "$schema": "./lib/config.types.ts",
   "site": {
-    "title": "Documentation Library",
+    "title": "Specra Docs",
     "description": "Comprehensive documentation for your project",
     "url": "https://vercel.com/dalmasontos-projects/v0-documentation-library",
     "baseUrl": "/",
     "language": "en",
-    "organizationName": "Your Organization",
-    "projectName": "v0-documentation-library",
+    "organizationName": "dalmasonto",
+    "projectName": "specra",
     "activeVersion": "v1.0.0",
     "favicon": "/icon-light-32x32.png"
   },
