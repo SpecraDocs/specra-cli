@@ -1,0 +1,42 @@
+{
+  "name": "create-specra",
+  "version": "0.1.0",
+  "description": "CLI tool to scaffold a new Specra documentation site with Next.js",
+  "type": "module",
+  "bin": {
+    "create-specra": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "documentation",
+    "docs",
+    "nextjs",
+    "mdx",
+    "specra",
+    "create-app",
+    "cli"
+  ],
+  "author": "dalmasonto, arthur-kamau",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "picocolors": "^1.1.1",
+    "prompts": "^2.4.2",
+    "validate-npm-package-name": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/prompts": "^2.4.9",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5"
+  }
+}

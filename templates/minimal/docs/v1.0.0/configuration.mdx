@@ -1,0 +1,322 @@
+---
+title: Configuration
+description: Configure your Specra documentation site with specra.config.json
+sidebar_position: 3
+icon: cog
+tab_group: guides
+---
+
+Specra uses a centralized configuration file `specra.config.json` at the project root to manage all settings.
+
+## Complete Configuration Example
+
+Here's a complete example showing all available configuration options:
+
+```json
+{
+  "$schema": "./lib/config.types.ts",
+  "site": {
+    "title": "Documentation Library",
+    "description": "Comprehensive documentation for your project",
+    "url": "https://your-docs.com",
+    "baseUrl": "/",
+    "language": "en",
+    "organizationName": "Your Organization",
+    "projectName": "your-project",
+    "activeVersion": "v1.0.0",
+    "favicon": "/icon-light-32x32.png"
+  },
+  "theme": {
+    "defaultMode": "system",
+    "respectPrefersColorScheme": true
+  },
+  "navigation": {
+    "showSidebar": true,
+    "collapsibleSidebar": true,
+    "showBreadcrumbs": true,
+    "showTableOfContents": true,
+    "tocPosition": "right",
+    "tocMaxDepth": 3,
+    "tabGroups": [
+      {
+        "id": "guides",
+        "label": "Guides",
+        "icon": "book-open"
+      },
+      {
+        "id": "api",
+        "label": "API Reference",
+        "icon": "zap"
+      }
+    ]
+  },
+  "social": {
+    "github": "https://github.com/your-org/your-repo",
+    "twitter": "https://twitter.com/your-handle",
+    "discord": "https://discord.gg/your-server",
+    "custom": [
+      {
+        "label": "Website",
+        "href": "https://yourwebsite.com"
+      }
+    ]
+  },
+  "search": {
+    "enabled": true,
+    "placeholder": "Search documentation...",
+    "provider": "meilisearch",
+    "meilisearch": {
+      "host": "http://localhost:7700",
+      "apiKey": "your-api-key",
+      "indexName": "docs"
+    }
+  },
+  "analytics": {
+    "googleAnalytics": "G-XXXXXXXXXX",
+    "plausible": "your-domain.com"
+  },
+  "footer": {
+    "copyright": "Copyright © 2024 Your Organization. All rights reserved.",
+    "links": [
+      {
+        "title": "Documentation",
+        "items": [
+          {
+            "label": "Getting Started",
+            "href": "/docs/v1.0.0/getting-started"
+          },
+          {
+            "label": "API Reference",
+            "href": "/docs/v1.0.0/api-overview"
+          }
+        ]
+      },
+      {
+        "title": "Community",
+        "items": [
+          {
+            "label": "GitHub",
+            "href": "https://github.com/your-org/your-repo"
+          },
+          {
+            "label": "Discord",
+            "href": "https://discord.gg/your-server"
+          }
+        ]
+      }
+    ]
+  },
+  "banner": {
+    "enabled": true,
+    "message": "�� Version 2.0 is now available!",
+    "type": "info",
+    "dismissible": true
+  },
+  "features": {
+    "editUrl": "https://github.com/your-org/your-repo/edit/main/docs",
+    "showLastUpdated": true,
+    "showReadingTime": true,
+    "showAuthors": false,
+    "showTags": true,
+    "versioning": true,
+    "i18n": false
+  },
+  "env": {
+    "API_BASE_URL": "https://api.example.com",
+    "API_VERSION": "v1",
+    "CDN_URL": "https://cdn.example.com"
+  },
+  "deployment": {
+    "target": "vercel",
+    "basePath": "",
+    "customDomain": false
+  }
+}
+```
+
+<Callout type="tip">
+Copy this complete configuration as a starting point and customize it for your needs.
+</Callout>
+
+## Site Configuration
+
+Core metadata and branding for your documentation site.
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `title` | string | Site title (shown in header and browser tab) |
+| `description` | string | Meta description for SEO |
+| `url` | string | Full URL where docs are hosted |
+| `baseUrl` | string | Base path (default: `/`) |
+| `language` | string | Language code (default: `en`) |
+| `activeVersion` | string | Default documentation version |
+| `organizationName` | string | Your organization name |
+| `projectName` | string | Project name |
+
+## Theme Configuration
+
+Control the appearance and color scheme.
+
+```json
+{
+  "theme": {
+    "defaultMode": "system",
+    "respectPrefersColorScheme": true
+  }
+}
+```
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `defaultMode` | `"light" \| "dark" \| "system"` | Default theme mode |
+| `respectPrefersColorScheme` | boolean | Follow system theme preference |
+
+## Navigation Configuration
+
+Control sidebar, breadcrumbs, and table of contents.
+
+```json
+{
+  "navigation": {
+    "showSidebar": true,
+    "collapsibleSidebar": true,
+    "showBreadcrumbs": true,
+    "showTableOfContents": true,
+    "tocPosition": "right",
+    "tocMaxDepth": 3
+  }
+}
+```
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `showSidebar` | boolean | Show/hide the sidebar |
+| `collapsibleSidebar` | boolean | Allow sections to collapse |
+| `showBreadcrumbs` | boolean | Show breadcrumb navigation |
+| `showTableOfContents` | boolean | Show table of contents |
+| `tocPosition` | `"left" \| "right"` | TOC position |
+| `tocMaxDepth` | number | Maximum heading depth for TOC (1-6) |
+
+## Search Configuration
+
+Configure the search functionality.
+
+```json
+{
+  "search": {
+    "enabled": true,
+    "placeholder": "Search documentation...",
+    "provider": "meilisearch",
+    "meilisearch": {
+      "host": "http://localhost:7700",
+      "apiKey": "your-api-key",
+      "indexName": "docs"
+    }
+  }
+}
+```
+
+<Callout type="info">
+Press **⌘K** (Mac) or **Ctrl+K** (Windows/Linux) to open the search modal.
+</Callout>
+
+## Social Links
+
+Add links to your social profiles and repositories.
+
+```json
+{
+  "social": {
+    "github": "https://github.com/your-org/your-repo",
+    "twitter": "https://twitter.com/yourhandle",
+    "discord": "https://discord.gg/yourserver"
+  }
+}
+```
+
+## Features Configuration
+
+Toggle documentation features.
+
+```json
+{
+  "features": {
+    "editUrl": "https://github.com/your-org/repo/edit/main/docs",
+    "showLastUpdated": true,
+    "showReadingTime": true,
+    "showAuthors": false,
+    "showTags": true,
+    "versioning": true
+  }
+}
+```
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `editUrl` | string | Base URL for "Edit this page" links |
+| `showLastUpdated` | boolean | Show last updated date |
+| `showReadingTime` | boolean | Show estimated reading time |
+| `showAuthors` | boolean | Show author information |
+| `showTags` | boolean | Show document tags |
+| `versioning` | boolean | Enable version switcher |
+
+## Environment Variables
+
+Define custom environment variables that can be used in your MDX content:
+
+```json
+{
+  "env": {
+    "API_BASE_URL": "https://api.example.com",
+    "API_VERSION": "v1"
+  }
+}
+```
+
+Use them in MDX with `${VARIABLE_NAME}` or `{{VARIABLE_NAME}}` syntax:
+
+```mdx
+The API is available at ${API_BASE_URL}/users
+```
+
+## Banner Configuration
+
+Show a site-wide banner for announcements.
+
+```json
+{
+  "banner": {
+    "enabled": true,
+    "message": "🎉 Version 2.0 is now available!",
+    "type": "info",
+    "dismissible": true
+  }
+}
+```
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `enabled` | boolean | Show/hide the banner |
+| `message` | string | Banner message text |
+| `type` | `"info" \| "warning" \| "error"` | Banner style |
+| `dismissible` | boolean | Allow users to dismiss |
+
+## Footer Configuration
+
+Customize the footer links.
+
+```json
+{
+  "footer": {
+    "copyright": "© 2024 Your Organization",
+    "links": [
+      {
+        "title": "Documentation",
+        "items": [
+          { "label": "Getting Started", "href": "/docs/v1.0.0/getting-started" }
+        ]
+      }
+    ]
+  }
+}
+```

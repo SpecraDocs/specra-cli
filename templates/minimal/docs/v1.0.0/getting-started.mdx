@@ -1,0 +1,183 @@
+---
+title: Getting Started
+description: Set up and start writing documentation with Specra
+sidebar_position: 2
+icon: book
+tab_group: guides
+---
+
+## Prerequisites
+
+Before you begin, make sure you have:
+- Node.js 18+ installed
+- A package manager (npm, yarn, or pnpm)
+
+## Quick Start
+
+<Steps>
+  <Step title="Clone the Repository">
+    ```bash
+    git clone https://github.com/your-org/specra-docs.git
+    cd specra-docs
+    ```
+  </Step>
+  
+  <Step title="Install Dependencies">
+    <Tabs defaultValue="npm">
+      <Tab label="npm">
+```bash
+npm install
+```
+      </Tab>
+      <Tab label="yarn">
+```bash
+yarn install
+```
+      </Tab>
+      <Tab label="pnpm">
+```bash
+pnpm install
+```
+      </Tab>
+    </Tabs>
+  </Step>
+  
+  <Step title="Start Development Server">
+    <Tabs defaultValue="npm">
+      <Tab label="npm">
+```bash
+npm run dev
+```
+      </Tab>
+      <Tab label="yarn">
+```bash
+yarn dev
+```
+      </Tab>
+      <Tab label="pnpm">
+```bash
+pnpm dev
+```
+      </Tab>
+    </Tabs>
+
+    Open [http://localhost:3000](http://localhost:3000) to view your docs.
+  </Step>
+</Steps>
+
+## Creating Documentation
+
+<Callout type="warning">
+All documentation files **must use the `.mdx` extension**, not `.md`. MDX enables React components inside your markdown.
+</Callout>
+
+### File Structure
+
+Documentation lives in the `docs/` folder, organized by version:
+
+```txt
+docs/
+├── v1.0.0/               # Version 1.0.0 docs
+│   ├── about.mdx
+│   ├── getting-started.mdx
+│   └── guides/
+│       ├── _category_.json
+│       └── writing-content.mdx
+├── v2.0.0/               # Version 2.0.0 docs
+│   └── ...
+└── next/                 # Unreleased/development docs
+    └── ...
+```
+
+### Creating a New Page
+
+1. Create a new `.mdx` file in the appropriate folder
+2. Add frontmatter at the top of the file
+3. Write your content using Markdown and components
+
+**Example: `docs/v1.0.0/my-page.mdx`**
+
+```mdx
+---
+title: My Page Title
+description: A brief description for SEO
+sidebar_position: 5
+---
+
+# My Page Title
+
+Your content goes here. You can use **Markdown** 
+and <Badge>React components</Badge>.
+```
+
+## Frontmatter
+
+Every MDX file should have frontmatter at the top. Here are the available fields:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `title` | ✅ | Page title (used in sidebar and browser tab) |
+| `description` | Recommended | Short description for SEO meta tags |
+| `sidebar_position` | No | Order in the sidebar (lower = higher) |
+| `tab_group` | No | Tab group name |
+| `tags` | No | Array of tags for categorization |
+| `draft` | No | Set `true` to hide in production |
+| `last_updated` | No | Date string for "last updated" display |
+
+<Callout type="tip">
+Use `sidebar_position` to control the order of pages in the sidebar. Pages are sorted by this number, then alphabetically.
+</Callout>
+
+## Organizing with Folders
+
+Create folders to group related documentation:
+
+```
+docs/v1.0.0/
+├── guides/
+│   ├── _category_.json    # Configure folder display
+│   ├── index.mdx          # Optional: custom folder landing page
+│   ├── installation.mdx
+│   └── configuration.mdx
+```
+
+### Category Configuration
+
+Create `_category_.json` in a folder to customize its sidebar appearance:
+
+```json
+{
+  "label": "Guides",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false
+}
+```
+
+## Using Components
+
+Specra includes many built-in components. Import is automatic—just use them:
+
+```mdx
+<Callout type="info">
+  This is an info callout!
+</Callout>
+
+<Tabs defaultValue="JavaScript">
+  <Tab label="JavaScript">
+    JavaScript code here
+  </Tab>
+  <Tab label="Python">
+    Python code here
+  </Tab>
+</Tabs>
+```
+
+See the [Components](/docs/v1.0.0/components) section for all available components.
+
+## Next Steps
+
+<CardGrid cols={2}>
+  <Card icon="settings" title="Configuration" description="Customize your docs site" href="/docs/v1.0.0/configuration" />
+  <Card icon="layers" title="Features" description="Explore all platform features" href="/docs/v1.0.0/features" />
+</CardGrid>

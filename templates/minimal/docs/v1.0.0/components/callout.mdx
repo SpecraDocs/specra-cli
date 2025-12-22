@@ -1,0 +1,83 @@
+---
+title: Callout
+description: Highlight important information with styled callout boxes
+sidebar_position: 4
+---
+
+Callouts draw attention to important information within your content. They're styled based on the type of message they convey.
+
+## Usage
+
+```mdx
+<Callout type="info">
+  This is helpful information for the reader.
+</Callout>
+```
+
+## Types
+
+### Info
+<Callout type="info">
+  This provides additional context or helpful tips.
+</Callout>
+
+```mdx
+<Callout type="info">
+  Helpful additional context goes here.
+</Callout>
+```
+
+### Note
+<Callout type="note">
+  Notes highlight important information the reader should be aware of.
+</Callout>
+
+### Tip
+<Callout type="tip">
+  Tips provide suggestions for better usage or best practices.
+</Callout>
+
+### Warning
+<Callout type="warning">
+  Warnings alert users to potential issues or breaking changes.
+</Callout>
+
+### Success
+<Callout type="success">
+  Success callouts confirm positive outcomes or completed actions.
+</Callout>
+
+### Error
+<Callout type="error">
+  Error callouts highlight critical issues or things to avoid.
+</Callout>
+
+### Danger
+<Callout type="danger">
+  Danger callouts warn about potentially destructive actions.
+</Callout>
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | required | Callout content |
+| `type` | `"info" \| "note" \| "tip" \| "warning" \| "success" \| "error" \| "danger"` | `"info"` | Callout style |
+
+## GitHub-Style Alerts
+
+You can also use markdown blockquotes with alert markers:
+
+```mdx
+> [!INFO]
+> This is an info alert using markdown syntax.
+
+> [!WARNING]
+> This is a warning using markdown syntax.
+```
+
+> [!INFO]
+> This is an info alert using markdown syntax.
+
+> [!WARNING]
+> This is a warning alert using markdown syntax.

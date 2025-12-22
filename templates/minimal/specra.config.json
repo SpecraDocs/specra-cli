@@ -1,0 +1,124 @@
+{
+  "$schema": "./lib/config.types.ts",
+  "site": {
+    "title": "Documentation Library",
+    "description": "Comprehensive documentation for your project",
+    "url": "https://vercel.com/dalmasontos-projects/v0-documentation-library",
+    "baseUrl": "/",
+    "language": "en",
+    "organizationName": "Your Organization",
+    "projectName": "v0-documentation-library",
+    "activeVersion": "v1.0.0",
+    "favicon": "/icon-light-32x32.png"
+  },
+  "theme": {
+    "defaultMode": "system",
+    "respectPrefersColorScheme": true
+  },
+  "navigation": {
+    "showSidebar": true,
+    "collapsibleSidebar": true,
+    "showBreadcrumbs": true,
+    "showTableOfContents": true,
+    "tocPosition": "right",
+    "tocMaxDepth": 3,
+    "tabGroups": [
+      {
+        "id": "guides",
+        "label": "Guides",
+        "icon": "book-open"
+      },
+      {
+        "id": "api",
+        "label": "API Reference",
+        "icon": "zap"
+      },
+      {
+        "id": "components",
+        "label": "Components",
+        "icon": "layers"
+      }
+    ]
+  },
+  "social": {
+    "github": "https://github.com/dalmasonto",
+    "twitter": "https://twitter.com/dalmasonto",
+    "discord": "https://discord.com/invite/dalmasonto",
+    "custom": [
+      {
+        "label": "Website",
+        "href": "https://craftfolio.com/dalmasonto"
+      }
+    ]
+  },
+  "search": {
+    "enabled": false,
+    "placeholder": "Search documentation...",
+    "provider": "meilisearch",
+    "meilisearch": {
+      "host": "http://localhost:7700",
+      "apiKey": "aSampleMasterKey",
+      "indexName": "docs"
+    }
+  },
+  "analytics": {
+    "googleAnalytics": "",
+    "plausible": ""
+  },
+  "footer": {
+    "copyright": "Copyright © 2024 Specra. All rights reserved.",
+    "links": [
+      {
+        "title": "Documentation",
+        "items": [
+          {
+            "label": "Getting Started",
+            "href": "/docs/v1.0.0/getting-started"
+          },
+          {
+            "label": "API Reference",
+            "href": "/docs/v1.0.0/api"
+          }
+        ]
+      },
+      {
+        "title": "Community",
+        "items": [
+          {
+            "label": "GitHub",
+            "href": "https://github.com/yourusername/your-repo"
+          },
+          {
+            "label": "Discord",
+            "href": "#"
+          }
+        ]
+      }
+    ]
+  },
+  "banner": {
+    "enabled": false,
+    "message": "🎉 This is a development version. Some features may not work as expected.",
+    "type": "error",
+    "dismissible": true
+  },
+  "features": {
+    "editUrl": "https://github.com/yourusername/your-repo/edit/main/docs",
+    "showLastUpdated": true,
+    "showReadingTime": true,
+    "showAuthors": false,
+    "showTags": true,
+    "versioning": true,
+    "i18n": false
+  },
+  "env": {
+    "API_BASE_URL": "https://api.example.com",
+    "API_VERSION": "v1",
+    "CDN_URL": "https://cdn.example.com"
+  },
+  "deployment": {
+    "target": "github-pages",
+    "basePath": "",
+    "customDomain": false
+  }
+}
