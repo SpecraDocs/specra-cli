@@ -1,5 +1,5 @@
 {
-  "$schema": "./lib/config.types.ts",
+  "$schema": "./specra.config.schema.json",
   "site": {
     "title": "Specra Docs",
     "description": "Comprehensive documentation for your project",
@@ -94,7 +94,13 @@
           }
         ]
       }
-    ]
+    ],
+    "branding": {
+      "showBranding": true,
+      "logo": "https://tokenkit.s3.amazonaws.com/logo_fa8c1a32da814a209b06c742fbf2a862.png",
+      "title": "Specra",
+      "url": "https://specra.dev"
+    }
   },
   "banner": {
     "enabled": false,

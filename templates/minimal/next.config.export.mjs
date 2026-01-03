@@ -54,6 +54,8 @@ const nextConfig = {
   },
   // Empty turbopack config to silence the warning
   turbopack: {},
+  // Prevent next-mdx-remote from being bundled externally
+  serverExternalPackages: [],
   async redirects() {
     return redirects
   },
