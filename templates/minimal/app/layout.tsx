@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
-import { Geist } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import { getConfig, getAssetPath, SpecraConfig, initConfig } from "specra/lib"
 import { ConfigProvider, TabProvider } from "specra/components"
 import specraConfig from "../specra.config.json"
 import "./globals.css"
 
-const geist = Geist({ subsets: ["latin"] })
+const _geist = Geist({ subsets: ["latin"] })
+const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 // Initialize Specra config
 initConfig(specraConfig as unknown as Partial<SpecraConfig>)
@@ -46,7 +47,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang={config.site.language || "en"}>
-      <body className={`${geist.className} font-sans antialiased`}>
+      <body
+        // className={`${geist.className} ${geist.style.fontFamily} font-sans antialiased`}
+        className={`font-sans antialiased`}
+      >
         <ConfigProvider config={config}>
           <TabProvider defaultTab={defaultTab}>
             {children}

@@ -1,0 +1,197 @@
+---
+title: Features
+description: Explore all the features of the Specra documentation platform
+sidebar_position: 4
+icon: scroll-text
+---
+
+## Content Features
+
+### MDX Support
+
+Write documentation in MDX—Markdown with React components built in.
+
+```mdx
+# Hello World
+
+This is **Markdown** with a <Badge variant="success">React component</Badge>!
+```
+
+<Callout type="tip">
+MDX lets you create interactive, dynamic documentation that goes beyond static text.
+</Callout>
+
+### Syntax Highlighting
+
+Code blocks automatically get syntax highlighting with line numbers:
+
+```typescript
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+function greetUser(user: User): string {
+  return `Hello, ${user.name}!`;
+}
+```
+
+Supported languages include JavaScript, TypeScript, Python, Bash, JSON, CSS, and many more.
+
+### Math Equations
+
+Render mathematical equations using KaTeX:
+
+Inline: <Math>{"E = mc^2"}</Math>
+
+Block:
+<Math block>
+  {"\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}"}
+</Math>
+
+### Mermaid Diagrams
+
+Create diagrams from text using Mermaid:
+
+<Mermaid
+  chart={`
+    graph LR
+      A[Write MDX] --> B[Build]
+      B --> C[Deploy]
+      C --> D[Users Read Docs]
+  `}
+  caption="Documentation workflow"
+/>
+
+## Navigation Features
+
+### Automatic Sidebar
+
+The sidebar is automatically generated from your folder structure. Use `_category_.json` to customize:
+
+```json
+{
+  "label": "Guides",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false
+}
+```
+
+### Table of Contents
+
+A floating table of contents is automatically generated from your headings. It highlights the current section as you scroll.
+
+### Breadcrumbs
+
+Breadcrumb navigation helps users understand their location in the documentation hierarchy.
+
+### Version Switcher
+
+Support multiple documentation versions with easy switching:
+
+- `/docs/v1.0.0/getting-started`
+- `/docs/v2.0.0/getting-started`
+- `/docs/next/getting-started` (unreleased)
+
+## Search
+
+### Full-Text Search
+
+Powered by Meilisearch for instant, typo-tolerant search results.
+
+- **Keyboard shortcut**: Press `⌘K` or `Ctrl+K` to open search
+- **Typo tolerance**: Finds results even with spelling mistakes
+- **Highlighted results**: See where your query matches
+
+### Search Indexing
+
+Documentation is automatically indexed at build time for fast search.
+
+## Theme & Styling
+
+### Dark Mode
+
+Automatic dark mode that respects system preferences:
+
+- Light mode
+- Dark mode  
+- System preference (auto)
+
+Toggle with the button in the header.
+
+### Customizable Design
+
+All styling is based on CSS variables and Tailwind, making customization easy:
+
+```css
+:root {
+  --primary: oklch(0.55 0.22 264.376);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+```
+
+## Components
+
+### Rich Component Library
+
+Built-in components for common documentation patterns:
+
+<CardGrid cols={3}>
+  <Card icon="message-square" title="Callouts" description="Info, warning, tip, error alerts" />
+  <Card icon="layers" title="Tabs" description="Tabbed content sections" />
+  <Card icon="list" title="Steps" description="Step-by-step guides" />
+  <Card icon="chevrons-up-down" title="Accordion" description="Collapsible content" />
+  <Card icon="grid" title="Cards" description="Feature cards with icons" />
+  <Card icon="code" title="Code Blocks" description="Syntax highlighted code" />
+</CardGrid>
+
+See the [Components](/docs/v1.0.0/components) section for documentation on each component.
+
+## Developer Experience
+
+### Hot Reload
+
+Changes to MDX files are instantly reflected without a full page refresh.
+
+### Frontmatter Validation
+
+Frontmatter fields are validated at build time to catch errors early.
+
+### SEO Optimization
+
+Automatic meta tags, OpenGraph images, and structured data from frontmatter:
+
+- Title and description tags
+- OpenGraph and Twitter cards
+- Canonical URLs
+- Sitemap generation
+
+### Reading Time
+
+Automatic calculation and display of estimated reading time for each page.
+
+## Production Features
+
+### Static Generation
+
+All pages are pre-rendered at build time for maximum performance:
+
+- Zero JavaScript required for content
+- Edge caching friendly
+- Fast Time to First Byte (TTFB)
+
+### Performance
+
+- Lighthouse score: 90+ (desktop)
+- Lazy-loaded images with Next.js Image
+- Code splitting for components
+
+### Accessibility
+
+- Keyboard navigation
+- Screen reader support
+- High contrast support
+- Focus management

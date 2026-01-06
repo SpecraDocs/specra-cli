@@ -1,5 +1,5 @@
 {
-  "$schema": "./specra.config.schema.json",
+  "$schema": "./node_modules/specra/config/specra.config.schema.json",
   "site": {
     "title": "Specra Docs",
     "description": "Comprehensive documentation for your project",
@@ -47,12 +47,12 @@
     "custom": [
       {
         "label": "Website",
-        "href": "https://craftfolio.com/dalmasonto"
+        "url": "https://craftfolio.com/dalmasonto"
       }
     ]
   },
   "search": {
-    "enabled": false,
+    "enabled": true,
     "placeholder": "Search documentation...",
     "provider": "meilisearch",
     "meilisearch": {
@@ -123,7 +123,7 @@
     "CDN_URL": "https://cdn.example.com"
   },
   "deployment": {
-    "target": "github-pages",
+    "target": "vercel",
     "basePath": "",
     "customDomain": false
   }

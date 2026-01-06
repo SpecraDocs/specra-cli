@@ -2,8 +2,9 @@ import { MeiliSearch } from "meilisearch"
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
-import { getConfig } from "specra"
-import { extractSearchText } from "specra/components"
+import { extractSearchText, getConfig, initConfig } from "specra"
+import specraConfig from "../specra.config.json"
+// import { extractSearchText } from "specra/components"
 // import { extractSearchText } from "@/components/docs/componentTextProps"
 
 interface SearchDocument {
@@ -14,11 +15,14 @@ interface SearchDocument {
     version: string
     category?: string
     tags?: string[]
+    tab_group?: string
 }
 
 
 async function indexDocuments() {
+    initConfig(specraConfig as any)
     const config = getConfig()
+    console.log(config)
     const searchConfig = config.search
 
     if (!searchConfig?.enabled || searchConfig.provider !== "meilisearch") {
@@ -68,6 +72,24 @@ async function indexDocuments() {
                 const pathParts = slug.split("/")
                 const category = pathParts.length > 1 ? pathParts[0] : undefined
 
+                // Get tab_group from frontmatter or from parent _category_.json
+                let tabGroup = data.tab_group
+
+                // If not in frontmatter, check parent directory's _category_.json
+                if (!tabGroup && pathParts.length > 1) {
+                    const folderPath = pathParts.slice(0, -1).join("/")
+                    const categoryPath = path.join(docsDir, version, folderPath, "_category_.json")
+
+                    if (fs.existsSync(categoryPath)) {
+                        try {
+                            const categoryData = JSON.parse(fs.readFileSync(categoryPath, "utf-8"))
+                            tabGroup = categoryData.tab_group
+                        } catch (e) {
+                            // Ignore JSON parse errors
+                        }
+                    }
+                }
+
                 // Clean content (remove code blocks and special chars for better search)
                 // const cleanContent = mdxContent
                 //     .replace(/```[\s\S]*?```/g, "") // Remove code blocks
@@ -95,6 +117,7 @@ async function indexDocuments() {
                     version: version,
                     category: category,
                     tags: data.tags || [],
+                    tab_group: tabGroup,
                 })
             }
         }
