@@ -1,0 +1,217 @@
+# Specra CLI (create-specra) - AI-Friendly Documentation
+
+## Project Overview
+create-specra is a command-line tool that scaffolds new Specra documentation sites. It's the fastest way to get started with Specra, creating a fully-configured Next.js project with all necessary dependencies and structure.
+
+## Key Information
+- Package Name: create-specra
+- Version: 0.1.7
+- Type: CLI Tool / Project Generator
+- License: MIT
+- Repository: https://github.com/dalmasonto/specra-cli
+- Published on npm: https://www.npmjs.com/package/create-specra
+
+## Core Purpose
+- Scaffold new Specra documentation projects
+- Interactive project setup with prompts
+- Template-based generation
+- Automatic dependency installation
+- Package manager detection and support
+
+## Technology Stack
+- Node.js (CLI runtime)
+- TypeScript
+- Commander.js (CLI framework)
+- Prompts (interactive prompts)
+- validate-npm-package-name (project name validation)
+- picocolors (terminal colors)
+
+## Usage
+```bash
+# With npx (recommended)
+npx create-specra my-docs
+
+# With npm
+npm create specra my-docs
+
+# With yarn
+yarn create specra my-docs
+
+# With pnpm
+pnpm create specra my-docs
+```
+
+## CLI Options
+- `[project-directory]` - Target directory (optional, will prompt)
+- `--template <template>` - Template to use (will prompt if not provided)
+- `--use-npm` - Force npm as package manager
+- `--use-pnpm` - Force pnpm as package manager
+- `--use-yarn` - Force yarn as package manager
+- `--skip-install` - Skip dependency installation
+
+## Available Templates
+- **minimal**: Minimal setup for quick start (default)
+- **default**: Full-featured with examples (coming soon)
+- **api-focused**: Optimized for API docs (coming soon)
+
+## Project Structure
+```
+specra-cli/
+├── src/
+│   ├── index.ts           # CLI entry point, argument parsing
+│   ├── create-project.ts  # Project creation logic
+│   └── utils.ts          # Utility functions
+├── templates/
+│   └── minimal/          # Minimal template files
+├── dist/                 # Compiled output
+├── package.json
+└── tsup.config.ts       # Build configuration
+```
+
+## What Gets Created
+When you run create-specra, it generates:
+```
+my-docs/
+├── app/
+│   ├── layout.tsx        # Re-exports from specra/app/layout
+│   ├── page.tsx          # Landing page
+│   └── [...slug]/
+│       └── page.tsx      # Re-exports from specra/app/docs-page
+├── docs/
+│   └── v1.0.0/
+│       └── index.mdx     # Sample documentation
+├── public/               # Static assets
+├── specra.config.ts      # Specra configuration
+├── next.config.js        # Next.js configuration
+├── tailwind.config.ts    # Tailwind configuration
+├── package.json          # Dependencies including specra
+└── README.md            # Project readme
+```
+
+## Workflow
+1. User runs `npx create-specra my-docs`
+2. CLI prompts for missing information (name, template, package manager)
+3. Validates project name against npm rules
+4. Copies template files to target directory
+5. Updates package.json with project name
+6. Detects or uses specified package manager
+7. Installs dependencies (unless --skip-install)
+8. Displays success message with next steps
+
+## Key Features
+- **Interactive Prompts**: Guides users through setup
+- **Validation**: Ensures valid project names
+- **Smart Detection**: Auto-detects package manager
+- **Flexible**: Supports npm, yarn, pnpm
+- **Fast**: Minimal template for quick starts
+- **Error Handling**: Clear error messages
+
+## Dependencies
+Production:
+- commander: CLI framework
+- prompts: Interactive prompts
+- picocolors: Terminal styling
+- validate-npm-package-name: Name validation
+
+Dev:
+- tsup: Build tool
+- typescript: Language
+
+## Build Process
+- Input: TypeScript source in src/
+- Output: Compiled JavaScript in dist/
+- Entry: dist/index.js (set as bin in package.json)
+- Tool: tsup
+
+## Binary Configuration
+```json
+{
+  "bin": {
+    "create-specra": "./dist/index.js"
+  }
+}
+```
+This allows `npx create-specra` to work globally.
+
+## Relationship to Other Projects
+- **specra-sdk**: The CLI scaffolds projects that use specra as a dependency
+- **specra-docs**: Documentation that guides CLI users
+
+**Flow**:
+User → create-specra → New project with specra dependency → Refer to specra-docs
+
+## Template System
+Templates are stored in `templates/` directory. Each template contains:
+- Complete Next.js project structure
+- Pre-configured specra setup
+- Sample documentation
+- README with instructions
+
+## Development
+```bash
+# Install dependencies
+npm install
+
+# Build
+npm run build
+
+# Watch mode
+npm run dev
+
+# Type check
+npm run typecheck
+
+# Test locally
+npm link
+create-specra test-project
+```
+
+## Publishing
+Distributed via npm. Users don't install it; they run it directly via npx/npm create.
+
+## Common Use Cases
+1. **New Documentation Site**: `npx create-specra my-docs`
+2. **Specific Template**: `npx create-specra my-docs --template minimal`
+3. **Skip Installation**: `npx create-specra my-docs --skip-install`
+4. **Force Package Manager**: `npx create-specra my-docs --use-pnpm`
+
+## Error Handling
+- Invalid project names: Shows npm naming restrictions
+- Existing directories: Warns before overwriting
+- Installation failures: Shows error and suggests manual install
+- Cancelled prompts: Graceful exit
+
+## Success Output
+After successful creation:
+```
+Success! Created my-docs at /path/to/my-docs
+
+Inside that directory, you can run several commands:
+
+  npm run dev
+    Starts the development server.
+
+  npm run build
+    Builds the app for production.
+
+  npm start
+    Runs the built app in production mode.
+
+We suggest that you begin by typing:
+
+  cd my-docs
+  npm run dev
+
+Happy documenting!
+```
+
+## Authors
+dalmasonto, arthur-kamau
+
+## Integration
+The CLI creates projects that immediately work with:
+- specra SDK (auto-installed as dependency)
+- Next.js 14/15/16
+- Modern package managers (npm, yarn, pnpm)
+- TypeScript (pre-configured)
+- Tailwind CSS (pre-configured)
