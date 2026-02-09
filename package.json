@@ -4,7 +4,8 @@
   "description": "CLI tool to scaffold a new Specra documentation site with Next.js",
   "type": "module",
   "bin": {
-    "create-specra": "./dist/index.js"
+    "create-specra": "./dist/index.js",
+    "specra": "./dist/cli.js"
   },
   "files": [
     "dist",
@@ -32,8 +33,11 @@
   "license": "SEE LICENSE IN LICENSE.MD",
   "dependencies": {
     "commander": "^12.1.0",
+    "open": "^11.0.0",
+    "ora": "^9.3.0",
     "picocolors": "^1.1.1",
     "prompts": "^2.4.2",
+    "tar": "^7.5.7",
     "validate-npm-package-name": "^6.0.0"
   },
   "devDependencies": {
