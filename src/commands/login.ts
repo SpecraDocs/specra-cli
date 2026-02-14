@@ -55,7 +55,7 @@ export async function login() {
     })
 
     server.listen(port, () => {
-      const loginUrl = `https://specra.dev/auth/login?cli=true&port=${port}&state=${state}`
+      const loginUrl = `https://specra-docs.com/auth/login?cli=true&port=${port}&state=${state}`
       console.log(`Opening browser to authenticate...`)
       console.log(pc.dim(`If the browser doesn't open, visit: ${loginUrl}`))
       console.log()

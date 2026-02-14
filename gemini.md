@@ -37,7 +37,7 @@ That's it. No configuration, no setup, just working documentation.
          ▼
 ┌─────────────────┐     generates    ┌─────────────────┐
 │  create-specra  │  ─────────────►  │  User's Project │
-│  (CLI Tool)     │     projects     │  (Next.js App)  │
+│  (CLI Tool)     │     projects     │  (SvelteKit App)  │
 └────────┬────────┘     with ───┐    └────────┬────────┘
          │                      │             │
          │ uses templates       │             │ uses as
@@ -125,7 +125,7 @@ specra-cli/
 │
 ├── templates/                    # Project templates
 │   └── minimal/                  # Minimal template
-│       ├── app/                  # Next.js App Router
+│       ├── app/                  # SvelteKit App Router
 │       │   ├── layout.tsx        # Re-exports specra layout
 │       │   ├── page.tsx          # Landing page
 │       │   └── [...slug]/
@@ -135,7 +135,7 @@ specra-cli/
 │       │       └── index.mdx
 │       ├── public/               # Static assets
 │       ├── specra.config.ts      # Specra configuration
-│       ├── next.config.js        # Next.js config
+│       ├── svelte.config.js        # SvelteKit config
 │       ├── tailwind.config.ts    # Tailwind config
 │       ├── tsconfig.json         # TypeScript config
 │       ├── package.json          # Dependencies
@@ -552,11 +552,11 @@ npm:
 
 ### Template Anatomy
 
-The `minimal` template is a complete, runnable Next.js project:
+The `minimal` template is a complete, runnable SvelteKit project:
 
 ```
 minimal/
-├── app/                      # Next.js App Router
+├── app/                      # SvelteKit App Router
 │   ├── globals.css           # Global styles
 │   ├── layout.tsx            # Root layout
 │   ├── page.tsx              # Landing page
@@ -575,7 +575,7 @@ minimal/
 │   └── logo.svg
 │
 ├── .gitignore                # Git ignore rules
-├── next.config.js            # Next.js configuration
+├── svelte.config.js            # SvelteKit configuration
 ├── package.json              # Dependencies
 ├── README.md                 # Project readme
 ├── specra.config.ts          # Specra configuration
@@ -596,7 +596,7 @@ This is the magic - the entire layout is provided by Specra!
 
 #### 2. app/page.tsx (Custom Landing Page)
 ```typescript
-import Link from 'next/link'
+import { goto } from '$app/navigation'
 
 export default function Home() {
   return (
@@ -663,14 +663,14 @@ All Specra behavior configured here.
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "vite dev",
+    "build": "vite build",
+    "start": "vite preview",
+    "lint": "npm run check"
   },
   "dependencies": {
     "specra": "^0.1.7",
-    "next": "^16.0.0",
+    "svelte": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -804,7 +804,7 @@ program
 
 #### Adding Template
 1. Create `templates/my-template/`
-2. Build complete Next.js + Specra project
+2. Build complete SvelteKit + Specra project
 3. Test independently
 4. Add to choices in `src/index.ts`
 5. Document in README
@@ -867,7 +867,7 @@ cat dist/index.js | head -n 20
 1. **Minimal Dependencies**: Only include essentials
 2. **Working Examples**: Template should run immediately
 3. **Clear Structure**: Easy to understand and modify
-4. **Best Practices**: Follow Next.js and Specra conventions
+4. **Best Practices**: Follow SvelteKit and Specra conventions
 5. **Documentation**: Include helpful README
 
 ### For CLI UX

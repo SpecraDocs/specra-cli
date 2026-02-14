@@ -41,7 +41,7 @@ export async function deploy(options: DeployOptions) {
 
     if (projects.length === 0) {
       console.error(
-        pc.red('No projects found. Create one at https://specra.dev/dashboard/projects/new')
+        pc.red('No projects found. Create one at https://specra-docs.com/dashboard/projects/new')
       )
       process.exit(1)
     }

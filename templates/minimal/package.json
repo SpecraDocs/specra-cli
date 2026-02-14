@@ -2,33 +2,32 @@
   "name": "specra-minimal",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "npm run generate:redirects && NEXT_BUILD_MODE=default next build",
-    "build:export": "npm run generate:redirects && NEXT_BUILD_MODE=export next build && npm run generate:static-redirects",
-    "start": "next start",
-    "lint": "eslint .",
-    "generate:redirects": "node scripts/generate-redirects.mjs",
-    "generate:static-redirects": "node scripts/generate-static-redirects.mjs",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "index:search": "tsx scripts/index-search.ts",
     "test:search": "tsx scripts/test-search.ts"
   },
   "dependencies": {
-    "lucide-react": "^0.454.0",
-    "next": "^16.1.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "specra": "^0.1.7"
+    "lucide-svelte": "^0.454.0",
+    "specra": "^0.2.0"
   },
   "devDependencies": {
+    "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/vite-plugin-svelte": "^6.0.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
     "postcss": "^8.5.6",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0",
     "tailwindcss": "^4.1.18",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^6.3.0"
   }
 }

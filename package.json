@@ -1,7 +1,7 @@
 {
   "name": "create-specra",
   "version": "0.1.7",
-  "description": "CLI tool to scaffold a new Specra documentation site with Next.js",
+  "description": "CLI tool to scaffold a new Specra documentation site with SvelteKit",
   "type": "module",
   "bin": {
     "create-specra": "./dist/index.js",
@@ -19,7 +19,8 @@
   "keywords": [
     "documentation",
     "docs",
-    "nextjs",
+    "sveltekit",
+    "svelte",
     "mdx",
     "specra",
     "create-app",

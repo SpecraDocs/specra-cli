@@ -78,22 +78,26 @@ npx create-specra my-docs --skip-install
 
 ## What's Created
 
-The CLI creates a new Next.js project with Specra pre-configured:
+The CLI creates a new SvelteKit project with Specra pre-configured:
 
 ```
 my-docs/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── [...slug]/
-│       └── page.tsx
+├── src/
+│   ├── routes/
+│   │   ├── +layout.svelte
+│   │   ├── +page.svelte
+│   │   └── docs/
+│   │       └── [version]/[...slug]/
+│   │           ├── +page.svelte
+│   │           └── +page.ts
+│   └── app.html
 ├── docs/
 │   └── v1.0.0/
 │       └── index.mdx
-├── public/
-├── specra.config.ts
-├── next.config.js
-├── tailwind.config.ts
+├── static/
+├── specra.config.json
+├── svelte.config.js
+├── vite.config.ts
 └── package.json
 ```
 
@@ -107,15 +111,15 @@ Once your project is created, you can:
    npm run dev
    ```
 
-2. Open [http://localhost:3000](http://localhost:3000) in your browser
+2. Open [http://localhost:5173](http://localhost:5173) in your browser
 
 3. Edit your documentation in the `docs/` directory
 
-4. Customize your site in `specra.config.ts`
+4. Customize your site in `specra.config.json`
 
 ## What is Specra?
 
-Specra is a modern documentation library for Next.js that provides:
+Specra is a modern documentation library for SvelteKit that provides:
 - Multi-version documentation support
 - API reference generation
 - Full-text search
@@ -127,7 +131,7 @@ The official Specra site ([specra-docs](https://specra-docs.com)) also offers a 
 ## Learn More
 
 - [Specra on npm](https://www.npmjs.com/package/specra)
-- [Next.js Documentation](https://nextjs.org/docs)
+- [SvelteKit Documentation](https://svelte.dev/docs/kit)
 - [MDX Documentation](https://mdxjs.com)
 
 ## License

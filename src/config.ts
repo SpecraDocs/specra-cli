@@ -12,7 +12,7 @@ interface SpecraConfig {
 }
 
 const DEFAULT_CONFIG: SpecraConfig = {
-  apiUrl: 'https://specra.dev',
+  apiUrl: 'https://specra-docs.com',
 }
 
 export function getConfig(): SpecraConfig {

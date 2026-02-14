@@ -21,7 +21,7 @@ export async function projects() {
   if (list.length === 0) {
     console.log(pc.yellow('No projects found.'))
     console.log(
-      `Create one at ${pc.dim('https://specra.dev/dashboard/projects/new')}`
+      `Create one at ${pc.dim('https://specra-docs.com/dashboard/projects/new')}`
     )
     return
   }
@@ -35,8 +35,8 @@ export async function projects() {
       status === 'RUNNING'
         ? pc.green
         : status === 'FAILED'
-        ? pc.red
-        : pc.dim
+          ? pc.red
+          : pc.dim
 
     console.log(
       `  ${pc.bold(p.name)} ${pc.dim(`(${p.id.slice(0, 8)})`)}  ${statusColor(status.toLowerCase())}`

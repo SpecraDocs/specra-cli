@@ -50,7 +50,7 @@ export async function createProject({
     fs.mkdirSync(root, { recursive: true })
   }
 
-  console.log(`Creating a new Specra documentation site in ${pc.cyan(root)}`)
+  console.log(`Creating a new Specra documentation site (SvelteKit) in ${pc.cyan(root)}`)
   console.log()
 
   // Create project structure based on template
@@ -118,8 +118,8 @@ export async function createProject({
   console.log(pc.cyan(`  ${command.run('build')}`))
   console.log('    Builds the app for production.')
   console.log()
-  console.log(pc.cyan(`  ${command.run('start')}`))
-  console.log('    Runs the built app in production mode.')
+  console.log(pc.cyan(`  ${command.run('preview')}`))
+  console.log('    Previews the built app locally.')
   console.log()
   console.log('We suggest that you begin by typing:')
   console.log()

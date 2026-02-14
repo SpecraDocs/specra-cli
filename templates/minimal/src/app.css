@@ -1,0 +1,9 @@
+@import "specra/styles";
+
+/* Scan app files for Tailwind utilities */
+@source "./**/*.{js,ts,svelte}";
+
+@theme inline {
+    --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
+    --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+}

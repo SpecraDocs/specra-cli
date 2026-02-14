@@ -1,7 +1,7 @@
 # Specra CLI (create-specra) - Claude Developer Guide
 
 ## Introduction
-Hi Claude! This guide will help you understand and work with create-specra, the CLI tool for scaffolding Specra documentation projects. This is a project generator similar to create-next-app or create-react-app, but specifically for Specra documentation sites.
+Hi Claude! This guide will help you understand and work with create-specra, the CLI tool for scaffolding Specra documentation projects. This is a project generator similar to sv create, but specifically for Specra documentation sites.
 
 ## Project Context
 
@@ -14,7 +14,7 @@ create-specra is a command-line interface tool that:
 
 ### Why Does It Exist?
 Instead of users manually:
-1. Creating a Next.js project
+1. Creating a SvelteKit project
 2. Installing specra and dependencies
 3. Configuring files
 4. Setting up the directory structure
@@ -82,11 +82,11 @@ specra-cli/
 │
 ├── templates/               # Project templates
 │   ├── minimal/            # Minimal template (default)
-│   │   ├── app/           # Next.js app directory
+│   │   ├── app/           # SvelteKit app directory
 │   │   ├── docs/          # Sample docs
 │   │   ├── public/        # Static assets
 │   │   ├── specra.config.ts
-│   │   ├── next.config.js
+│   │   ├── svelte.config.js
 │   │   ├── tailwind.config.ts
 │   │   ├── package.json   # Template dependencies
 │   │   └── README.md
@@ -295,7 +295,7 @@ create-specra          # Also works
 ## Template System
 
 ### Template Structure
-Each template in `templates/` is a complete, standalone Next.js project:
+Each template in `templates/` is a complete, standalone SvelteKit project:
 
 ```
 templates/minimal/
@@ -313,7 +313,7 @@ templates/minimal/
 │   └── logo.svg             # Logo placeholder
 │
 ├── specra.config.ts         # Specra configuration
-├── next.config.js           # Next.js config (imports specra)
+├── svelte.config.js           # SvelteKit config (imports specra)
 ├── tailwind.config.ts       # Tailwind config
 ├── tsconfig.json            # TypeScript config
 ├── package.json             # Dependencies (includes specra)
@@ -367,13 +367,13 @@ export default config
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "vite dev",
+    "build": "vite build",
+    "start": "vite preview"
   },
   "dependencies": {
     "specra": "^0.1.7",
-    "next": "^16.0.0",
+    "svelte": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
@@ -390,7 +390,7 @@ mkdir templates/my-template
 ```
 
 2. **Build Complete Project**:
-Create a full Next.js + Specra project in the directory.
+Create a full SvelteKit + Specra project in the directory.
 
 3. **Use Placeholders**:
 In package.json, use a placeholder for the name:

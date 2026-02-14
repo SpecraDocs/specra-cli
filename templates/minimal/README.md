@@ -17,26 +17,23 @@ pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see your documentation site.
+Open [http://localhost:5173](http://localhost:5173) with your browser to see your documentation site.
 
 ## Project Structure
 
 ```
-├── app/              # Next.js app directory
-│   ├── layout.tsx    # Root layout
-│   ├── page.tsx      # Home page
-│   └── docs/         # Documentation pages
-├── components/       # Reusable components
-│   ├── docs/        # Documentation-specific components
-│   └── ui/          # UI components
-├── docs/            # Your MDX documentation files
-│   └── v1.0.0/     # Version 1.0.0 docs
-├── lib/             # Utility functions
-│   ├── mdx.ts      # MDX processing
-│   ├── config.ts   # Configuration
-│   └── parsers/    # API parsers
-├── public/          # Static assets
-└── specra.config.json  # Specra configuration
+├── src/
+│   ├── routes/          # SvelteKit routes
+│   │   ├── +layout.svelte   # Root layout
+│   │   ├── +page.svelte     # Home page
+│   │   └── docs/            # Documentation pages
+│   └── app.html         # HTML template
+├── docs/                # Your MDX documentation files
+│   └── v1.0.0/          # Version 1.0.0 docs
+├── static/              # Static assets
+├── specra.config.json   # Specra configuration
+├── svelte.config.js     # SvelteKit configuration
+└── vite.config.ts       # Vite configuration
 ```
 
 ## Writing Documentation
@@ -56,13 +53,9 @@ Your content here...
 
 ### Using Components
 
-Import and use components in your MDX:
+Specra provides built-in components for your documentation:
 
 ```mdx
-import { Callout } from '@/components/docs/callout'
-import { CodeBlock } from '@/components/docs/code-block'
-import { Tabs, Tab } from '@/components/docs/tabs'
-
 <Callout type="info">
   This is an info callout!
 </Callout>
@@ -105,18 +98,18 @@ Edit `specra.config.json` to customize your site:
 
 ```bash
 npm run build
-npm run start
+npm run preview
 ```
 
 ## Learn More
 
-- [Specra Documentation](https://specra.dev/docs)
-- [Next.js Documentation](https://nextjs.org/docs)
+- [Specra Documentation](https://specra-docs.com/docs)
+- [SvelteKit Documentation](https://svelte.dev/docs/kit)
 - [MDX Documentation](https://mdxjs.com)
 
 ## Deployment
 
-Deploy your Specra documentation site to Vercel, Netlify, or any hosting platform that supports Next.js.
+Deploy your Specra documentation site to Vercel, Netlify, or any hosting platform that supports SvelteKit.
 
 ### Vercel
 
@@ -128,5 +121,5 @@ Deploy your Specra documentation site to Vercel, Netlify, or any hosting platfor
 
 ## Need Help?
 
-- Check the [documentation](https://specra.dev/docs)
-- Report issues on [GitHub](https://github.com/yourusername/specra/issues)
+- Check the [documentation](https://specra-docs.com/docs)
+- Report issues on [GitHub](https://github.com/dalmasonto/specra/issues)
