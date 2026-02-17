@@ -1,0 +1,81 @@
+---
+title: Themes
+description: Configure the look and feel of your documentation site
+sidebar_position: 1
+---
+
+The platform supports light and dark themes out of the box, with full control over which mode is used by default.
+
+## Theme Modes
+
+Three theme modes are available:
+
+| Mode | Description |
+|------|-------------|
+| `light` | Always use the light theme |
+| `dark` | Always use the dark theme |
+| `system` | Follow the user's operating system preference |
+
+## Configuration
+
+Set the default theme in `specra.config.json`:
+
+```json
+{
+  "theme": {
+    "defaultMode": "dark",
+    "respectPrefersColorScheme": true
+  }
+}
+```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `defaultMode` | `"light" \| "dark" \| "system"` | `"system"` | Initial theme mode |
+| `respectPrefersColorScheme` | `boolean` | `true` | Whether to detect and follow OS preference |
+
+<Callout type="info">
+  When `respectPrefersColorScheme` is `true` and `defaultMode` is `"system"`, the site automatically switches themes when the user changes their OS appearance settings.
+</Callout>
+
+## Theme Toggle
+
+Users can switch themes using the toggle button in the site header. Their preference is saved in local storage and persists across visits.
+
+## Customizing Colors
+
+All colors are defined as CSS custom properties, making them easy to override:
+
+```css
+:root {
+  --primary: oklch(0.55 0.22 264.376);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+
+.dark {
+  --primary: oklch(0.65 0.22 264.376);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.95 0 0);
+}
+```
+
+<Callout type="tip">
+  Use the OKLCH color space for perceptually uniform color adjustments. This ensures colors look consistent across light and dark themes.
+</Callout>
+
+## Best Practices
+
+<Steps>
+  <Step title="Choose a Default">
+    Pick a default theme that matches your brand. For developer documentation, dark mode is often preferred.
+  </Step>
+
+  <Step title="Test Both Themes">
+    Always preview your content in both light and dark modes. Ensure images, diagrams, and code blocks are readable in both.
+  </Step>
+
+  <Step title="Respect User Preference">
+    Keep `respectPrefersColorScheme` enabled so users get the theme they expect.
+  </Step>
+</Steps>

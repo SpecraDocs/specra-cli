@@ -10,7 +10,7 @@ program
   .name('create-specra')
   .description('Create a new Specra documentation site')
   .argument('[project-directory]', 'Directory to create the project in')
-  .option('--template <template>', 'Template to use (default, minimal, api-focused)')
+  .option('--template <template>', 'Template to use (minimal, book-docs, jbrains-docs)')
   .option('--use-npm', 'Use npm as the package manager')
   .option('--use-pnpm', 'Use pnpm as the package manager')
   .option('--use-yarn', 'Use yarn as the package manager')
@@ -72,21 +72,21 @@ program
         name: 'template',
         message: 'Which template would you like to use?',
         choices: [
-          // {
-          //   title: 'Default',
-          //   value: 'default',
-          //   description: 'Full-featured documentation site with examples',
-          // },
           {
             title: 'Minimal',
             value: 'minimal',
             description: 'Minimal setup to get started quickly',
           },
-          // {
-          //   title: 'API-Focused',
-          //   value: 'api-focused',
-          //   description: 'Optimized for API documentation',
-          // },
+          {
+            title: 'Book Docs',
+            value: 'book-docs',
+            description: 'Knowledge base style with dark theme and categorized sidebar',
+          },
+          {
+            title: 'JBrains Docs',
+            value: 'jbrains-docs',
+            description: 'Reference docs style with light theme and tab groups',
+          },
         ],
         initial: 0,
       })

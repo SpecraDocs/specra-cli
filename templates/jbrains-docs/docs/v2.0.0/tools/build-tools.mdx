@@ -1,0 +1,165 @@
+---
+title: Build Tools
+description: Configure and use build tools for your documentation project
+sidebar_position: 1
+---
+
+This page covers the build tools used to develop, build, and deploy your documentation site.
+
+## Development Server
+
+Start the development server with hot reload:
+
+<Tabs defaultValue="npm">
+  <Tab label="npm">
+```bash
+npm run dev
+```
+  </Tab>
+  <Tab label="yarn">
+```bash
+yarn dev
+```
+  </Tab>
+  <Tab label="pnpm">
+```bash
+pnpm dev
+```
+  </Tab>
+</Tabs>
+
+The dev server runs on `http://localhost:5173` by default with:
+- **Hot Module Replacement (HMR)** — instant updates when you edit MDX files
+- **Error overlay** — displays build errors in the browser
+- **Fast startup** — powered by Vite
+
+## Production Build
+
+Build the site for production:
+
+<Tabs defaultValue="npm">
+  <Tab label="npm">
+```bash
+npm run build
+```
+  </Tab>
+  <Tab label="yarn">
+```bash
+yarn build
+```
+  </Tab>
+  <Tab label="pnpm">
+```bash
+pnpm build
+```
+  </Tab>
+</Tabs>
+
+This outputs a static site to the `build/` directory.
+
+<Callout type="info">
+  The production build pre-renders all pages for optimal performance and SEO.
+</Callout>
+
+## Preview
+
+Preview the production build locally:
+
+<Tabs defaultValue="npm">
+  <Tab label="npm">
+```bash
+npm run preview
+```
+  </Tab>
+  <Tab label="yarn">
+```bash
+yarn preview
+```
+  </Tab>
+  <Tab label="pnpm">
+```bash
+pnpm preview
+```
+  </Tab>
+</Tabs>
+
+## Vite Configuration
+
+The documentation platform uses Vite as its build tool. The default configuration is in `vite.config.ts`:
+
+```typescript
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [sveltekit()]
+});
+```
+
+## SvelteKit Configuration
+
+SvelteKit is configured in `svelte.config.js`:
+
+```javascript
+import { specraConfig } from 'specra/svelte-config';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+
+const config = specraConfig({
+  vitePreprocess: { vitePreprocess }
+});
+
+export default config;
+```
+
+## PostCSS & Tailwind
+
+Styling is handled by Tailwind CSS via PostCSS. Configuration is in `postcss.config.mjs`:
+
+```javascript
+const config = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
+
+export default config;
+```
+
+## TypeScript
+
+TypeScript is configured in `tsconfig.json` with strict mode enabled:
+
+```json
+{
+  "extends": "./.svelte-kit/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true
+  }
+}
+```
+
+## Type Checking
+
+Run the type checker:
+
+<Tabs defaultValue="npm">
+  <Tab label="npm">
+```bash
+npm run check
+```
+  </Tab>
+  <Tab label="yarn">
+```bash
+yarn check
+```
+  </Tab>
+  <Tab label="pnpm">
+```bash
+pnpm check
+```
+  </Tab>
+</Tabs>
+
+This runs `svelte-kit sync` followed by `svelte-check` to verify your TypeScript types.

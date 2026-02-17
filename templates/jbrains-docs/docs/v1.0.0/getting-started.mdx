@@ -1,0 +1,111 @@
+---
+title: Getting Started
+description: Set up your environment and create your first project
+sidebar_position: 2
+icon: rocket
+---
+
+This guide walks you through setting up your development environment and writing your first program.
+
+## Prerequisites
+
+- **Node.js 18+** installed on your machine
+- A code editor (VS Code recommended)
+- A terminal or command line
+
+## Create a Project
+
+<Steps>
+  <Step title="Scaffold the Project">
+    Use the CLI to create a new project:
+
+    ```bash
+    npx create-specra my-project
+    ```
+  </Step>
+
+  <Step title="Install Dependencies">
+    <Tabs defaultValue="npm">
+      <Tab label="npm">
+```bash
+cd my-project && npm install
+```
+      </Tab>
+      <Tab label="yarn">
+```bash
+cd my-project && yarn install
+```
+      </Tab>
+      <Tab label="pnpm">
+```bash
+cd my-project && pnpm install
+```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Run the Project">
+    <Tabs defaultValue="npm">
+      <Tab label="npm">
+```bash
+npm run dev
+```
+      </Tab>
+      <Tab label="yarn">
+```bash
+yarn dev
+```
+      </Tab>
+      <Tab label="pnpm">
+```bash
+pnpm dev
+```
+      </Tab>
+    </Tabs>
+
+    Open `http://localhost:5173` in your browser.
+  </Step>
+</Steps>
+
+## Project Structure
+
+A newly scaffolded project has this structure:
+
+```txt
+my-project/
+├── docs/
+│   ├── v1.0.0/          # Documentation content
+│   └── v2.0.0/          # Another version
+├── src/                  # Application source
+├── specra.config.json    # Configuration
+└── package.json
+```
+
+## Hello World
+
+Create a new file `docs/v1.0.0/hello.mdx`:
+
+```mdx
+---
+title: Hello World
+sidebar_position: 99
+---
+
+# Hello World
+
+This is your first documentation page!
+
+```
+
+<Callout type="tip">
+  Files are automatically picked up by the sidebar. Use `sidebar_position` to control ordering.
+</Callout>
+
+## What's Next
+
+Now that you have a running project, explore the language fundamentals:
+
+<CardGrid cols={2}>
+  <Card icon="code" title="Basic Syntax" description="Learn the fundamental building blocks" href="/docs/v1.0.0/basics/syntax" />
+  <Card icon="layers" title="Types & Variables" description="Understand the type system" href="/docs/v1.0.0/basics/types" />
+</CardGrid>

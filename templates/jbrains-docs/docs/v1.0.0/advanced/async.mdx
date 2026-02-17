@@ -1,0 +1,95 @@
+---
+title: Async Programming
+description: Asynchronous data loading and dynamic content
+sidebar_position: 2
+---
+
+This page covers how the documentation platform handles asynchronous operations like data loading, content processing, and dynamic rendering.
+
+## How Content Loading Works
+
+Documentation pages are loaded asynchronously at build time and on navigation. The platform uses SvelteKit's server-side loading to fetch and process MDX content:
+
+```typescript
+export const load: PageServerLoad = async ({ params }) => {
+  const { version, slug } = params;
+  const doc = await getCachedDocBySlug(slug, version);
+  const allDocs = await getCachedAllDocs(version);
+  return { doc, allDocs, version, slug };
+};
+```
+
+<Callout type="info">
+  Content is cached after the first load, so subsequent navigations are nearly instant.
+</Callout>
+
+## Server-Side Data Flow
+
+The data loading follows this pipeline:
+
+<Steps>
+  <Step title="Route Matching">
+    SvelteKit matches the URL to a route pattern like `/docs/[version]/[...slug]`.
+  </Step>
+
+  <Step title="Data Loading">
+    The `+page.server.ts` load function runs, fetching the document and sidebar data.
+  </Step>
+
+  <Step title="MDX Processing">
+    The MDX content is parsed, components are resolved, and the content tree is built.
+  </Step>
+
+  <Step title="Rendering">
+    The Svelte component renders the processed content with all interactive components.
+  </Step>
+</Steps>
+
+## Configuration Loading
+
+Configuration is loaded once at application startup and cached:
+
+```typescript
+import { initConfig, getConfig } from 'specra';
+import specraConfig from '../../specra.config.json';
+
+initConfig(specraConfig);
+
+const config = getConfig(); // Cached after first call
+```
+
+## Version Resolution
+
+When a user navigates to the root URL, the system resolves the active version and redirects:
+
+```typescript
+export const load: PageServerLoad = async () => {
+  const config = getConfig();
+  const activeVersion = config.site?.activeVersion || 'v1.0.0';
+  redirect(302, `/docs/${activeVersion}/home`);
+};
+```
+
+## Adjacent Document Resolution
+
+Previous and next links are computed asynchronously from the full document list:
+
+```typescript
+const { previous, next } = getAdjacentDocs(slug, allDocs);
+```
+
+This enables linear navigation through the documentation in sidebar order.
+
+## Table of Contents Extraction
+
+The table of contents is extracted from heading elements in the content:
+
+```typescript
+const toc = extractTableOfContents(doc.content);
+```
+
+This returns a structured list of headings with their depths and anchor IDs.
+
+<Callout type="tip">
+  All these async operations are handled by the platform automatically. You only need to write MDX content — the data loading pipeline is built in.
+</Callout>

@@ -1,0 +1,116 @@
+---
+title: Reusable Content
+description: Create reusable content blocks for consistent documentation
+sidebar_position: 3
+---
+
+Reusable content helps you maintain consistency across your documentation by defining content once and using it in multiple places.
+
+## Components as Reusable Blocks
+
+The built-in component library provides reusable patterns for common documentation needs.
+
+### Card Grids
+
+Use card grids to create consistent navigation sections across pages:
+
+<CardGrid cols={3}>
+  <Card icon="zap" title="Fast" description="Optimized for speed" />
+  <Card icon="shield" title="Secure" description="Built with security in mind" />
+  <Card icon="code" title="Developer First" description="Great developer experience" />
+</CardGrid>
+
+### Step-by-Step Patterns
+
+Use the Steps component for consistent instructional content:
+
+<Steps>
+  <Step title="Define the Content">
+    Write your content in MDX format with clear, concise language.
+  </Step>
+
+  <Step title="Add Components">
+    Enhance your content with interactive components like callouts, tabs, and cards.
+  </Step>
+
+  <Step title="Review and Publish">
+    Preview your changes locally, then commit and deploy.
+  </Step>
+</Steps>
+
+## Consistent Callout Patterns
+
+Use standardized callout types across your docs for a consistent reading experience:
+
+<Callout type="info">
+  **Info callouts** provide supplementary context that helps readers understand a topic better.
+</Callout>
+
+<Callout type="warning">
+  **Warning callouts** alert readers about potential pitfalls or breaking changes.
+</Callout>
+
+<Callout type="tip">
+  **Tip callouts** share best practices and shortcuts that improve the reader's workflow.
+</Callout>
+
+## Tabbed Content Patterns
+
+Use tabs to provide content variations. Common patterns include:
+
+### Installation Instructions
+
+<Tabs defaultValue="npm">
+  <Tab label="npm">
+```bash
+npm install my-package
+```
+  </Tab>
+  <Tab label="yarn">
+```bash
+yarn add my-package
+```
+  </Tab>
+  <Tab label="pnpm">
+```bash
+pnpm add my-package
+```
+  </Tab>
+</Tabs>
+
+### Language Examples
+
+<Tabs defaultValue="TypeScript">
+  <Tab label="TypeScript">
+```typescript
+const greeting: string = "Hello, world!";
+console.log(greeting);
+```
+  </Tab>
+  <Tab label="Python">
+```python
+greeting = "Hello, world!"
+print(greeting)
+```
+  </Tab>
+  <Tab label="Go">
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, world!")
+}
+```
+  </Tab>
+</Tabs>
+
+## Best Practices
+
+| Practice | Description |
+|----------|-------------|
+| **Use consistent types** | Always use the same callout type for the same kind of information |
+| **Keep cards brief** | Card descriptions should be one short sentence |
+| **Limit tab count** | Use 2-4 tabs per group for readability |
+| **Name tabs clearly** | Tab labels should be short and descriptive |

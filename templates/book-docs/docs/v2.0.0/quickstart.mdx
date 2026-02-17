@@ -1,0 +1,112 @@
+---
+title: Quick Start
+description: Get up and running in under 5 minutes
+sidebar_position: 2
+icon: zap
+---
+
+Follow these steps to set up your documentation site and start writing content.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- **Node.js 18+** installed
+- A package manager (**npm**, **yarn**, or **pnpm**)
+
+## Installation
+
+<Steps>
+  <Step title="Create a New Project">
+    Run the CLI to scaffold a new documentation site:
+
+    ```bash
+    npx create-specra my-docs
+    ```
+  </Step>
+
+  <Step title="Install Dependencies">
+    <Tabs defaultValue="npm">
+      <Tab label="npm">
+```bash
+cd my-docs && npm install
+```
+      </Tab>
+      <Tab label="yarn">
+```bash
+cd my-docs && yarn install
+```
+      </Tab>
+      <Tab label="pnpm">
+```bash
+cd my-docs && pnpm install
+```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Start the Dev Server">
+    <Tabs defaultValue="npm">
+      <Tab label="npm">
+```bash
+npm run dev
+```
+      </Tab>
+      <Tab label="yarn">
+```bash
+yarn dev
+```
+      </Tab>
+      <Tab label="pnpm">
+```bash
+pnpm dev
+```
+      </Tab>
+    </Tabs>
+
+    Your docs site is now running at `http://localhost:5173`.
+  </Step>
+</Steps>
+
+## Project Structure
+
+After scaffolding, your project looks like this:
+
+```txt
+my-docs/
+├── docs/
+│   ├── v1.0.0/          # Previous version docs
+│   └── v2.0.0/          # Current version docs
+├── src/                  # SvelteKit application
+├── specra.config.json    # Site configuration
+└── package.json
+```
+
+<Callout type="info">
+  All documentation lives in the `docs/` directory as `.mdx` files. The sidebar is automatically generated from the folder structure.
+</Callout>
+
+## Creating Your First Page
+
+Create a new file at `docs/v2.0.0/my-page.mdx`:
+
+```mdx
+---
+title: My First Page
+description: A page I just created
+sidebar_position: 10
+---
+
+# Hello World
+
+This is my first documentation page.
+```
+
+Save the file and it will appear in the sidebar automatically.
+
+## Next Steps
+
+<CardGrid cols={2}>
+  <Card icon="lightbulb" title="Core Concepts" description="Learn the key ideas" href="/docs/v2.0.0/concepts" />
+  <Card icon="file-text" title="Formatting" description="Style your content" href="/docs/v2.0.0/content/formatting" />
+</CardGrid>

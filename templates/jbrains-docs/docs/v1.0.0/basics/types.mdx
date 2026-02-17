@@ -1,0 +1,135 @@
+---
+title: Types & Variables
+description: Understand the type system and variable declarations
+sidebar_position: 2
+---
+
+This page covers how content types and configuration variables work in the documentation platform.
+
+## Frontmatter Types
+
+Frontmatter fields have specific types that the system validates:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | `string` | Yes | Page title |
+| `description` | `string` | No | SEO description |
+| `sidebar_position` | `number` | No | Sidebar ordering |
+| `icon` | `string` | No | Lucide icon name |
+| `tab_group` | `string` | No | Tab group assignment |
+| `tags` | `string[]` | No | Content tags |
+| `draft` | `boolean` | No | Hide in production |
+
+## Configuration Types
+
+The `specra.config.json` file uses typed configuration:
+
+### Theme Configuration
+
+```typescript
+interface ThemeConfig {
+  defaultMode: 'light' | 'dark' | 'system';
+  respectPrefersColorScheme: boolean;
+}
+```
+
+Example:
+
+```json
+{
+  "theme": {
+    "defaultMode": "light",
+    "respectPrefersColorScheme": true
+  }
+}
+```
+
+### Navigation Configuration
+
+```typescript
+interface NavigationConfig {
+  showSidebar: boolean;
+  collapsibleSidebar: boolean;
+  showBreadcrumbs: boolean;
+  showTableOfContents: boolean;
+  tocPosition: 'left' | 'right';
+  tocMaxDepth: number;
+  tabGroups?: TabGroup[];
+}
+
+interface TabGroup {
+  id: string;
+  label: string;
+  icon?: string;
+}
+```
+
+<Callout type="info">
+  Tab groups allow you to split sidebar content into separate sections. Each category folder can be assigned to a tab group using `tab_group` in its `_category_.json`.
+</Callout>
+
+### Category Configuration
+
+Categories are defined with `_category_.json` files:
+
+```typescript
+interface CategoryConfig {
+  label: string;
+  position: number;
+  collapsible: boolean;
+  collapsed: boolean;
+  icon?: string;
+  tab_group?: string;
+}
+```
+
+Example:
+
+```json
+{
+  "label": "Basics",
+  "position": 3,
+  "collapsible": true,
+  "collapsed": false,
+  "icon": "book",
+  "tab_group": "language"
+}
+```
+
+## Content Variables
+
+Environment variables can be defined in configuration and used in content:
+
+```json
+{
+  "env": {
+    "API_URL": "https://api.example.com",
+    "VERSION": "1.0.0"
+  }
+}
+```
+
+<Callout type="tip">
+  Use environment variables for values that change between environments, like API URLs or version numbers.
+</Callout>
+
+## Version Variables
+
+The documentation supports multiple versions. Each version is a folder under `docs/`:
+
+```txt
+docs/
+├── v1.0.0/    # Version 1.0.0
+├── v2.0.0/    # Version 2.0.0
+└── next/      # Development version
+```
+
+The active version is set in configuration:
+
+```json
+{
+  "site": {
+    "activeVersion": "v1.0.0"
+  }
+}
+```
