@@ -1,15 +1,14 @@
 {
   "$schema": "./node_modules/specra/config/specra.config.schema.json",
   "site": {
-    "title": "Specra Docs",
-    "description": "Comprehensive documentation for your project",
-    "url": "https://vercel.com/dalmasontos-projects/v0-documentation-library",
+    "title": "My Docs",
+    "description": "Documentation for my project",
+    "url": "http://localhost:5173",
     "baseUrl": "/",
     "language": "en",
-    "organizationName": "dalmasonto",
-    "projectName": "specra",
-    "activeVersion": "v1.0.0",
-    "favicon": "/icon-light-32x32.png"
+    "organizationName": "my-org",
+    "projectName": "my-project",
+    "activeVersion": "v1.0.0"
   },
   "theme": {
     "defaultMode": "system",
@@ -41,32 +40,13 @@
     ]
   },
   "social": {
-    "github": "https://github.com/dalmasonto",
-    "twitter": "https://twitter.com/dalmasonto",
-    "discord": "https://discord.com/invite/dalmasonto",
-    "custom": [
-      {
-        "label": "Website",
-        "url": "https://craftfolio.com/dalmasonto"
-      }
-    ]
+    "github": "https://github.com/your-org/your-repo"
   },
   "search": {
-    "enabled": true,
-    "placeholder": "Search documentation...",
-    "provider": "meilisearch",
-    "meilisearch": {
-      "host": "http://localhost:7700",
-      "apiKey": "aSampleMasterKey",
-      "indexName": "docs"
-    }
-  },
-  "analytics": {
-    "googleAnalytics": "",
-    "plausible": ""
+    "enabled": false
   },
   "footer": {
-    "copyright": "Copyright © 2024 Specra. All rights reserved.",
+    "copyright": "Copyright © 2025 My Project. All rights reserved.",
     "links": [
       {
         "title": "Documentation",
@@ -74,10 +54,6 @@
           {
             "label": "Getting Started",
             "href": "/docs/v1.0.0/getting-started"
-          },
-          {
-            "label": "API Reference",
-            "href": "/docs/v1.0.0/api"
           }
         ]
       },
@@ -86,45 +62,18 @@
         "items": [
           {
             "label": "GitHub",
-            "href": "https://github.com/yourusername/your-repo"
-          },
-          {
-            "label": "Discord",
-            "href": "#"
+            "href": "https://github.com/your-org/your-repo"
           }
         ]
       }
-    ],
-    "branding": {
-      "showBranding": true,
-      "logo": "https://tokenkit.s3.amazonaws.com/logo_fa8c1a32da814a209b06c742fbf2a862.png",
-      "title": "Specra",
-      "url": "https://specra.dev"
-    }
-  },
-  "banner": {
-    "enabled": false,
-    "message": "🎉 This is a development version. Some features may not work as expected.",
-    "type": "error",
-    "dismissible": true
+    ]
   },
   "features": {
-    "editUrl": "https://github.com/yourusername/your-repo/edit/main/docs",
     "showLastUpdated": true,
     "showReadingTime": true,
     "showAuthors": false,
     "showTags": true,
     "versioning": true,
     "i18n": false
-  },
-  "env": {
-    "API_BASE_URL": "https://api.example.com",
-    "API_VERSION": "v1",
-    "CDN_URL": "https://cdn.example.com"
-  },
-  "deployment": {
-    "target": "vercel",
-    "basePath": "",
-    "customDomain": false
   }
 }

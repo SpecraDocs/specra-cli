@@ -1,7 +1,7 @@
 import pc from 'picocolors'
 import open from 'open'
 import { createServer } from 'http'
-import { saveConfig } from '../config.js'
+import { getConfig, saveConfig } from '../config.js'
 import { apiRequest } from '../api-client.js'
 import { randomBytes } from 'crypto'
 
@@ -11,15 +11,17 @@ export async function login() {
 
   const state = randomBytes(16).toString('hex')
   const port = 9876
+  const { apiUrl } = getConfig()
 
   return new Promise<void>((resolve) => {
     const server = createServer(async (req, res) => {
       const url = new URL(req.url!, `http://localhost:${port}`)
 
-      if (url.pathname === '/callback') {
-        const token = url.searchParams.get('token')
-        const returnedState = url.searchParams.get('state')
+      // Backend redirects to root path with token as query param
+      const token = url.searchParams.get('token')
+      const returnedState = url.searchParams.get('state')
 
+      if (token || returnedState) {
         if (returnedState !== state) {
           res.writeHead(400, { 'Content-Type': 'text/html' })
           res.end('<html><body><h1>State mismatch. Please try again.</h1></body></html>')
@@ -33,7 +35,6 @@ export async function login() {
 
           // Verify the token works
           try {
-            saveConfig({ token })
             const user = await apiRequest<{ email: string }>('/api/auth/verify')
             console.log(pc.green(`Authenticated as ${user.email}`))
           } catch {
@@ -55,7 +56,7 @@ export async function login() {
     })
 
     server.listen(port, () => {
-      const loginUrl = `https://specra.dev/auth/login?cli=true&port=${port}&state=${state}`
+      const loginUrl = `${apiUrl}/auth/cli?port=${port}&state=${state}`
       console.log(`Opening browser to authenticate...`)
       console.log(pc.dim(`If the browser doesn't open, visit: ${loginUrl}`))
       console.log()
