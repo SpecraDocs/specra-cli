@@ -40,7 +40,7 @@ npx create-specra [project-directory] [options]
 
 ### Options
 
-- `--template <template>` - Template to use: `minimal` (will prompt if not provided)
+- `--template <template>` - Template to use: `minimal`, `book-docs`, `jbrains-docs` (will prompt if not provided)
 - `--use-npm` - Use npm as the package manager
 - `--use-pnpm` - Use pnpm as the package manager
 - `--use-yarn` - Use yarn as the package manager
@@ -56,6 +56,25 @@ Minimal setup to get started quickly:
 - Clean starting point
 - Ready to customize
 
+### Book Docs
+
+Knowledge base style inspired by popular docs platforms:
+- Dark theme by default
+- Categorized sidebar with section headers (Content, Customization)
+- Site-wide banner
+- Flush sidebar layout (attached to screen edge)
+- Version badge in sidebar
+
+### JBrains Docs
+
+Reference documentation style with tabbed navigation:
+- Light theme by default
+- Tab groups for organizing content (Language, Multiplatform)
+- Collapsible tree-style sidebar
+- No table of contents (right panel)
+- Flush sidebar layout
+- Version badge in sidebar
+
 ## Examples
 
 Create a new project with interactive prompts:
@@ -70,6 +89,12 @@ Create a project with the minimal template using npm:
 npx create-specra my-docs --template minimal --use-npm
 ```
 
+Create a project with the book-docs template:
+
+```bash
+npx create-specra my-docs --template book-docs
+```
+
 Create a project and skip installation:
 
 ```bash
@@ -78,22 +103,29 @@ npx create-specra my-docs --skip-install
 
 ## What's Created
 
-The CLI creates a new Next.js project with Specra pre-configured:
+The CLI creates a new SvelteKit project with Specra pre-configured:
 
 ```
 my-docs/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── [...slug]/
-│       └── page.tsx
+├── src/
+│   ├── app.css
+│   ├── app.html
+│   └── routes/
+│       ├── +layout.server.ts
+│       ├── +layout.svelte
+│       ├── +page.server.ts
+│       └── docs/
+│           └── [version]/
+│               └── [...slug]/
+│                   ├── +page.server.ts
+│                   └── +page.svelte
 ├── docs/
-│   └── v1.0.0/
-│       └── index.mdx
+│   ├── v1.0.0/
+│   └── v2.0.0/
 ├── public/
-├── specra.config.ts
-├── next.config.js
-├── tailwind.config.ts
+├── specra.config.json
+├── svelte.config.js
+├── vite.config.ts
 └── package.json
 ```
 
@@ -107,15 +139,15 @@ Once your project is created, you can:
    npm run dev
    ```
 
-2. Open [http://localhost:3000](http://localhost:3000) in your browser
+2. Open [http://localhost:5173](http://localhost:5173) in your browser
 
 3. Edit your documentation in the `docs/` directory
 
-4. Customize your site in `specra.config.ts`
+4. Customize your site in `specra.config.json`
 
 ## What is Specra?
 
-Specra is a modern documentation library for Next.js that provides:
+Specra is a modern documentation library for SvelteKit that provides:
 - Multi-version documentation support
 - API reference generation
 - Full-text search
@@ -127,7 +159,7 @@ The official Specra site ([specra-docs](https://specra-docs.com)) also offers a 
 ## Learn More
 
 - [Specra on npm](https://www.npmjs.com/package/specra)
-- [Next.js Documentation](https://nextjs.org/docs)
+- [SvelteKit Documentation](https://svelte.dev/docs/kit)
 - [MDX Documentation](https://mdxjs.com)
 
 ## License
