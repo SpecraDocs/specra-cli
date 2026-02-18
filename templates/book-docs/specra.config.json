@@ -71,6 +71,7 @@
     "showAuthors": false,
     "showTags": true,
     "versioning": true,
+    "showVersionBadge": true,
     "i18n": false
   }
 }
