@@ -77,17 +77,37 @@ export async function deploy(options: DeployOptions) {
     projectId = response.project
   }
 
-  // Create archive
-  const spinner = ora('Packaging docs...').start()
+  const spinner = ora('Building project...').start()
 
   try {
-    const archive = await createArchive(dir)
+    // 1. Build the project locally
+    const buildDir = join(dir, 'build')
+    const { execSync } = await import('child_process')
+
+    try {
+      execSync('npm run build', { cwd: dir, stdio: 'pipe' })
+    } catch (err) {
+      const stderr = err instanceof Error && 'stderr' in err
+        ? (err as { stderr: Buffer }).stderr?.toString()
+        : ''
+      throw new Error(`Build failed:\n${stderr}`)
+    }
+
+    if (!existsSync(buildDir)) {
+      throw new Error(
+        'Build output not found. Expected a `build/` directory.\n' +
+        'Make sure your project uses @sveltejs/adapter-static.'
+      )
+    }
+
+    // 2. Archive the build output
+    spinner.text = 'Packaging build output...'
+    const archive = await createArchive(buildDir)
     spinner.text = `Uploading (${(archive.length / 1024).toFixed(0)}KB)...`
 
-    // Get git commit SHA if available
+    // 3. Get git commit SHA if available
     let commitSha: string | undefined
     try {
-      const { execSync } = await import('child_process')
       commitSha = execSync('git rev-parse HEAD', { cwd: dir })
         .toString()
         .trim()
@@ -95,16 +115,18 @@ export async function deploy(options: DeployOptions) {
       // not a git repo
     }
 
+    // 4. Upload as pre-built
     const result = await apiUpload(
       `/api/projects/${projectId}/deploy`,
       archive,
       {
         'X-Deploy-Trigger': 'CLI',
+        'X-Pre-Built': 'true',
         ...(commitSha ? { 'X-Commit-Sha': commitSha } : {}),
       }
     ) as { deploymentId: string }
 
-    spinner.succeed(pc.green('Deployment triggered!'))
+    spinner.succeed(pc.green('Deployed!'))
     console.log()
     console.log(`  Deployment ID: ${pc.cyan(result.deploymentId)}`)
 
