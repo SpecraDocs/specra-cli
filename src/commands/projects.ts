@@ -1,5 +1,5 @@
 import pc from 'picocolors'
-import { apiRequest } from '../api-client.js'
+import { apiRequest, formatError } from '../api-client.js'
 import { isAuthenticated } from '../config.js'
 
 interface Project {
@@ -16,7 +16,13 @@ export async function projects() {
     process.exit(1)
   }
 
-  const list = await apiRequest<Project[]>('/api/projects')
+  let list: Project[]
+  try {
+    list = await apiRequest<Project[]>('/api/projects')
+  } catch (err) {
+    console.error(pc.red(formatError('Failed to fetch projects', err)))
+    process.exit(1)
+  }
 
   if (list.length === 0) {
     console.log(pc.yellow('No projects found.'))

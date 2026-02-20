@@ -1,10 +1,30 @@
 import { getConfig, getToken } from './config.js'
 
-class ApiError extends Error {
+export class ApiError extends Error {
   constructor(public status: number, message: string) {
     super(message)
     this.name = 'ApiError'
   }
+}
+
+const STATUS_HINTS: Record<number, string> = {
+  401: 'Try running `specra login` to re-authenticate.',
+  403: 'You may not have permission for this action. Check your plan or project access.',
+  502: 'The server is temporarily unavailable. Try again in a moment.',
+  503: 'The server is temporarily unavailable. Try again in a moment.',
+}
+
+/** Format an error for CLI display (no stack traces). */
+export function formatError(context: string, err: unknown): string {
+  const prefix = context ? `${context}: ` : ''
+  if (err instanceof ApiError) {
+    const hint = STATUS_HINTS[err.status] || ''
+    return `${prefix}${err.message} (${err.status})${hint ? `\n  ${hint}` : ''}`
+  }
+  if (err instanceof Error) {
+    return `${prefix}${err.message}`
+  }
+  return `${prefix}${String(err)}`
 }
 
 export async function apiRequest<T = unknown>(

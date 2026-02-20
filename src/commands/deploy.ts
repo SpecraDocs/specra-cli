@@ -1,7 +1,7 @@
 import pc from 'picocolors'
 import ora from 'ora'
 import { createArchive } from '../archive.js'
-import { apiUpload, apiRequest } from '../api-client.js'
+import { apiUpload, apiRequest, formatError } from '../api-client.js'
 import { isAuthenticated, getConfig } from '../config.js'
 import { existsSync, readFileSync } from 'fs'
 import { join, resolve } from 'path'
@@ -35,9 +35,15 @@ export async function deploy(options: DeployOptions) {
 
   if (!projectId) {
     // List projects and ask user to pick
-    const projects = await apiRequest<Array<{ id: string; name: string; subdomain: string }>>(
-      '/api/projects'
-    )
+    let projects: Array<{ id: string; name: string; subdomain: string }>
+    try {
+      projects = await apiRequest<Array<{ id: string; name: string; subdomain: string }>>(
+        '/api/projects'
+      )
+    } catch (err) {
+      console.error(pc.red(formatError('Failed to fetch projects', err)))
+      process.exit(1)
+    }
 
     if (projects.length === 0) {
       console.error(
@@ -109,7 +115,7 @@ export async function deploy(options: DeployOptions) {
     console.log()
   } catch (err) {
     spinner.fail(pc.red('Deploy failed'))
-    console.error(err instanceof Error ? err.message : err)
+    console.error(pc.red(formatError('', err)))
     process.exit(1)
   }
 }

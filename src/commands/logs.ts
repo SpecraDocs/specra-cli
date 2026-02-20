@@ -1,5 +1,5 @@
 import pc from 'picocolors'
-import { apiRequest } from '../api-client.js'
+import { apiRequest, formatError } from '../api-client.js'
 import { isAuthenticated } from '../config.js'
 
 interface Deployment {
@@ -24,30 +24,35 @@ export async function logs(
     process.exit(1)
   }
 
-  if (options.deployment) {
-    // Get specific deployment
-    const deploy = await apiRequest<Deployment>(
-      `/api/projects/${projectId}/deployments/${options.deployment}`
-    )
+  try {
+    if (options.deployment) {
+      // Get specific deployment
+      const deploy = await apiRequest<Deployment>(
+        `/api/projects/${projectId}/deployments/${options.deployment}`
+      )
 
-    printDeployment(deploy)
-  } else {
-    // Get latest deployment
-    const data = await apiRequest<DeploymentList>(
-      `/api/projects/${projectId}/deployments?limit=1`
-    )
+      printDeployment(deploy)
+    } else {
+      // Get latest deployment
+      const data = await apiRequest<DeploymentList>(
+        `/api/projects/${projectId}/deployments?limit=1`
+      )
 
-    if (data.deployments.length === 0) {
-      console.log(pc.yellow('No deployments found.'))
-      return
+      if (data.deployments.length === 0) {
+        console.log(pc.yellow('No deployments found.'))
+        return
+      }
+
+      // Fetch full details with logs
+      const deploy = await apiRequest<Deployment>(
+        `/api/projects/${projectId}/deployments/${data.deployments[0].id}`
+      )
+
+      printDeployment(deploy)
     }
-
-    // Fetch full details with logs
-    const deploy = await apiRequest<Deployment>(
-      `/api/projects/${projectId}/deployments/${data.deployments[0].id}`
-    )
-
-    printDeployment(deploy)
+  } catch (err) {
+    console.error(pc.red(formatError('Failed to fetch logs', err)))
+    process.exit(1)
   }
 }
 
