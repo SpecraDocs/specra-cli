@@ -1,8 +1,7 @@
 @import "specra/styles";
 @source "./**/*.{js,ts,svelte}";
 
-
-:root {
-    --font-sans: "Geist", "Geist Fallback";
-    --font-mono: "Geist Mono", "Geist Mono Fallback";
+@theme {
+    --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
+    --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
 }
