@@ -1,0 +1,129 @@
+---
+title: Basic Syntax
+description: Learn the fundamental syntax and structure
+sidebar_position: 1
+---
+
+This page covers the essential syntax you need to know to start writing documentation content with MDX.
+
+## Page Structure
+
+Every MDX page starts with frontmatter followed by content:
+
+```mdx
+---
+title: Page Title
+description: Page description
+sidebar_position: 1
+---
+
+Your content goes here.
+```
+
+The frontmatter is a YAML block enclosed by `---` lines. It defines metadata about the page.
+
+## Markdown Basics
+
+MDX supports all standard Markdown syntax:
+
+### Text Formatting
+
+```markdown
+**Bold text**
+*Italic text*
+`Inline code`
+~~Strikethrough~~
+```
+
+**Bold text**, *Italic text*, `Inline code`, ~~Strikethrough~~
+
+### Links
+
+```markdown
+[Internal link](/docs/v2.0.0/getting-started)
+[External link](https://example.com)
+```
+
+### Images
+
+```markdown
+![Alt text](/path/to/image.png)
+```
+
+## Code Blocks
+
+Fenced code blocks support syntax highlighting for many languages:
+
+```typescript
+interface Document {
+  title: string;
+  content: string;
+  version: string;
+}
+
+function createDocument(title: string): Document {
+  return {
+    title,
+    content: '',
+    version: '2.0.0',
+  };
+}
+```
+
+```python
+class Document:
+    def __init__(self, title: str):
+        self.title = title
+        self.content = ""
+        self.version = "2.0.0"
+```
+
+## Components in MDX
+
+MDX lets you use components directly in your Markdown. Components are available globally — no imports needed:
+
+```mdx
+<Callout type="info">
+  This is a callout component inside MDX.
+</Callout>
+```
+
+<Callout type="info">
+  This is a callout component inside MDX.
+</Callout>
+
+## Headings
+
+Use headings to create document structure. The table of contents (when enabled) is generated from H2 and H3 headings:
+
+```markdown
+## Section (H2)
+### Subsection (H3)
+#### Detail (H4)
+```
+
+<Callout type="tip">
+  Start your content with H2 (`##`). The page title from frontmatter automatically renders as H1.
+</Callout>
+
+## Lists
+
+### Unordered
+
+- First item
+- Second item
+  - Nested item
+- Third item
+
+### Ordered
+
+1. First step
+2. Second step
+3. Third step
+
+## Tables
+
+| Column A | Column B | Column C |
+|----------|----------|----------|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |

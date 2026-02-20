@@ -1,0 +1,77 @@
+{
+  "$schema": "./node_modules/specra/config/specra.config.schema.json",
+  "site": {
+    "title": "My Docs",
+    "description": "Documentation for my project",
+    "url": "http://localhost:5173",
+    "baseUrl": "/",
+    "language": "en",
+    "organizationName": "my-org",
+    "projectName": "my-project",
+    "activeVersion": "v1.0.0"
+  },
+  "theme": {
+    "defaultMode": "dark",
+    "respectPrefersColorScheme": true
+  },
+  "navigation": {
+    "showSidebar": true,
+    "collapsibleSidebar": true,
+    "sidebarStyle": "flush",
+    "showBreadcrumbs": true,
+    "showTableOfContents": true,
+    "tocPosition": "right",
+    "tocMaxDepth": 3
+  },
+  "social": {
+    "github": "https://github.com/your-org/your-repo"
+  },
+  "search": {
+    "enabled": false
+  },
+  "banner": {
+    "enabled": true,
+    "message": "Welcome to our docs — we're actively improving them!",
+    "type": "info",
+    "dismissible": true
+  },
+  "footer": {
+    "copyright": "Copyright © 2025 My Project. All rights reserved.",
+    "branding": {
+      "showBranding": true
+    },
+    "links": [
+      {
+        "title": "Documentation",
+        "items": [
+          {
+            "label": "Introduction",
+            "href": "/docs/v1.0.0/introduction"
+          },
+          {
+            "label": "Quick Start",
+            "href": "/docs/v1.0.0/quickstart"
+          }
+        ]
+      },
+      {
+        "title": "Community",
+        "items": [
+          {
+            "label": "GitHub",
+            "href": "https://github.com/your-org/your-repo"
+          }
+        ]
+      }
+    ]
+  },
+  "features": {
+    "showLastUpdated": true,
+    "showReadingTime": true,
+    "showAuthors": false,
+    "showTags": true,
+    "versioning": true,
+    "showVersionBadge": true,
+    "i18n": false
+  }
+}

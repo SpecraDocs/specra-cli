@@ -40,7 +40,7 @@ npx create-specra [project-directory] [options]
 
 ### Options
 
-- `--template <template>` - Template to use: `minimal` (will prompt if not provided)
+- `--template <template>` - Template to use: `minimal`, `book-docs`, `jbrains-docs` (will prompt if not provided)
 - `--use-npm` - Use npm as the package manager
 - `--use-pnpm` - Use pnpm as the package manager
 - `--use-yarn` - Use yarn as the package manager
@@ -56,6 +56,25 @@ Minimal setup to get started quickly:
 - Clean starting point
 - Ready to customize
 
+### Book Docs
+
+Knowledge base style inspired by popular docs platforms:
+- Dark theme by default
+- Categorized sidebar with section headers (Content, Customization)
+- Site-wide banner
+- Flush sidebar layout (attached to screen edge)
+- Version badge in sidebar
+
+### JBrains Docs
+
+Reference documentation style with tabbed navigation:
+- Light theme by default
+- Tab groups for organizing content (Language, Multiplatform)
+- Collapsible tree-style sidebar
+- No table of contents (right panel)
+- Flush sidebar layout
+- Version badge in sidebar
+
 ## Examples
 
 Create a new project with interactive prompts:
@@ -68,6 +87,12 @@ Create a project with the minimal template using npm:
 
 ```bash
 npx create-specra my-docs --template minimal --use-npm
+```
+
+Create a project with the book-docs template:
+
+```bash
+npx create-specra my-docs --template book-docs
 ```
 
 Create a project and skip installation:

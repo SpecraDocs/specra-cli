@@ -1,0 +1,89 @@
+---
+title: Core Concepts
+description: Understand the key ideas behind the documentation platform
+sidebar_position: 3
+icon: lightbulb
+---
+
+Before diving into content creation, it helps to understand a few core concepts that shape how the platform works.
+
+## MDX
+
+MDX is Markdown with components. You write standard Markdown and can embed rich, interactive components directly in your content.
+
+```mdx
+# Regular Markdown
+
+This is a paragraph with **bold** and *italic* text.
+
+<Callout type="tip">
+  And this is an interactive component inside Markdown!
+</Callout>
+```
+
+<Callout type="info">
+  All documentation files use the `.mdx` extension, not `.md`.
+</Callout>
+
+## Frontmatter
+
+Every page starts with frontmatter — a YAML block at the top of the file that defines metadata:
+
+```mdx
+---
+title: Page Title
+description: A short description for SEO
+sidebar_position: 1
+icon: book
+---
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `title` | Yes | Page title shown in sidebar and browser tab |
+| `description` | Recommended | Short description for search engines |
+| `sidebar_position` | No | Controls order in sidebar (lower number = higher up) |
+| `icon` | No | Lucide icon name for the sidebar |
+| `tags` | No | Array of tags for categorization |
+
+## Versioning
+
+Documentation is organized by version. Each version lives in its own folder:
+
+```txt
+docs/
+├── v1.0.0/    # Previous release
+├── v2.0.0/    # Current release
+└── next/      # Development docs
+```
+
+Users can switch between versions using the version selector in the header.
+
+## Sidebar Navigation
+
+The sidebar is automatically generated from your folder structure. You control the order and appearance using:
+
+- **`sidebar_position`** in frontmatter — sets page order
+- **`_category_.json`** in folders — configures section labels and behavior
+
+```json
+{
+  "label": "Getting Started",
+  "position": 1,
+  "collapsible": true,
+  "collapsed": false
+}
+```
+
+## Components
+
+The platform includes a library of built-in components that you can use without any imports:
+
+<CardGrid cols={3}>
+  <Card icon="message-square" title="Callouts" description="Highlight important info" />
+  <Card icon="layers" title="Tabs" description="Tabbed content panels" />
+  <Card icon="list" title="Steps" description="Step-by-step guides" />
+  <Card icon="grid" title="Cards" description="Feature cards with icons" />
+  <Card icon="code" title="Code Blocks" description="Syntax-highlighted code" />
+  <Card icon="chevrons-up-down" title="Accordion" description="Collapsible sections" />
+</CardGrid>

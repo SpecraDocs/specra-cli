@@ -1,0 +1,112 @@
+---
+title: Testing
+description: Verify your documentation builds and renders correctly
+sidebar_position: 2
+---
+
+This page covers strategies for testing your documentation site to ensure content renders correctly and the build succeeds.
+
+## Build Verification
+
+The simplest test is to run a production build and check for errors:
+
+<Tabs defaultValue="npm">
+  <Tab label="npm">
+```bash
+npm run build
+```
+  </Tab>
+  <Tab label="yarn">
+```bash
+yarn build
+```
+  </Tab>
+  <Tab label="pnpm">
+```bash
+pnpm build
+```
+  </Tab>
+</Tabs>
+
+The build will fail if:
+- MDX files have syntax errors
+- Frontmatter is malformed
+- Required fields are missing
+
+<Callout type="tip">
+  Run `npm run build` in your CI pipeline to catch documentation errors before they reach production.
+</Callout>
+
+## Type Checking
+
+Verify TypeScript types are correct:
+
+```bash
+npm run check
+```
+
+This catches type errors in your SvelteKit configuration and any custom components.
+
+## Content Checklist
+
+When reviewing documentation changes, verify:
+
+| Check | Description |
+|-------|-------------|
+| **Frontmatter** | All pages have `title`, and key pages have `description` |
+| **Links** | Internal links point to existing pages |
+| **Versions** | Content exists in all active version directories |
+| **Sidebar Order** | `sidebar_position` values create a logical reading flow |
+| **Categories** | Each folder has a `_category_.json` with `label` and `position` |
+
+## Visual Testing
+
+Preview the site locally and check:
+
+<Steps>
+  <Step title="Start Dev Server">
+    Run `npm run dev` and open the site in your browser.
+  </Step>
+
+  <Step title="Check Navigation">
+    Verify sidebar links work, breadcrumbs are correct, and previous/next navigation follows the expected order.
+  </Step>
+
+  <Step title="Check Themes">
+    Toggle between light and dark themes. Ensure all content is readable in both modes.
+  </Step>
+
+  <Step title="Check Responsive">
+    Test on different viewport sizes. The mobile sidebar should collapse into a menu.
+  </Step>
+</Steps>
+
+## Common Issues
+
+### Frontmatter Parsing Errors
+
+```
+Error: Invalid frontmatter in docs/v2.0.0/page.mdx
+```
+
+Ensure your frontmatter uses valid YAML syntax and is enclosed by `---` delimiters.
+
+### Missing Pages
+
+If a page doesn't appear in the sidebar:
+
+1. Check the file has the `.mdx` extension (not `.md`)
+2. Verify the file is in the correct version directory
+3. Check if `draft: true` is set in frontmatter
+
+### Broken Links
+
+If internal links return 404:
+
+1. Check the path matches the file structure
+2. Include the version prefix: `/docs/v2.0.0/page-name`
+3. Use the file's slug (filename without `.mdx`), not the title
+
+<Callout type="info">
+  The dev server shows detailed error messages in the browser overlay. Check the terminal output for build-time errors.
+</Callout>

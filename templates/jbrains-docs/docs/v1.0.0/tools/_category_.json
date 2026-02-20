@@ -1,0 +1,8 @@
+{
+  "label": "Tools",
+  "position": 5,
+  "collapsible": true,
+  "collapsed": false,
+  "icon": "wrench",
+  "tab_group": "multiplatform"
+}

@@ -1,0 +1,106 @@
+---
+title: Control Flow
+description: Navigation flow and content organization
+sidebar_position: 3
+---
+
+This page explains how navigation flow works in the documentation system — how users move between pages and how you control the reading path.
+
+## Sidebar Navigation
+
+The sidebar is the primary navigation mechanism. It is automatically generated from the file and folder structure in `docs/`:
+
+```txt
+docs/v2.0.0/
+├── home.mdx                  → Top-level page
+├── getting-started.mdx       → Top-level page
+├── basics/
+│   ├── _category_.json       → Section configuration
+│   ├── syntax.mdx            → Page in section
+│   ├── types.mdx             → Page in section
+│   └── control-flow.mdx      → Page in section
+```
+
+Pages are sorted by `sidebar_position`, then alphabetically.
+
+## Previous/Next Navigation
+
+At the bottom of each page, previous and next links are automatically generated based on the sidebar order. This creates a linear reading path through the documentation.
+
+<Callout type="tip">
+  Design your `sidebar_position` values to create a logical reading flow from introduction to advanced topics.
+</Callout>
+
+## Tab Groups
+
+Tab groups split the sidebar into separate tabbed sections. This is useful when documentation covers distinct but related areas:
+
+```json
+{
+  "navigation": {
+    "tabGroups": [
+      { "id": "language", "label": "Language" },
+      { "id": "multiplatform", "label": "Multiplatform" }
+    ]
+  }
+}
+```
+
+Assign categories to tab groups in `_category_.json`:
+
+```json
+{
+  "label": "Basics",
+  "tab_group": "language"
+}
+```
+
+<Callout type="info">
+  Pages not assigned to any tab group appear in all tabs. Use tab groups to separate conceptually different areas of documentation.
+</Callout>
+
+## Breadcrumbs
+
+Breadcrumbs show the user's current position in the documentation hierarchy:
+
+```
+Home > Basics > Control Flow
+```
+
+Enable or disable breadcrumbs in configuration:
+
+```json
+{
+  "navigation": {
+    "showBreadcrumbs": true
+  }
+}
+```
+
+## Version Switching
+
+Users can switch between documentation versions using the version selector in the header. The system attempts to navigate to the same page in the selected version.
+
+## Linking Between Pages
+
+Use standard Markdown links with the full path:
+
+```markdown
+[Getting Started](/docs/v2.0.0/getting-started)
+[Basic Syntax](/docs/v2.0.0/basics/syntax)
+```
+
+### Cross-Version Links
+
+```markdown
+[See v1.0.0 docs](/docs/v1.0.0/getting-started)
+```
+
+## Cards as Navigation
+
+Use CardGrid for hub pages that direct users to different sections:
+
+<CardGrid cols={2}>
+  <Card icon="code" title="Basic Syntax" description="The fundamental building blocks" href="/docs/v2.0.0/basics/syntax" />
+  <Card icon="layers" title="Types & Variables" description="Type system and declarations" href="/docs/v2.0.0/basics/types" />
+</CardGrid>

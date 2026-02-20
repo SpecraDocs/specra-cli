@@ -1,0 +1,80 @@
+{
+  "$schema": "./node_modules/specra/config/specra.config.schema.json",
+  "site": {
+    "title": "My Docs",
+    "description": "Documentation for my project",
+    "url": "http://localhost:5173",
+    "baseUrl": "/",
+    "language": "en",
+    "organizationName": "my-org",
+    "projectName": "my-project",
+    "activeVersion": "v1.0.0"
+  },
+  "theme": {
+    "defaultMode": "light",
+    "respectPrefersColorScheme": true
+  },
+  "navigation": {
+    "showSidebar": true,
+    "collapsibleSidebar": true,
+    "sidebarStyle": "flush",
+    "showBreadcrumbs": true,
+    "showTableOfContents": false,
+    "tocPosition": "right",
+    "tocMaxDepth": 3,
+    "tabGroups": [
+      {
+        "id": "language",
+        "label": "Language"
+      },
+      {
+        "id": "multiplatform",
+        "label": "Multiplatform"
+      }
+    ]
+  },
+  "social": {
+    "github": "https://github.com/your-org/your-repo"
+  },
+  "search": {
+    "enabled": false
+  },
+  "banner": {
+    "enabled": true,
+    "message": "Docs v2.0.0 is now available!",
+    "type": "info",
+    "dismissible": true
+  },
+  "footer": {
+    "copyright": "Copyright © 2025 My Project. All rights reserved.",
+    "links": [
+      {
+        "title": "Documentation",
+        "items": [
+          {
+            "label": "Getting Started",
+            "href": "/docs/v1.0.0/getting-started"
+          }
+        ]
+      },
+      {
+        "title": "Community",
+        "items": [
+          {
+            "label": "GitHub",
+            "href": "https://github.com/your-org/your-repo"
+          }
+        ]
+      }
+    ]
+  },
+  "features": {
+    "showLastUpdated": true,
+    "showReadingTime": false,
+    "showAuthors": false,
+    "showTags": true,
+    "versioning": true,
+    "showVersionBadge": true,
+    "i18n": false
+  }
+}

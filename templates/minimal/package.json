@@ -1,6 +1,6 @@
 {
-  "name": "specra-minimal",
-  "version": "0.1.0",
+  "name": "my-docs",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,7 +13,11 @@
   },
   "dependencies": {
     "lucide-svelte": "^0.454.0",
-    "specra": "^0.2.0"
+    "specra": "^0.2.0",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+  },
+  "dependencies": {
+    "specra": "^0.2.1"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",

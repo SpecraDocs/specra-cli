@@ -2,6 +2,8 @@ import pc from 'picocolors'
 import open from 'open'
 import { createServer } from 'http'
 import { saveToken, getGlobalConfig } from '../config.js'
+import { getConfig, saveConfig } from '../config.js'
+import { apiRequest } from '../api-client.js'
 import { randomBytes } from 'crypto'
 
 interface LoginOptions {
@@ -21,16 +23,18 @@ export async function login(options: LoginOptions = {}) {
 
   const state = randomBytes(16).toString('hex')
   const port = 9876
-  const apiUrl = getGlobalConfig().apiUrl
+  // const apiUrl = getGlobalConfig().apiUrl
+  const { apiUrl } = getConfig()
 
   return new Promise<void>((resolve) => {
     const server = createServer(async (req, res) => {
       const url = new URL(req.url!, `http://localhost:${port}`)
 
-      if (url.pathname === '/callback') {
-        const token = url.searchParams.get('token')
-        const returnedState = url.searchParams.get('state')
+      // Backend redirects to root path with token as query param
+      const token = url.searchParams.get('token')
+      const returnedState = url.searchParams.get('state')
 
+      if (token || returnedState) {
         if (returnedState !== state) {
           res.writeHead(400, { 'Content-Type': 'text/html' })
           res.end('<html><body><h1>State mismatch. Please try again.</h1></body></html>')

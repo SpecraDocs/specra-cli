@@ -1,0 +1,92 @@
+---
+title: Content Structure
+description: Organize your documentation with folders and categories
+sidebar_position: 2
+---
+
+Learn how to organize your documentation into a clear, navigable structure.
+
+## File Organization
+
+Documentation files live in the `docs/` directory, grouped by version:
+
+```txt
+docs/
+├── v1.0.0/
+│   ├── introduction.mdx
+│   ├── quickstart.mdx
+│   ├── guides/
+│   │   ├── _category_.json
+│   │   ├── installation.mdx
+│   │   └── deployment.mdx
+│   └── reference/
+│       ├── _category_.json
+│       └── api.mdx
+└── v2.0.0/
+    └── ...
+```
+
+## Categories
+
+Folders become sidebar sections. Add a `_category_.json` file to configure each section:
+
+```json
+{
+  "label": "Guides",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false,
+  "icon": "book-open"
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `label` | Display name in the sidebar |
+| `position` | Order relative to other sections |
+| `collapsible` | Whether the section can be collapsed |
+| `collapsed` | Whether the section starts collapsed |
+| `icon` | Lucide icon name |
+
+## Page Ordering
+
+Pages within a section are ordered by their `sidebar_position` frontmatter value:
+
+```mdx
+---
+title: First Page
+sidebar_position: 1
+---
+```
+
+<Callout type="info">
+  Pages without a `sidebar_position` are sorted alphabetically after positioned pages.
+</Callout>
+
+## Index Pages
+
+Create an `index.mdx` in a folder to provide a landing page for that section. When users click the section header in the sidebar, they'll see this page.
+
+```txt
+guides/
+├── _category_.json
+├── index.mdx          # Landing page for "Guides"
+├── installation.mdx
+└── deployment.mdx
+```
+
+## Best Practices
+
+<Steps>
+  <Step title="Keep It Flat">
+    Avoid deeply nested folders. Two levels of nesting is usually enough for most documentation sites.
+  </Step>
+
+  <Step title="Use Descriptive Names">
+    File names become URL slugs. Use lowercase, hyphenated names like `getting-started.mdx`.
+  </Step>
+
+  <Step title="Group Related Content">
+    Put related pages in the same folder. This makes the sidebar intuitive and keeps URLs predictable.
+  </Step>
+</Steps>

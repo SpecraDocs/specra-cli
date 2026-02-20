@@ -1,0 +1,115 @@
+---
+title: Branding
+description: Customize logos, site title, and brand identity
+sidebar_position: 2
+---
+
+Make the documentation site match your brand by customizing the title, description, social links, and footer.
+
+## Site Identity
+
+Configure basic site information in `specra.config.json`:
+
+```json
+{
+  "site": {
+    "title": "My Project Docs",
+    "description": "Official documentation for My Project",
+    "url": "https://docs.myproject.com",
+    "organizationName": "My Organization",
+    "projectName": "my-project"
+  }
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `title` | Displayed in the header and browser tab |
+| `description` | Used for SEO meta tags |
+| `url` | Full URL where docs are hosted |
+| `organizationName` | Your company or organization name |
+| `projectName` | Project identifier |
+
+## Social Links
+
+Add links to your social profiles and repositories:
+
+```json
+{
+  "social": {
+    "github": "https://github.com/your-org/your-repo",
+    "twitter": "https://twitter.com/yourhandle",
+    "discord": "https://discord.gg/yourserver"
+  }
+}
+```
+
+Social links appear as icons in the site header.
+
+## Footer
+
+Customize the footer with copyright text and link columns:
+
+```json
+{
+  "footer": {
+    "copyright": "Copyright © 2025 My Organization. All rights reserved.",
+    "branding": {
+      "showBranding": true
+    },
+    "links": [
+      {
+        "title": "Documentation",
+        "items": [
+          { "label": "Getting Started", "href": "/docs/v2.0.0/quickstart" },
+          { "label": "Concepts", "href": "/docs/v2.0.0/concepts" }
+        ]
+      },
+      {
+        "title": "Community",
+        "items": [
+          { "label": "GitHub", "href": "https://github.com/your-org" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+<Callout type="info">
+  The footer supports multiple link columns. Each column has a title and a list of labeled links.
+</Callout>
+
+## Banner
+
+Display a site-wide announcement banner:
+
+```json
+{
+  "banner": {
+    "enabled": true,
+    "message": "We just launched v2.0 — check out what's new!",
+    "type": "info",
+    "dismissible": true
+  }
+}
+```
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `enabled` | `boolean` | Show or hide the banner |
+| `message` | `string` | Banner text content |
+| `type` | `"info" \| "warning" \| "error"` | Visual style |
+| `dismissible` | `boolean` | Allow users to close the banner |
+
+## Favicon
+
+Place your favicon file in the `public/` directory and reference it in `src/app.html`:
+
+```html
+<link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
+```
+
+<Callout type="tip">
+  Use SVG favicons for crisp rendering at any size and automatic dark mode support.
+</Callout>

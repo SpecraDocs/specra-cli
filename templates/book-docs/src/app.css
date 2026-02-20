@@ -1,0 +1,8 @@
+@import "specra/styles";
+@source "./**/*.{js,ts,svelte}";
+
+
+:root {
+    --font-sans: "Geist", "Geist Fallback";
+    --font-mono: "Geist Mono", "Geist Mono Fallback";
+}

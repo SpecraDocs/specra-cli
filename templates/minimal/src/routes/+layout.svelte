@@ -1,8 +1,11 @@
 <script lang="ts">
-  import { LayoutProviders } from 'specra/components';
   import '../app.css';
+  import { LayoutProviders } from 'specra/components';
+  import type { Snippet } from 'svelte';
+  import type { LayoutData } from './$types';
 
-  let { data, children } = $props();
+
+  let { data, children } : { data: LayoutData; children: Snippet } = $props();
 </script>
 
 <svelte:head>
@@ -10,6 +13,12 @@
   <meta name="description" content={data.config.site.description || 'Modern documentation platform'} />
 </svelte:head>
 
-<LayoutProviders config={data.config}>
-  {@render children()}
-</LayoutProviders>
+{#if data?.config}
+  <LayoutProviders config={data.config}>
+    {@render children?.()}
+  </LayoutProviders>
+{:else}
+  {@render children?.()}
+{/if}
+
+</script>

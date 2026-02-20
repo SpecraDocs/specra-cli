@@ -1,0 +1,8 @@
+{
+  "label": "Advanced",
+  "position": 4,
+  "collapsible": true,
+  "collapsed": false,
+  "icon": "graduation-cap",
+  "tab_group": "language"
+}

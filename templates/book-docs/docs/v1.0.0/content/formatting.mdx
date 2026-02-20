@@ -1,0 +1,128 @@
+---
+title: Formatting
+description: Format your content with Markdown and components
+sidebar_position: 1
+---
+
+This guide covers the formatting options available for your documentation pages.
+
+## Text Formatting
+
+Standard Markdown formatting is fully supported:
+
+| Syntax | Output |
+|--------|--------|
+| `**bold**` | **bold** |
+| `*italic*` | *italic* |
+| `` `code` `` | `code` |
+| `~~strikethrough~~` | ~~strikethrough~~ |
+
+## Headings
+
+Use headings to structure your content. The table of contents on the right is generated from your headings.
+
+```markdown
+## Second Level
+### Third Level
+#### Fourth Level
+```
+
+<Callout type="tip">
+  Start with `##` (H2) in your content. The page title from frontmatter is rendered as H1 automatically.
+</Callout>
+
+## Lists
+
+### Unordered Lists
+
+```markdown
+- First item
+- Second item
+  - Nested item
+  - Another nested item
+- Third item
+```
+
+- First item
+- Second item
+  - Nested item
+  - Another nested item
+- Third item
+
+### Ordered Lists
+
+1. First step
+2. Second step
+3. Third step
+
+## Code Blocks
+
+Use fenced code blocks with a language identifier for syntax highlighting:
+
+```typescript
+interface Config {
+  title: string;
+  theme: 'light' | 'dark' | 'system';
+  version: string;
+}
+
+function loadConfig(path: string): Config {
+  const raw = readFileSync(path, 'utf-8');
+  return JSON.parse(raw);
+}
+```
+
+## Tables
+
+```markdown
+| Feature | Status |
+|---------|--------|
+| Dark Mode | Supported |
+| Search | Supported |
+| i18n | Coming Soon |
+```
+
+| Feature | Status |
+|---------|--------|
+| Dark Mode | Supported |
+| Search | Supported |
+| i18n | Coming Soon |
+
+## Callouts
+
+Use callouts to draw attention to important information:
+
+<Callout type="info">
+  Informational callouts provide additional context.
+</Callout>
+
+<Callout type="warning">
+  Warning callouts alert readers to potential issues.
+</Callout>
+
+<Callout type="tip">
+  Tip callouts suggest best practices or shortcuts.
+</Callout>
+
+## Tabs
+
+Use tabs to show alternative content side by side:
+
+<Tabs defaultValue="JavaScript">
+  <Tab label="JavaScript">
+```javascript
+console.log("Hello, world!");
+```
+  </Tab>
+  <Tab label="Python">
+```python
+print("Hello, world!")
+```
+  </Tab>
+</Tabs>
+
+## Links
+
+- **Internal links**: `[Getting Started](/docs/v1.0.0/quickstart)`
+- **External links**: `[GitHub](https://github.com)`
+- **Anchor links**: `[See below](#callouts)`

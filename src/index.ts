@@ -82,6 +82,16 @@ const initCmd = program
             value: 'minimal',
             description: 'Minimal setup to get started quickly',
           },
+          {
+            title: 'Book Docs',
+            value: 'book-docs',
+            description: 'Knowledge base style with dark theme and categorized sidebar',
+          },
+          {
+            title: 'JBrains Docs',
+            value: 'jbrains-docs',
+            description: 'Reference docs style with light theme and tab groups',
+          },
         ],
         initial: 0,
       })

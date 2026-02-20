@@ -7,3 +7,9 @@
     --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
     --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
 }
+
+
+:root {
+    --font-sans: "Geist", "Geist Fallback";
+    --font-mono: "Geist Mono", "Geist Mono Fallback";
+}

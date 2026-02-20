@@ -1,0 +1,126 @@
+---
+title: Generics
+description: Create reusable, type-safe documentation patterns
+sidebar_position: 1
+---
+
+Generics in the context of this documentation platform refer to creating reusable, parameterized content patterns that work across different contexts.
+
+## Reusable Component Patterns
+
+The built-in component library provides generic patterns that adapt to your content:
+
+### Cards
+
+Cards accept different props to serve different purposes:
+
+<CardGrid cols={3}>
+  <Card icon="zap" title="Feature Card" description="Showcase a feature" />
+  <Card icon="book" title="Guide Card" description="Link to a guide" href="/docs/v2.0.0/getting-started" />
+  <Card icon="code" title="Code Card" description="Reference a code concept" />
+</CardGrid>
+
+### Tabs
+
+Tabs provide generic containers for alternative content:
+
+<Tabs defaultValue="Pattern A">
+  <Tab label="Pattern A">
+    Use tabs for installation instructions across different package managers.
+
+    ```bash
+    npm install my-package
+    ```
+  </Tab>
+  <Tab label="Pattern B">
+    Use tabs for code examples across different languages.
+
+    ```python
+    pip install my-package
+    ```
+  </Tab>
+  <Tab label="Pattern C">
+    Use tabs for platform-specific instructions.
+
+    ```bash
+    brew install my-package
+    ```
+  </Tab>
+</Tabs>
+
+## Generic Page Templates
+
+### Landing Pages
+
+Landing pages use CardGrid to create navigation hubs:
+
+```mdx
+---
+title: Section Landing
+---
+
+<CardGrid cols={2}>
+  <Card title="Topic A" description="Description" href="/path" />
+  <Card title="Topic B" description="Description" href="/path" />
+</CardGrid>
+```
+
+### Reference Pages
+
+Reference pages use tables and code blocks:
+
+```mdx
+---
+title: API Reference
+---
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `name` | `string` | The item name |
+| `value` | `number` | The item value |
+```
+
+### Tutorial Pages
+
+Tutorial pages use Steps for structured guidance:
+
+```mdx
+---
+title: Tutorial
+---
+
+<Steps>
+  <Step title="Step 1">Instructions here</Step>
+  <Step title="Step 2">More instructions</Step>
+</Steps>
+```
+
+## Callout Types as Generic Patterns
+
+Each callout type serves a specific semantic purpose:
+
+<Callout type="info">
+  **Info** — Supplementary context that enriches understanding.
+</Callout>
+
+<Callout type="tip">
+  **Tip** — Practical advice that improves the reader's workflow.
+</Callout>
+
+<Callout type="warning">
+  **Warning** — Important caveats or potential issues to be aware of.
+</Callout>
+
+<Callout type="error">
+  **Error** — Critical mistakes to avoid or known issues.
+</Callout>
+
+## Best Practices
+
+| Pattern | When to Use |
+|---------|-------------|
+| CardGrid | Hub pages, feature showcases, navigation |
+| Tabs | Alternative content (languages, platforms, package managers) |
+| Steps | Sequential instructions, tutorials |
+| Callouts | Inline annotations (tips, warnings, notes) |
+| Tables | Reference data, comparisons, specifications |

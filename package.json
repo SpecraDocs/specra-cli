@@ -1,7 +1,7 @@
 {
   "name": "create-specra",
-  "version": "0.1.8",
-  "description": "CLI tool to scaffold a new Specra documentation site with SvelteKit",
+  "version": "0.2.2",
+  "description": "CLI tool to scaffold a new Specra documentation site with Next.js",
   "type": "module",
   "bin": {
     "create-specra": "./dist/index.js",
@@ -29,8 +29,9 @@
   "author": "dalmasonto, arthur-kamau",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dalmasonto/specra-cli"
+    "url": "https://github.com/SpecraDocs/specra-cli"
   },
+  "homepage": "https://github.com/SpecraDocs",
   "license": "SEE LICENSE IN LICENSE.MD",
   "dependencies": {
     "commander": "^12.1.0",
