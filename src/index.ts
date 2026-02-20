@@ -8,9 +8,14 @@ const program = new Command()
 
 program
   .name('create-specra')
+  .description('Specra CLI - Create, deploy, and manage your documentation sites')
+  .version('0.1.8')
+
+// init command - create a new project (default when no subcommand given)
+const initCmd = program
+  .command('init [project-directory]', { isDefault: true })
   .description('Create a new Specra documentation site')
-  .argument('[project-directory]', 'Directory to create the project in')
-  .option('--template <template>', 'Template to use (default, minimal, api-focused)')
+  .option('--template <template>', 'Template to use (minimal)')
   .option('--use-npm', 'Use npm as the package manager')
   .option('--use-pnpm', 'Use pnpm as the package manager')
   .option('--use-yarn', 'Use yarn as the package manager')
@@ -72,21 +77,11 @@ program
         name: 'template',
         message: 'Which template would you like to use?',
         choices: [
-          // {
-          //   title: 'Default',
-          //   value: 'default',
-          //   description: 'Full-featured documentation site with examples',
-          // },
           {
             title: 'Minimal',
             value: 'minimal',
             description: 'Minimal setup to get started quickly',
           },
-          // {
-          //   title: 'API-Focused',
-          //   value: 'api-focused',
-          //   description: 'Optimized for API documentation',
-          // },
         ],
         initial: 0,
       })
@@ -135,7 +130,7 @@ program
     try {
       await createProject({
         projectName: projectName!,
-        template: template || 'default',
+        template: template || 'minimal',
         packageManager: packageManager || 'npm',
         skipInstall: options.skipInstall,
       })
@@ -146,4 +141,71 @@ program
     }
   })
 
+// login
+program
+  .command('login')
+  .description('Authenticate with your Specra account')
+  .option('-g, --global', 'Store credentials in ~/.specra/ instead of local specra.config.json')
+  .action(async (options) => {
+    const { login } = await import('./commands/login.js')
+    await login(options)
+  })
+
+// logout
+program
+  .command('logout')
+  .description('Clear stored credentials')
+  .option('-g, --global', 'Clear credentials from ~/.specra/ instead of local specra.config.json')
+  .action(async (options) => {
+    const { logout } = await import('./commands/logout.js')
+    await logout(options)
+  })
+
+// deploy
+program
+  .command('deploy')
+  .description('Deploy your docs project')
+  .option('-p, --project <id>', 'Project ID to deploy to')
+  .option('-d, --dir <directory>', 'Docs directory to deploy', '.')
+  .action(async (options) => {
+    const { deploy } = await import('./commands/deploy.js')
+    await deploy(options)
+  })
+
+// projects
+program
+  .command('projects')
+  .description('List your projects')
+  .action(async () => {
+    const { projects } = await import('./commands/projects.js')
+    await projects()
+  })
+
+// logs
+program
+  .command('logs')
+  .description('View deployment logs')
+  .argument('<projectId>', 'Project ID')
+  .option('--deployment <id>', 'Specific deployment ID')
+  .action(async (projectId: string, options) => {
+    const { logs } = await import('./commands/logs.js')
+    await logs(projectId, options)
+  })
+
+// doctor
+program
+  .command('doctor')
+  .description('Check specra.config.json for issues')
+  .option('-d, --dir <directory>', 'Project directory to check', '.')
+  .action(async (options) => {
+    const { doctor } = await import('./commands/doctor.js')
+    await doctor(options)
+  })
+
 program.parse()
+
+// Handle unhandled rejections
+process.on('unhandledRejection', (err) => {
+  console.error(pc.red('Error:'), err)
+  process.exit(1)
+})

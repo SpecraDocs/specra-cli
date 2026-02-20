@@ -1,6 +1,6 @@
 {
   "name": "create-specra",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "CLI tool to scaffold a new Specra documentation site with SvelteKit",
   "type": "module",
   "bin": {

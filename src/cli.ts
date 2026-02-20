@@ -6,22 +6,24 @@ const program = new Command()
 program
   .name('specra')
   .description('Specra CLI - Deploy and manage your documentation sites')
-  .version('0.1.0')
+  .version('0.1.8')
 
 program
   .command('login')
   .description('Authenticate with your Specra account')
-  .action(async () => {
+  .option('-g, --global', 'Store credentials in ~/.specra/ instead of local specra.config.json')
+  .action(async (options) => {
     const { login } = await import('./commands/login.js')
-    await login()
+    await login(options)
   })
 
 program
   .command('logout')
   .description('Clear stored credentials')
-  .action(async () => {
+  .option('-g, --global', 'Clear credentials from ~/.specra/ instead of local specra.config.json')
+  .action(async (options) => {
     const { logout } = await import('./commands/logout.js')
-    await logout()
+    await logout(options)
   })
 
 program
@@ -50,6 +52,15 @@ program
   .action(async (projectId: string, options) => {
     const { logs } = await import('./commands/logs.js')
     await logs(projectId, options)
+  })
+
+program
+  .command('doctor')
+  .description('Check specra.config.json for issues')
+  .option('-d, --dir <directory>', 'Project directory to check', '.')
+  .action(async (options) => {
+    const { doctor } = await import('./commands/doctor.js')
+    await doctor(options)
   })
 
 program.parse()
