@@ -4,13 +4,12 @@
   import type { Snippet } from 'svelte';
   import type { LayoutData } from './$types';
 
-
-  let { data, children } : { data: LayoutData; children: Snippet } = $props();
+  let { data, children }: { data: LayoutData; children: Snippet } = $props();
 </script>
 
 <svelte:head>
-  <title>{data.config.site.title}</title>
-  <meta name="description" content={data.config.site.description || 'Modern documentation platform'} />
+  <title>{data?.config?.site?.title || 'Documentation'}</title>
+  <meta name="description" content={data?.config?.site?.description || 'Modern documentation platform'} />
 </svelte:head>
 
 {#if data?.config}
@@ -20,5 +19,3 @@
 {:else}
   {@render children?.()}
 {/if}
-
-</script>

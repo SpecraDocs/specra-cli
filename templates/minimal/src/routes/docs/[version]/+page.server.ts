@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { getCachedVersions, getCachedAllDocs } from 'specra/lib';
+import { getCachedVersions, getCachedAllDocs } from 'specra';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
