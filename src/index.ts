@@ -1,15 +1,20 @@
 import { Command } from 'commander'
 import prompts from 'prompts'
+import path from 'path'
 import { createProject } from './create-project.js'
 import { validateProjectName } from './utils.js'
 import pc from 'picocolors'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
+const { version } = require('../package.json')
 
 const program = new Command()
 
 program
   .name('create-specra')
   .description('Specra CLI - Create, deploy, and manage your documentation sites')
-  .version('0.1.8')
+  .version(version)
 
 // init command - create a new project (default when no subcommand given)
 const initCmd = program
@@ -52,13 +57,14 @@ const initCmd = program
       projectName = response.projectName
     }
 
-    // Validate project name
-    const validation = validateProjectName(projectName!)
+    // Validate the basename as a package name (allow full paths like /tmp/my-docs)
+    const projectBaseName = path.basename(path.resolve(projectName!))
+    const validation = validateProjectName(projectBaseName)
     if (!validation.valid) {
       console.error(
         pc.red(
           `Cannot create a project named ${pc.cyan(
-            `"${projectName}"`
+            `"${projectBaseName}"`
           )} because of npm naming restrictions:\n`
         )
       )

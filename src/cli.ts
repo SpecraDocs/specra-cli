@@ -1,12 +1,16 @@
 import { Command } from 'commander'
 import pc from 'picocolors'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
+const { version } = require('../package.json')
 
 const program = new Command()
 
 program
   .name('specra')
   .description('Specra CLI - Deploy and manage your documentation sites')
-  .version('0.1.8')
+  .version(version)
 
 program
   .command('login')
