@@ -27,7 +27,7 @@ export async function createArchive(dir: string): Promise<Buffer> {
   // Build the file list — include relevant files, exclude node_modules/.next/.git
   const chunks: Buffer[] = []
 
-  await tar.create(
+  const stream = tar.create(
     {
       gzip: true,
       cwd: absDir,
@@ -40,10 +40,11 @@ export async function createArchive(dir: string): Promise<Buffer> {
       },
     },
     ['.']
-  ).on('data', (chunk: Buffer) => {
-    chunks.push(chunk)
-  })
+  )
 
-  // Wait for stream to finish
+  for await (const chunk of stream) {
+    chunks.push(chunk as Buffer)
+  }
+
   return Buffer.concat(chunks)
 }
