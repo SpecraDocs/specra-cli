@@ -35,6 +35,7 @@ program
   .description('Deploy your docs project')
   .option('-p, --project <id>', 'Project ID to deploy to')
   .option('-d, --dir <directory>', 'Docs directory to deploy', '.')
+  .option('-v, --verbose', 'Show detailed build output and logs')
   .action(async (options) => {
     const { deploy } = await import('./commands/deploy.js')
     await deploy(options)

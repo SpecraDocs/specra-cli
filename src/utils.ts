@@ -57,6 +57,22 @@ export function getPackageManagerCommand(packageManager: string): {
   }
 }
 
+export function detectPackageManager(dir: string): string {
+  // 1. Check specra.config.json for explicit setting
+  const configPath = path.join(dir, 'specra.config.json')
+  try {
+    const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+    if (config.packageManager) return config.packageManager
+  } catch {
+    // ignore
+  }
+
+  // 2. Detect from lockfiles
+  if (fs.existsSync(path.join(dir, 'pnpm-lock.yaml'))) return 'pnpm'
+  if (fs.existsSync(path.join(dir, 'yarn.lock'))) return 'yarn'
+  return 'npm'
+}
+
 export function tryGitInit(root: string): boolean {
   try {
     execSync('git --version', { stdio: 'ignore' })

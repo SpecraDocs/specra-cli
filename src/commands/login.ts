@@ -38,8 +38,10 @@ export async function login(options: LoginOptions = {}) {
         if (returnedState !== state) {
           res.writeHead(400, { 'Content-Type': 'text/html' })
           res.end('<html><body><h1>State mismatch. Please try again.</h1></body></html>')
-          server.close()
-          resolve()
+          server.close(() => {
+            resolve()
+            process.exit(1)
+          })
           return
         }
 
@@ -76,8 +78,10 @@ export async function login(options: LoginOptions = {}) {
           res.end('<html><body><h1>Authentication failed.</h1></body></html>')
         }
 
-        server.close()
-        resolve()
+        server.close(() => {
+          resolve()
+          process.exit(0)
+        })
       }
     })
 
@@ -92,8 +96,10 @@ export async function login(options: LoginOptions = {}) {
     // Timeout after 5 minutes
     setTimeout(() => {
       console.log(pc.yellow('Login timed out.'))
-      server.close()
-      resolve()
+      server.close(() => {
+        resolve()
+        process.exit(1)
+      })
     }, 300000)
   })
 }

@@ -75,6 +75,14 @@ export async function createProject({
   packageJson.name = appName
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n')
 
+  // Save package manager choice to specra.config.json
+  const specraConfigPath = path.join(root, 'specra.config.json')
+  if (fs.existsSync(specraConfigPath)) {
+    const specraConfig = JSON.parse(fs.readFileSync(specraConfigPath, 'utf8'))
+    specraConfig.packageManager = packageManager
+    fs.writeFileSync(specraConfigPath, JSON.stringify(specraConfig, null, 2) + '\n')
+  }
+
   // Rename gitignore
   const gitignorePath = path.join(root, 'gitignore')
   if (fs.existsSync(gitignorePath)) {

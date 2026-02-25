@@ -1,8 +1,13 @@
+import adapter from '@sveltejs/adapter-static';
 import { specraConfig } from 'specra/svelte-config';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const config = specraConfig({
-  vitePreprocess: { vitePreprocess }
+  vitePreprocess: { vitePreprocess },
+  kit: {
+    adapter: adapter({ fallback: '404.html' }),
+    prerender: { handleHttpError: 'warn', handleMissingId: 'warn' }
+  }
 });
 
 export default config;

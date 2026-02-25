@@ -5,10 +5,12 @@ import { apiUpload, apiRequest, formatError } from '../api-client.js'
 import { isAuthenticated, getConfig } from '../config.js'
 import { existsSync, readFileSync } from 'fs'
 import { join, resolve } from 'path'
+import { detectPackageManager, getPackageManagerCommand } from '../utils.js'
 
 interface DeployOptions {
   project?: string
   dir: string
+  verbose?: boolean
 }
 
 export async function deploy(options: DeployOptions) {
@@ -77,6 +79,13 @@ export async function deploy(options: DeployOptions) {
     projectId = response.project
   }
 
+  const verbose = options.verbose ?? false
+
+  if (verbose) {
+    console.log(pc.dim(`Project ID: ${projectId}`))
+    console.log(pc.dim(`Directory:  ${dir}`))
+  }
+
   const spinner = ora('Building project...').start()
 
   try {
@@ -84,13 +93,30 @@ export async function deploy(options: DeployOptions) {
     const buildDir = join(dir, 'build')
     const { execSync } = await import('child_process')
 
+    const pm = detectPackageManager(dir)
+    const pmCmd = getPackageManagerCommand(pm)
+
+    if (verbose) {
+      spinner.stop()
+      console.log(pc.dim(`Package manager: ${pm}`))
+      console.log(pc.dim(`Running: ${pmCmd.run('build')}`))
+      console.log()
+    }
+
     try {
-      execSync('npm run build', { cwd: dir, stdio: 'pipe' })
+      execSync(pmCmd.run('build'), { cwd: dir, stdio: verbose ? 'inherit' : 'pipe' })
     } catch (err) {
-      const stderr = err instanceof Error && 'stderr' in err
-        ? (err as { stderr: Buffer }).stderr?.toString()
-        : ''
-      throw new Error(`Build failed:\n${stderr}`)
+      if (!verbose) {
+        const stderr = err instanceof Error && 'stderr' in err
+          ? (err as { stderr: Buffer }).stderr?.toString()
+          : ''
+        throw new Error(`Build failed:\n${stderr}`)
+      }
+      throw new Error('Build failed. See output above.')
+    }
+
+    if (verbose) {
+      spinner.start()
     }
 
     if (!existsSync(buildDir)) {
@@ -104,6 +130,10 @@ export async function deploy(options: DeployOptions) {
     spinner.text = 'Packaging build output...'
     const archive = await createArchive(buildDir)
     spinner.text = `Uploading (${(archive.length / 1024).toFixed(0)}KB)...`
+
+    if (verbose) {
+      console.log(pc.dim(`Archive size: ${(archive.length / 1024).toFixed(1)}KB`))
+    }
 
     // 3. Get git commit SHA if available
     let commitSha: string | undefined
