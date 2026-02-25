@@ -15,9 +15,9 @@ export async function login(options: LoginOptions = {}) {
   console.log()
 
   if (options.global) {
-    console.log(pc.dim('Storing credentials globally in ~/.specra/'))
+    console.log(pc.dim('Storing credentials globally in ~/.specra/config.json'))
   } else {
-    console.log(pc.dim('Storing credentials in local specra.config.json'))
+    console.log(pc.dim('Storing credentials in local .env (referenced by specra.config.json)'))
   }
   console.log()
 

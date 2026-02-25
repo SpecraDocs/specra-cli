@@ -252,12 +252,52 @@ export async function doctor(options: DoctorOptions) {
     }
   }
 
-  // 8. Warn if auth token is in specra.config.json (should be gitignored)
+  // 8. Check auth configuration
   if (config.auth?.token) {
     results.push({
       label: 'auth.token in config',
       status: 'warn',
-      message: 'Token found in specra.config.json. Make sure this file is in .gitignore, or use `specra login --global` to store it in ~/.specra/ instead.',
+      message: 'Raw token found in specra.config.json. Run `specra login` again to migrate it to .env.',
+    })
+  } else if (config.auth?.tokenEnv) {
+    // Check the .env file has the referenced var
+    const envPath = join(dir, '.env')
+    if (existsSync(envPath)) {
+      try {
+        const envContent = readFileSync(envPath, 'utf-8')
+        const hasVar = envContent.split('\n').some((line: string) => line.trim().startsWith(`${config.auth.tokenEnv}=`))
+        if (hasVar) {
+          results.push({
+            label: 'Auth',
+            status: 'pass',
+            message: `Token stored in .env as ${config.auth.tokenEnv}`,
+          })
+        } else {
+          results.push({
+            label: 'Auth',
+            status: 'fail',
+            message: `specra.config.json references ${config.auth.tokenEnv} but it's not set in .env. Run \`specra login\`.`,
+          })
+        }
+      } catch {
+        results.push({
+          label: 'Auth',
+          status: 'fail',
+          message: `.env file unreadable. Run \`specra login\` to re-authenticate.`,
+        })
+      }
+    } else {
+      results.push({
+        label: 'Auth',
+        status: 'fail',
+        message: `No .env file found but specra.config.json references ${config.auth.tokenEnv}. Run \`specra login\`.`,
+      })
+    }
+  } else if (config.auth?.source === 'global') {
+    results.push({
+      label: 'Auth',
+      status: 'pass',
+      message: 'Using global credentials from ~/.specra/config.json',
     })
   }
 
