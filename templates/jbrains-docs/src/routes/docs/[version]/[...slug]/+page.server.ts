@@ -12,7 +12,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
   const { version, slug: slugArray } = params;
-  const slug = slugArray;
+  const slug = slugArray.replace(/\/$/, '');
 
   const i18nConfig = getI18nConfig();
   const slugParts = slug.split('/');

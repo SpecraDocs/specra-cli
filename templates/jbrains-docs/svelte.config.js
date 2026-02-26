@@ -5,7 +5,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 const config = specraConfig({
   vitePreprocess: { vitePreprocess },
   kit: {
-    adapter: adapter({ fallback: 'index.html' }),
+    adapter: adapter(),
     prerender: { handleHttpError: 'warn', handleMissingId: 'warn' }
   }
 });
