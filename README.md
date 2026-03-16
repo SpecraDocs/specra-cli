@@ -2,6 +2,17 @@
 
 The fastest way to create a new Specra documentation site. Scaffold a complete documentation project with a single command.
 
+## What is Specra?
+
+Specra is a modern documentation library for SvelteKit that provides:
+- Multi-version documentation support
+- API reference generation
+- Full-text search
+- MDX-powered content
+- Beautiful UI components
+
+The official Specra site ([specra-docs](https://specra-docs.com)) also offers a SaaS platform with paid tiers (Starter, Pro, Enterprise) including authentication, Stripe/M-Pesa billing, and a user dashboard. The CLI scaffolds free, self-hosted documentation sites — no billing features are included in generated projects.
+
 ## Usage
 
 ### With npx (recommended)
@@ -142,16 +153,81 @@ Once your project is created, you can:
 
 4. Customize your site in `specra.config.json`
 
-## What is Specra?
+## Deployment
 
-Specra is a modern documentation library for SvelteKit that provides:
-- Multi-version documentation support
-- API reference generation
-- Full-text search
-- MDX-powered content
-- Beautiful UI components
+Specra projects are standard SvelteKit apps, so you can deploy anywhere SvelteKit runs.
 
-The official Specra site ([specra-docs](https://specra-docs.com)) also offers a SaaS platform with paid tiers (Starter, Pro, Enterprise) including authentication, Stripe/M-Pesa billing, and a user dashboard. The CLI scaffolds free, self-hosted documentation sites — no billing features are included in generated projects.
+### Static Hosting (Vercel, Netlify, Cloudflare Pages)
+
+Install the appropriate SvelteKit adapter:
+
+```bash
+# Vercel
+npm install -D @sveltejs/adapter-vercel
+
+# Netlify
+npm install -D @sveltejs/adapter-netlify
+
+# Cloudflare Pages
+npm install -D @sveltejs/adapter-cloudflare
+```
+
+Update `svelte.config.js` to use the adapter:
+
+```js
+import adapter from '@sveltejs/adapter-vercel'; // or adapter-netlify, etc.
+
+export default {
+  kit: {
+    adapter: adapter()
+  }
+};
+```
+
+Then push to your Git provider — the platform handles the rest.
+
+### Node Server (VPS, Docker, Railway)
+
+Use `@sveltejs/adapter-node` (included by default):
+
+```bash
+npm run build
+node build
+```
+
+The server listens on port 3000 by default. Configure with environment variables:
+
+```bash
+PORT=8080 HOST=0.0.0.0 node build
+```
+
+### Static Site Generation
+
+For fully static docs with no server needed:
+
+```bash
+npm install -D @sveltejs/adapter-static
+```
+
+Update `svelte.config.js`:
+
+```js
+import adapter from '@sveltejs/adapter-static';
+
+export default {
+  kit: {
+    adapter: adapter({
+      fallback: '404.html'
+    })
+  }
+};
+```
+
+```bash
+npm run build
+```
+
+Upload the `build/` directory to any static host (GitHub Pages, S3, etc.).
 
 ## Learn More
 
