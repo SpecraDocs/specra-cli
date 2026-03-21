@@ -2,28 +2,17 @@ import {
   extractTableOfContents,
   getAdjacentDocs,
   isCategoryPage,
-  getCachedVersions,
   getCachedAllDocs,
   getCachedDocBySlug,
   getI18nConfig,
-  getConfig,
 } from 'specra';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, parent }) => {
   const { version, slug: slugArray } = params;
   const slug = slugArray.replace(/\/$/, '');
+  const { allDocs, versions, config, versionsMeta, versionBanner } = await parent();
 
-  const i18nConfig = getI18nConfig();
-  const slugParts = slug.split('/');
-  let locale: string | undefined;
-  if (i18nConfig && i18nConfig.locales.includes(slugParts[0])) {
-    locale = slugParts[0];
-  }
-
-  const allDocs = await getCachedAllDocs(version, locale);
-  const versions = getCachedVersions();
-  const config = getConfig();
   const isCategory = isCategoryPage(slug, allDocs);
   const doc = await getCachedDocBySlug(slug, version);
 
@@ -51,6 +40,8 @@ export const load: PageServerLoad = async ({ params }) => {
       slug,
       allDocs,
       versions,
+      versionsMeta,
+      versionBanner,
       config,
       isCategory: true,
       isNotFound: false,
@@ -74,6 +65,8 @@ export const load: PageServerLoad = async ({ params }) => {
       slug,
       allDocs,
       versions,
+      versionsMeta,
+      versionBanner,
       config,
       isCategory: false,
       isNotFound: true,
@@ -102,6 +95,8 @@ export const load: PageServerLoad = async ({ params }) => {
     slug,
     allDocs,
     versions,
+    versionsMeta,
+    versionBanner,
     config,
     isCategory: showCategoryIndex,
     isNotFound: false,

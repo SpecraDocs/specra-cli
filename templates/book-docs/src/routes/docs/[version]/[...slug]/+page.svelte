@@ -2,6 +2,7 @@
   import {
     TableOfContents,
     Header,
+    TabGroups,
     DocLayout,
     CategoryIndex,
     HotReloadIndicator,
@@ -44,7 +45,19 @@
     activeTabGroup={data.categoryTabGroup}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} config={data.config} />
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config}>
+        {#snippet subheader()}
+          {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
+            <TabGroups
+              tabGroups={data.config.navigation.tabGroups}
+              activeTabId={data.categoryTabGroup}
+              docs={allDocsCompat}
+              version={data.version}
+              flush={data.config.navigation?.sidebarStyle === 'flush'}
+            />
+          {/if}
+        {/snippet}
+      </Header>
     {/snippet}
     <CategoryIndex
       categoryPath={data.slug}
@@ -65,7 +78,19 @@
     config={data.config}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} config={data.config} />
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config}>
+        {#snippet subheader()}
+          {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
+            <TabGroups
+              tabGroups={data.config.navigation.tabGroups}
+              activeTabId={data.categoryTabGroup}
+              docs={allDocsCompat}
+              version={data.version}
+              flush={data.config.navigation?.sidebarStyle === 'flush'}
+            />
+          {/if}
+        {/snippet}
+      </Header>
     {/snippet}
     <NotFoundContent version={data.version} />
   </MobileDocLayout>
@@ -80,7 +105,19 @@
     activeTabGroup={data.categoryTabGroup}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} config={data.config} />
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config}>
+        {#snippet subheader()}
+          {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
+            <TabGroups
+              tabGroups={data.config.navigation.tabGroups}
+              activeTabId={data.categoryTabGroup}
+              docs={allDocsCompat}
+              version={data.version}
+              flush={data.config.navigation?.sidebarStyle === 'flush'}
+            />
+          {/if}
+        {/snippet}
+      </Header>
     {/snippet}
     {#snippet toc()}
       {#if !data.isCategory}
