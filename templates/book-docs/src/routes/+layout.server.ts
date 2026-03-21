@@ -6,7 +6,7 @@ import type { SpecraConfig } from 'specra';
 initConfig(specraConfig as unknown as Partial<SpecraConfig>);
 
 export const prerender = true;
-export const trailingSlash = 'always';
+export const trailingSlash = 'never';
 
 export const load: LayoutServerLoad = async () => {
   const config = getConfig();
