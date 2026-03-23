@@ -1,5 +1,9 @@
 import { Command } from 'commander'
+import prompts from 'prompts'
+import path from 'path'
 import pc from 'picocolors'
+import { createProject } from './create-project.js'
+import { validateProjectName } from './utils.js'
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
@@ -11,6 +15,126 @@ program
   .name('specra')
   .description('Specra CLI - Deploy and manage your documentation sites')
   .version(version)
+
+program
+  .command('create [project-directory]')
+  .description('Create a new Specra documentation site')
+  .option('--template <template>', 'Template to use (minimal, book-docs, jbrains-docs)')
+  .option('--use-npm', 'Use npm as the package manager')
+  .option('--use-pnpm', 'Use pnpm as the package manager')
+  .option('--use-yarn', 'Use yarn as the package manager')
+  .option('--skip-install', 'Skip package installation')
+  .action(async (projectDirectory: string | undefined, options) => {
+    console.log()
+    console.log(pc.bold(pc.cyan('Create Specra Documentation Site')))
+    console.log()
+
+    let projectName = projectDirectory
+
+    if (!projectName) {
+      const response = await prompts({
+        type: 'text',
+        name: 'projectName',
+        message: 'What is your project named?',
+        initial: 'my-docs',
+        validate: (name) => {
+          const validation = validateProjectName(name)
+          if (validation.valid) return true
+          return validation.problems![0]
+        },
+      })
+
+      if (!response.projectName) {
+        console.log()
+        console.log('Aborting.')
+        process.exit(1)
+      }
+
+      projectName = response.projectName
+    }
+
+    const projectBaseName = path.basename(path.resolve(projectName!))
+    const validation = validateProjectName(projectBaseName)
+    if (!validation.valid) {
+      console.error(
+        pc.red(
+          `Cannot create a project named ${pc.cyan(
+            `"${projectBaseName}"`
+          )} because of npm naming restrictions:\n`
+        )
+      )
+      validation.problems!.forEach((p) =>
+        console.error(`  ${pc.red('•')} ${p}`)
+      )
+      process.exit(1)
+    }
+
+    let template = options.template
+    if (!template) {
+      const response = await prompts({
+        type: 'select',
+        name: 'template',
+        message: 'Which template would you like to use?',
+        choices: [
+          { title: 'Minimal', value: 'minimal', description: 'Minimal setup to get started quickly' },
+          { title: 'Book Docs', value: 'book-docs', description: 'Knowledge base style with dark theme and categorized sidebar' },
+          { title: 'JBrains Docs', value: 'jbrains-docs', description: 'Reference docs style with light theme and tab groups' },
+        ],
+        initial: 0,
+      })
+
+      if (!response.template) {
+        console.log()
+        console.log('Aborting.')
+        process.exit(1)
+      }
+
+      template = response.template
+    }
+
+    let packageManager = options.useNpm
+      ? 'npm'
+      : options.usePnpm
+      ? 'pnpm'
+      : options.useYarn
+      ? 'yarn'
+      : undefined
+
+    if (!packageManager && !options.skipInstall) {
+      const response = await prompts({
+        type: 'select',
+        name: 'packageManager',
+        message: 'Which package manager do you want to use?',
+        choices: [
+          { title: 'npm', value: 'npm' },
+          { title: 'yarn', value: 'yarn' },
+          { title: 'pnpm', value: 'pnpm' },
+        ],
+        initial: 0,
+      })
+
+      if (!response.packageManager) {
+        console.log()
+        console.log('Aborting.')
+        process.exit(1)
+      }
+
+      packageManager = response.packageManager
+    }
+
+    try {
+      await createProject({
+        projectName: projectName!,
+        template: template || 'minimal',
+        packageManager: packageManager || 'npm',
+        skipInstall: options.skipInstall,
+      })
+    } catch (error) {
+      console.error(pc.red('\nError creating project:'))
+      console.error(error)
+      process.exit(1)
+    }
+  })
 
 program
   .command('login')
