@@ -31,13 +31,17 @@
   <meta property="og:title" content={data.title} />
   <meta property="og:description" content={data.description} />
   <meta property="og:url" content={data.ogUrl} />
+  <meta property="og:site_name" content="Documentation Platform" />
   <meta property="og:type" content="article" />
+  <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={data.title} />
   <meta name="twitter:description" content={data.description} />
+  <link rel="canonical" href={data.ogUrl} />
 </svelte:head>
 
 {#if !data.doc && data.isCategory}
+  <!-- Category page without doc content -->
   <MobileDocLayout
     docs={allDocsCompat}
     version={data.version}
@@ -45,7 +49,7 @@
     activeTabGroup={data.categoryTabGroup}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config}>
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products}>
         {#snippet subheader()}
           {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
             <TabGroups
@@ -72,13 +76,14 @@
   <HotReloadIndicator />
   <DevModeBadge />
 {:else if data.isNotFound}
+  <!-- Not found -->
   <MobileDocLayout
     docs={allDocsCompat}
     version={data.version}
     config={data.config}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config}>
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products}>
         {#snippet subheader()}
           {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
             <TabGroups
@@ -98,6 +103,7 @@
   <HotReloadIndicator />
   <DevModeBadge />
 {:else if data.doc}
+  <!-- Normal doc or category with doc content -->
   <MobileDocLayout
     docs={allDocsCompat}
     version={data.version}
@@ -105,7 +111,7 @@
     activeTabGroup={data.categoryTabGroup}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config}>
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products}>
         {#snippet subheader()}
           {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
             <TabGroups

@@ -45,11 +45,12 @@
   <MobileDocLayout
     docs={allDocsCompat}
     version={data.version}
+    product={data.product}
     config={data.config}
     activeTabGroup={data.categoryTabGroup}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products}>
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products} currentProduct={data.product}>
         {#snippet subheader()}
           {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
             <TabGroups
@@ -57,6 +58,7 @@
               activeTabId={data.categoryTabGroup}
               docs={allDocsCompat}
               version={data.version}
+              product={data.product}
               flush={data.config.navigation?.sidebarStyle === 'flush'}
             />
           {/if}
@@ -66,6 +68,7 @@
     <CategoryIndex
       categoryPath={data.slug}
       version={data.version}
+      product={data.product}
       allDocs={allDocsCompat}
       title={categoryTitle}
       description={categoryDescription}
@@ -80,10 +83,11 @@
   <MobileDocLayout
     docs={allDocsCompat}
     version={data.version}
+    product={data.product}
     config={data.config}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products}>
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products} currentProduct={data.product}>
         {#snippet subheader()}
           {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
             <TabGroups
@@ -91,6 +95,7 @@
               activeTabId={data.categoryTabGroup}
               docs={allDocsCompat}
               version={data.version}
+              product={data.product}
               flush={data.config.navigation?.sidebarStyle === 'flush'}
             />
           {/if}
@@ -107,11 +112,12 @@
   <MobileDocLayout
     docs={allDocsCompat}
     version={data.version}
+    product={data.product}
     config={data.config}
     activeTabGroup={data.categoryTabGroup}
   >
     {#snippet header()}
-      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products}>
+      <Header currentVersion={data.version} versions={data.versions} versionsMeta={data.versionsMeta} versionBanner={data.versionBanner} config={data.config} products={data.products} currentProduct={data.product}>
         {#snippet subheader()}
           {#if data.config.navigation?.tabGroups && data.config.navigation.tabGroups.length > 0}
             <TabGroups
@@ -119,6 +125,7 @@
               activeTabId={data.categoryTabGroup}
               docs={allDocsCompat}
               version={data.version}
+              product={data.product}
               flush={data.config.navigation?.sidebarStyle === 'flush'}
             />
           {/if}
@@ -156,6 +163,7 @@
         nextDoc={nextDoc}
         version={data.version}
         slug={data.slug}
+        product={data.product}
         config={data.config}
       >
         {#if data.doc.contentNodes}
