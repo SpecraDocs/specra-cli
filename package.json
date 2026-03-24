@@ -1,10 +1,9 @@
 {
-  "name": "create-specra",
-  "version": "0.2.7",
-  "description": "CLI tool to scaffold a new Specra documentation site with Next.js",
+  "name": "specra-cli",
+  "version": "0.3.0",
+  "description": "CLI tool to create, deploy, and manage Specra documentation sites",
   "type": "module",
   "bin": {
-    "create-specra": "./dist/index.js",
     "specra": "./dist/cli.js"
   },
   "files": [
@@ -23,7 +22,6 @@
     "svelte",
     "mdx",
     "specra",
-    "create-app",
     "cli"
   ],
   "author": "dalmasonto, arthur-kamau",
