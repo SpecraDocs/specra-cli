@@ -10,6 +10,7 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
+    "lucide-svelte": "^0.454.0",
     "specra": "^0.2.4"
   },
   "devDependencies": {
