@@ -6,7 +6,7 @@ const config = specraConfig({
   vitePreprocess: { vitePreprocess },
   kit: {
     adapter: adapter(),
-    prerender: { handleHttpError: 'warn', handleMissingId: 'warn' }
+    prerender: { handleHttpError: 'warn', handleMissingId: 'warn', handleUnseenRoutes: 'warn' }
   }
 });
 
