@@ -1,7 +1,7 @@
 <script lang="ts">
   import {
     Header,
-    Footer,
+    // Footer,
     DocLayout,
     CategoryIndex,
     HotReloadIndicator,
@@ -16,6 +16,7 @@
   import { sidebarStore } from 'specra/stores';
   import ModernSidebar from './ModernSidebar.svelte';
   import ModernToc from './ModernToc.svelte';
+  import ModernFooter from './ModernFooter.svelte';
 
   interface Props {
     data: any;
@@ -150,7 +151,7 @@
             {/if}
           {/if}
 
-          <Footer config={data.config} />
+          <ModernFooter config={data.config} />
         </div>
       </main>
 
