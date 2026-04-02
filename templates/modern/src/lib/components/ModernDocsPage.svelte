@@ -154,7 +154,7 @@
 
       <!-- Desktop TOC -->
       {#if data.doc && !data.isCategory && data.config.navigation?.showTableOfContents}
-        <div class="hidden xl:block w-56 shrink-0 border-l border-r border-border">
+        <div class="hidden xl:block w-64 shrink-0 border-l border-r border-border">
           <div
             class="overflow-y-auto py-6 px-4"
             style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem));"
