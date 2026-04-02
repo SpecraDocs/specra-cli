@@ -1,0 +1,23 @@
+---
+title: build
+description: Build the documentation site for production
+sidebar_position: 2
+---
+
+## Usage
+
+```bash
+platform build
+```
+
+## What It Does
+
+1. Runs `vite build` to generate static HTML
+2. Pre-renders all documentation pages
+3. Outputs to the `build/` directory
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `--outDir` | Custom output directory (default: `build`) |

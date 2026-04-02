@@ -1,0 +1,42 @@
+---
+title: Configuration
+description: Configure your documentation site
+sidebar_position: 2
+---
+
+## Configuration File
+
+All configuration lives in `specra.config.json` at the project root.
+
+```json
+{
+  "site": {
+    "title": "My Docs",
+    "description": "Documentation for my project",
+    "activeVersion": "v1.0.0"
+  },
+  "theme": {
+    "defaultMode": "dark"
+  },
+  "navigation": {
+    "showSidebar": true,
+    "showTableOfContents": true
+  }
+}
+```
+
+## Site Settings
+
+| Setting | Type | Description |
+|---------|------|-------------|
+| `title` | string | Site title shown in header |
+| `description` | string | Meta description |
+| `activeVersion` | string | Default version to show |
+| `url` | string | Production URL |
+
+## Theme Settings
+
+| Setting | Type | Description |
+|---------|------|-------------|
+| `defaultMode` | `"light"` \| `"dark"` \| `"system"` | Default theme mode |
+| `respectPrefersColorScheme` | boolean | Follow OS preference |

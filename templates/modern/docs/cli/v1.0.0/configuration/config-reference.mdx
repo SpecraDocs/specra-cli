@@ -1,0 +1,34 @@
+---
+title: Config Reference
+description: Complete CLI configuration reference
+sidebar_position: 1
+---
+
+## Configuration File
+
+The CLI reads configuration from `specra.config.json`.
+
+## All Options
+
+| Section | Key | Type | Default | Description |
+|---------|-----|------|---------|-------------|
+| `site` | `title` | string | `"My Docs"` | Site title |
+| `site` | `activeVersion` | string | `"v1.0.0"` | Default version |
+| `theme` | `defaultMode` | string | `"system"` | Theme mode |
+| `navigation` | `showSidebar` | boolean | `true` | Show sidebar |
+| `navigation` | `showTableOfContents` | boolean | `true` | Show TOC |
+| `navigation` | `collapsibleSidebar` | boolean | `true` | Allow collapsing |
+| `features` | `versioning` | boolean | `true` | Enable versions |
+
+## Products
+
+```json
+{
+  "products": [
+    { "id": "platform", "label": "Platform", "default": true },
+    { "id": "cli", "label": "CLI" }
+  ]
+}
+```
+
+Each product gets its own docs folder and URL namespace: `/docs/{product}/{version}/`.

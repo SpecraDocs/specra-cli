@@ -1,0 +1,44 @@
+---
+title: Building for Production
+description: Build and optimize your documentation for production
+sidebar_position: 4
+---
+
+## Build Command
+
+```bash
+npm run build
+```
+
+This generates a static site in the `build/` directory.
+
+## Output
+
+The build output is a collection of static HTML, CSS, and JavaScript files that can be served by any web server or CDN.
+
+```
+build/
+├── index.html
+├── docs/
+│   └── platform/
+│       └── v1.0.0/
+│           └── ...
+├── _app/
+│   ├── immutable/
+│   └── version.json
+└── api-specs/
+```
+
+## Preview Locally
+
+```bash
+npm run preview
+```
+
+## Optimization
+
+The build automatically:
+- Pre-renders all pages as static HTML
+- Code-splits JavaScript bundles
+- Inlines critical CSS
+- Generates a sitemap

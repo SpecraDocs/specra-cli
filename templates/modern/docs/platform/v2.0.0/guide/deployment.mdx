@@ -1,0 +1,60 @@
+---
+title: Deployment
+description: Deploy your documentation site
+sidebar_position: 5
+---
+
+## Static Hosting
+
+Since the platform generates a static site, you can deploy to any static hosting provider.
+
+## Vercel
+
+```bash
+npm i -g vercel
+vercel
+```
+
+## Netlify
+
+```bash
+npm i -g netlify-cli
+netlify deploy --prod --dir=build
+```
+
+## GitHub Pages
+
+Add a GitHub Actions workflow:
+
+```yaml
+name: Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+```
+
+## Docker
+
+```dockerfile
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY . .
+RUN npm ci && npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+```
