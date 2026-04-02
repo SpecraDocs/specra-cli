@@ -1,0 +1,30 @@
+---
+title: Plugins
+description: Extend the platform with plugins
+sidebar_position: 3
+---
+
+## Plugin System
+
+The platform supports plugins to extend functionality.
+
+## Available Plugins
+
+- **Search** — Full-text search powered by Meilisearch
+- **Analytics** — Track page views and engagement
+- **Sitemap** — Auto-generated XML sitemaps
+
+## Creating a Plugin
+
+Plugins follow a simple interface:
+
+```typescript
+interface Plugin {
+  name: string;
+  setup(config: PluginConfig): void;
+}
+```
+
+<Callout type="info">
+Plugin documentation is a work in progress. Check back for updates.
+</Callout>

@@ -1,0 +1,88 @@
+---
+title: Manual Endpoints
+description: Hand-crafted API endpoint documentation
+sidebar_position: 2
+---
+
+API endpoints documented with individual components.
+
+---
+
+## Get User
+
+<ApiEndpoint
+  method="GET"
+  path="/api/users/:id"
+  summary="Retrieve a user by ID"
+>
+
+<ApiParams
+  title="Path Parameters"
+  params={[
+    {
+      name: "id",
+      type: "string",
+      required: true,
+      description: "The unique identifier of the user"
+    }
+  ]}
+/>
+
+<ApiResponse
+  status={200}
+  description="User retrieved successfully"
+  example={{
+    "id": "user_123",
+    "name": "John Doe",
+    "email": "john@example.com"
+  }}
+/>
+
+<ApiResponse
+  status={404}
+  description="User not found"
+  example={{
+    "error": "User not found",
+    "code": "USER_NOT_FOUND"
+  }}
+/>
+
+</ApiEndpoint>
+
+## Create User
+
+<ApiEndpoint
+  method="POST"
+  path="/api/users"
+  summary="Create a new user"
+>
+
+<ApiParams
+  title="Body Parameters"
+  params={[
+    {
+      name: "name",
+      type: "string",
+      required: true,
+      description: "Full name of the user"
+    },
+    {
+      name: "email",
+      type: "string",
+      required: true,
+      description: "Email address"
+    }
+  ]}
+/>
+
+<ApiResponse
+  status={201}
+  description="User created"
+  example={{
+    "id": "user_456",
+    "name": "Jane Smith",
+    "email": "jane@example.com"
+  }}
+/>
+
+</ApiEndpoint>
