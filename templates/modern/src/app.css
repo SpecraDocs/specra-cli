@@ -6,32 +6,6 @@
     --font-mono: "Fira Code", "JetBrains Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* ─── Vite-Inspired Dark Theme (default) ─── */
-.dark {
-  --background: #1b1b1f;
-  --foreground: rgba(255, 255, 255, 0.87);
-  --card: #232326;
-  --card-foreground: rgba(255, 255, 255, 0.87);
-  --popover: #232326;
-  --popover-foreground: rgba(255, 255, 255, 0.87);
-  --primary: #bd34fe;
-  --primary-foreground: #ffffff;
-  --secondary: #2e2e32;
-  --secondary-foreground: rgba(255, 255, 255, 0.87);
-  --muted: #232326;
-  --muted-foreground: #ababab;
-  --accent: #2e2e32;
-  --accent-foreground: rgba(255, 255, 255, 0.87);
-  --destructive: #e5484d;
-  --destructive-foreground: #ffffff;
-  --border: #2e2e32;
-  --input: #2e2e32;
-  --ring: #bd34fe;
-  --sidebar-background: #161618;
-  --sidebar-foreground: #ababab;
-  --sidebar-border: #2e2e32;
-}
-
 /* ─── Vite-Inspired Light Theme ─── */
 :root {
   --background: #ffffff;
@@ -53,7 +27,41 @@
   --border: #e2e2e3;
   --input: #e2e2e3;
   --ring: #bd34fe;
-  --sidebar-background: #f6f6f7;
+  --sidebar: #f6f6f7;
   --sidebar-foreground: #616161;
   --sidebar-border: #e2e2e3;
+  --sidebar-primary: #bd34fe;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f0f1;
+  --sidebar-accent-foreground: #1b1b1f;
+}
+
+/* ─── Vite-Inspired Dark Theme (default) ─── */
+.dark {
+  --background: #1b1b1f;
+  --foreground: rgba(255, 255, 255, 0.87);
+  --card: #232326;
+  --card-foreground: rgba(255, 255, 255, 0.87);
+  --popover: #232326;
+  --popover-foreground: rgba(255, 255, 255, 0.87);
+  --primary: #bd34fe;
+  --primary-foreground: #ffffff;
+  --secondary: #2e2e32;
+  --secondary-foreground: rgba(255, 255, 255, 0.87);
+  --muted: #232326;
+  --muted-foreground: #ababab;
+  --accent: #2e2e32;
+  --accent-foreground: rgba(255, 255, 255, 0.87);
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+  --border: #2e2e32;
+  --input: #2e2e32;
+  --ring: #bd34fe;
+  --sidebar: #161618;
+  --sidebar-foreground: #ababab;
+  --sidebar-border: #2e2e32;
+  --sidebar-primary: #bd34fe;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #232326;
+  --sidebar-accent-foreground: rgba(255, 255, 255, 0.87);
 }

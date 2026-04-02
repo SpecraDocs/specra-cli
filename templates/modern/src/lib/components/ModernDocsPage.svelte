@@ -61,7 +61,7 @@
 
   <div
     class="lg:hidden fixed top-0 left-0 h-full w-72 z-50 transform transition-transform duration-300 ease-in-out {sidebarOpen ? 'translate-x-0' : '-translate-x-full'}"
-    style="background: var(--sidebar-background);"
+    style="background: var(--sidebar);"
   >
     <div class="flex flex-col h-full border-r" style="border-color: var(--sidebar-border);">
       <div class="shrink-0 px-4 py-4 border-b" style="border-color: var(--sidebar-border);">
@@ -84,7 +84,7 @@
   <div class="flex">
     <aside
       class="hidden lg:block w-64 shrink-0 sticky top-0 h-screen overflow-y-auto border-r"
-      style="background: var(--sidebar-background); border-color: var(--sidebar-border);"
+      style="background: var(--sidebar); border-color: var(--sidebar-border);"
     >
       <ModernSidebar
         docs={allDocsCompat}
