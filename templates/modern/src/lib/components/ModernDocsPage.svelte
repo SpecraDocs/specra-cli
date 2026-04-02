@@ -86,7 +86,7 @@
 
   <!-- Main layout: same container width as navbar -->
   <div class="container mx-auto px-4 md:px-6">
-    <div class="flex">
+    <div class="flex" style="min-height: calc(100vh - var(--header-height, 4rem));">
       <!-- Desktop Sidebar -->
       <aside
         class="hidden lg:block w-64 shrink-0 overflow-y-auto border-r border-border"
