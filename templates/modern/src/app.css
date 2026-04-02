@@ -2,85 +2,58 @@
 @source "./**/*.{js,ts,svelte}";
 
 @theme inline {
-    --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
-    --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+    --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    --font-mono: "Fira Code", "JetBrains Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* =============================================
-   THEME OVERRIDES
-   Uncomment a :root block for light theme and/or
-   a .dark block for dark theme. Mix and match!
-   ============================================= */
+/* ─── Vite-Inspired Dark Theme (default) ─── */
+.dark {
+  --background: #1b1b1f;
+  --foreground: rgba(255, 255, 255, 0.87);
+  --card: #232326;
+  --card-foreground: rgba(255, 255, 255, 0.87);
+  --popover: #232326;
+  --popover-foreground: rgba(255, 255, 255, 0.87);
+  --primary: #bd34fe;
+  --primary-foreground: #ffffff;
+  --secondary: #2e2e32;
+  --secondary-foreground: rgba(255, 255, 255, 0.87);
+  --muted: #232326;
+  --muted-foreground: #ababab;
+  --accent: #2e2e32;
+  --accent-foreground: rgba(255, 255, 255, 0.87);
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+  --border: #2e2e32;
+  --input: #2e2e32;
+  --ring: #bd34fe;
+  --sidebar-background: #161618;
+  --sidebar-foreground: #ababab;
+  --sidebar-border: #2e2e32;
+}
 
-/* ─── Mint Light ─── */
-/* :root {
-  --primary: oklch(0.45 0.18 162);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.45 0.18 162);
-} */
-
-/* ─── Ocean Light ─── */
-/* :root {
-  --primary: oklch(0.45 0.18 240);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.45 0.18 240);
-} */
-
-/* ─── Rose Light ─── */
-/* :root {
-  --primary: oklch(0.50 0.20 350);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.50 0.20 350);
-} */
-
-/* ─── Amber Light ─── */
-/* :root {
-  --primary: oklch(0.55 0.16 70);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.55 0.16 70);
-} */
-
-/* ─── Violet Light ─── */
-/* :root {
-  --primary: oklch(0.48 0.22 290);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.48 0.22 290);
-} */
-
-/* ─── Mint Dark ─── */
-/* .dark {
-  --primary: oklch(0.72 0.18 162);
-  --primary-foreground: oklch(0.10 0.03 160);
-  --ring: oklch(0.72 0.18 162);
-} */
-
-/* ─── Ocean Dark ─── */
-/* .dark {
-  --primary: oklch(0.68 0.16 240);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.68 0.16 240);
-} */
-
-/* ─── Rose Dark ─── */
-/* .dark {
-  --primary: oklch(0.70 0.18 350);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.70 0.18 350);
-} */
-
-/* ─── Amber Dark ─── */
-/* .dark {
-  --primary: oklch(0.75 0.16 70);
-  --primary-foreground: oklch(0.10 0.03 70);
-  --ring: oklch(0.75 0.16 70);
-} */
-
-/* ─── Violet Dark ─── */
-/* .dark {
-  --primary: oklch(0.70 0.20 290);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.70 0.20 290);
-} */
-
-/* For full theme customization (backgrounds, borders, sidebar, etc.)
-   see: https://specra-docs.com/docs/v1.0.0/configuration/theming */
+/* ─── Vite-Inspired Light Theme ─── */
+:root {
+  --background: #ffffff;
+  --foreground: #1b1b1f;
+  --card: #f9f9f9;
+  --card-foreground: #1b1b1f;
+  --popover: #ffffff;
+  --popover-foreground: #1b1b1f;
+  --primary: #bd34fe;
+  --primary-foreground: #ffffff;
+  --secondary: #f6f6f7;
+  --secondary-foreground: #1b1b1f;
+  --muted: #f6f6f7;
+  --muted-foreground: #616161;
+  --accent: #f6f6f7;
+  --accent-foreground: #1b1b1f;
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+  --border: #e2e2e3;
+  --input: #e2e2e3;
+  --ring: #bd34fe;
+  --sidebar-background: #f6f6f7;
+  --sidebar-foreground: #616161;
+  --sidebar-border: #e2e2e3;
+}
