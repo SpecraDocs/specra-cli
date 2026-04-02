@@ -1,8 +1,8 @@
 {
   "$schema": "./node_modules/specra/config/specra.config.schema.json",
   "site": {
-    "title": "My Docs",
-    "description": "Documentation for my project",
+    "title": "Modern Docs",
+    "description": "Next-generation documentation platform",
     "url": "http://localhost:5173",
     "baseUrl": "/",
     "language": "en",
@@ -11,34 +11,21 @@
     "activeVersion": "v1.0.0"
   },
   "theme": {
-    "defaultMode": "system",
+    "defaultMode": "dark",
     "respectPrefersColorScheme": true
   },
   "navigation": {
     "showSidebar": true,
-    "collapsibleSidebar": true,
+    "collapsibleSidebar": false,
     "showBreadcrumbs": true,
     "showTableOfContents": true,
     "tocPosition": "right",
-    "tocMaxDepth": 3,
-    "tabGroups": [
-      {
-        "id": "guides",
-        "label": "Guides",
-        "icon": "book-open"
-      },
-      {
-        "id": "api",
-        "label": "API Reference",
-        "icon": "zap"
-      },
-      {
-        "id": "components",
-        "label": "Components",
-        "icon": "layers"
-      }
-    ]
+    "tocMaxDepth": 3
   },
+  "products": [
+    { "id": "platform", "label": "Platform", "default": true },
+    { "id": "cli", "label": "CLI" }
+  ],
   "social": {
     "github": "https://github.com/your-org/your-repo"
   },
@@ -46,38 +33,26 @@
     "enabled": false
   },
   "footer": {
-    "copyright": "Copyright © 2025 My Project. All rights reserved.",
+    "copyright": "Copyright © 2025 Modern Docs. All rights reserved.",
     "links": [
       {
         "title": "Documentation",
         "items": [
-          {
-            "label": "Getting Started",
-            "href": "/docs/v1.0.0/getting-started"
-          }
+          { "label": "Getting Started", "href": "/docs/platform/v1.0.0/introduction/getting-started" }
         ]
       },
       {
         "title": "Community",
         "items": [
-          {
-            "label": "GitHub",
-            "href": "https://github.com/your-org/your-repo"
-          }
+          { "label": "GitHub", "href": "https://github.com/your-org/your-repo" }
         ]
       }
-    ],
-    "branding": {
-      "showBranding": true,
-      "logo": "https://specra-docs.com/favicon.svg",
-      "title": "Specra",
-      "url": "https://specra-docs.com"
-    }
+    ]
   },
   "banner": {
     "enabled": false,
-    "message": "🎉 This is a development version. Some features may not work as expected.",
-    "type": "error",
+    "message": "This is a development build.",
+    "type": "info",
     "dismissible": true
   },
   "features": {
