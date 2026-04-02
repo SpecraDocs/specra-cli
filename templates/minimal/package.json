@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "lucide-svelte": "^0.454.0",
-    "specra": "^0.2.8"
+    "specra": "file:/home/dalmas/E/projects/documentation-system/specra/specra-sdk/specra-0.2.50.tgz"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.0",

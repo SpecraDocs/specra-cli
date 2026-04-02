@@ -12,8 +12,8 @@ importers:
         specifier: ^0.454.0
         version: 0.454.0(svelte@5.55.1)
       specra:
-        specifier: file:/home/dalmas/E/projects/documentation-system/specra/specra-sdk/specra-0.2.47.tgz
-        version: file:../../../specra-sdk/specra-0.2.47.tgz(@sveltejs/kit@2.55.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.1)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1)(typescript@5.9.3)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1)
+        specifier: file:/home/dalmas/E/projects/documentation-system/specra/specra-sdk/specra-0.2.50.tgz
+        version: file:../../../specra-sdk/specra-0.2.50.tgz(@sveltejs/kit@2.55.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.1)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1)(typescript@5.9.3)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1)
     devDependencies:
       '@sveltejs/adapter-static':
         specifier: ^3.0.0
@@ -1541,9 +1541,9 @@ packages:
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
 
-  specra@file:../../../specra-sdk/specra-0.2.47.tgz:
-    resolution: {integrity: sha512-xWpqW42IXpAVhGtUkm3q1ObpFXpMh8Y/pO8p85+FUDoveGFLKbc5UrVNNGeeJVZAXpcXbwAowAryr7RXvl48wA==, tarball: file:../../../specra-sdk/specra-0.2.47.tgz}
-    version: 0.2.47
+  specra@file:../../../specra-sdk/specra-0.2.50.tgz:
+    resolution: {integrity: sha512-GG/CerX0PbpREaVVYQeeyPOd3wLmwp4e0bDKOO5/LXbkjUxzICe94UQLtZoEaBYt6pt7tH1dSTbHYf2llfwBOg==, tarball: file:../../../specra-sdk/specra-0.2.50.tgz}
+    version: 0.2.50
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
       svelte: ^5.0.0
@@ -3457,7 +3457,7 @@ snapshots:
 
   space-separated-tokens@2.0.2: {}
 
-  specra@file:../../../specra-sdk/specra-0.2.47.tgz(@sveltejs/kit@2.55.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.1)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1)(typescript@5.9.3)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1):
+  specra@file:../../../specra-sdk/specra-0.2.50.tgz(@sveltejs/kit@2.55.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.1)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1)(typescript@5.9.3)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1):
     dependencies:
       '@sveltejs/kit': 2.55.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.1)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0)))(svelte@5.55.1)(typescript@5.9.3)(vite@6.4.1(jiti@2.6.1)(lightningcss@1.32.0))
       bits-ui: 1.8.0(svelte@5.55.1)

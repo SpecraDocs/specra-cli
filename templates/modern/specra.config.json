@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/specra/config/specra.config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/SpecraDocs/specra-sdk/main/config/specra.config.schema.json",
   "site": {
     "title": "Modern Docs",
     "description": "Next-generation documentation platform",
