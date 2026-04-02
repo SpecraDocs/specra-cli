@@ -65,3 +65,41 @@
   --sidebar-accent: #232326;
   --sidebar-accent-foreground: rgba(255, 255, 255, 0.87);
 }
+
+/* ─── Smaller text and headings (Vite-style compact) ─── */
+.prose {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.prose :where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 1.75rem;
+  margin-top: 0;
+}
+
+.prose :where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 1.375rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 1.125rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose :where(p):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.prose :where(li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.8125rem;
+}
