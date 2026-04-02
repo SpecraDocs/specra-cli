@@ -22,10 +22,6 @@
     "tocPosition": "right",
     "tocMaxDepth": 3
   },
-  "products": [
-    { "id": "platform", "label": "Platform", "default": true },
-    { "id": "cli", "label": "CLI" }
-  ],
   "social": {
     "github": "https://github.com/your-org/your-repo"
   },
