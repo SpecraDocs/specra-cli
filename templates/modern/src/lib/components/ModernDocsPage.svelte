@@ -16,7 +16,6 @@
   } from 'specra/components';
   import { sidebarStore } from 'specra/stores';
   import ModernSidebar from './ModernSidebar.svelte';
-  import type { Snippet } from 'svelte';
 
   interface Props {
     data: any;
@@ -37,6 +36,7 @@
 </script>
 
 <div class="min-h-screen bg-background">
+  <!-- Header spans full width -->
   <Header
     currentVersion={data.version}
     versions={data.versions}
@@ -48,6 +48,7 @@
 
   <SiteBanner config={data.config} />
 
+  <!-- Mobile Sidebar Overlay -->
   {#if sidebarOpen}
     <div
       class="lg:hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
@@ -59,12 +60,13 @@
     ></div>
   {/if}
 
+  <!-- Mobile Sidebar Drawer -->
   <div
     class="lg:hidden fixed top-0 left-0 h-full w-72 z-50 transform transition-transform duration-300 ease-in-out {sidebarOpen ? 'translate-x-0' : '-translate-x-full'}"
     style="background: var(--sidebar);"
   >
-    <div class="flex flex-col h-full border-r" style="border-color: var(--sidebar-border);">
-      <div class="shrink-0 px-4 py-4 border-b" style="border-color: var(--sidebar-border);">
+    <div class="flex flex-col h-full border-r border-border">
+      <div class="shrink-0 px-4 py-4 border-b border-border">
         <a href="/" class="font-semibold text-foreground">
           {data.config.site?.title || 'Documentation'}
         </a>
@@ -81,10 +83,12 @@
     </div>
   </div>
 
+  <!-- Main three-column layout: sidebar | content | TOC -->
   <div class="flex">
+    <!-- Desktop Sidebar — flush left, full height, border from top -->
     <aside
-      class="hidden lg:block w-64 shrink-0 sticky top-0 h-screen overflow-y-auto border-r"
-      style="background: var(--sidebar); border-color: var(--sidebar-border);"
+      class="hidden lg:block w-64 shrink-0 overflow-y-auto border-r border-border"
+      style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem)); background: var(--sidebar);"
     >
       <ModernSidebar
         docs={allDocsCompat}
@@ -94,64 +98,67 @@
       />
     </aside>
 
+    <!-- Content -->
     <main class="flex-1 min-w-0 px-4 md:px-8 py-8">
-      <div class="flex max-w-6xl mx-auto">
-        <div class="flex-1 min-w-0">
-          {#if !data.doc && data.isCategory}
+      <div class="flex flex-col gap-2 max-w-4xl mx-auto">
+        {#if !data.doc && data.isCategory}
+          <CategoryIndex
+            categoryPath={data.slug}
+            version={data.version}
+            product={data.product}
+            allDocs={allDocsCompat}
+            title={categoryTitle}
+            description={categoryDescription}
+            config={data.config}
+          />
+        {:else if data.isNotFound}
+          <NotFoundContent version={data.version} />
+        {:else if data.doc}
+          {#if data.isCategory}
             <CategoryIndex
               categoryPath={data.slug}
               version={data.version}
               product={data.product}
               allDocs={allDocsCompat}
-              title={categoryTitle}
-              description={categoryDescription}
+              title={data.doc.meta.title}
+              description={data.doc.meta.description}
               config={data.config}
             />
-          {:else if data.isNotFound}
-            <NotFoundContent version={data.version} />
-          {:else if data.doc}
-            {#if data.isCategory}
-              <CategoryIndex
-                categoryPath={data.slug}
-                version={data.version}
-                product={data.product}
-                allDocs={allDocsCompat}
-                title={data.doc.meta.title}
-                description={data.doc.meta.description}
-                config={data.config}
-              />
-            {:else}
-              <SearchHighlight />
-              <DocLayout
-                meta={data.doc.meta}
-                previousDoc={previousDoc}
-                nextDoc={nextDoc}
-                version={data.version}
-                slug={data.slug}
-                product={data.product}
-                config={data.config}
-              >
-                {#if data.doc.contentNodes}
-                  <MdxContent nodes={data.doc.contentNodes} components={mdxComponents} />
-                {:else}
-                  {@html data.doc.content}
-                {/if}
-              </DocLayout>
-            {/if}
+          {:else}
+            <SearchHighlight />
+            <DocLayout
+              meta={data.doc.meta}
+              previousDoc={previousDoc}
+              nextDoc={nextDoc}
+              version={data.version}
+              slug={data.slug}
+              product={data.product}
+              config={data.config}
+            >
+              {#if data.doc.contentNodes}
+                <MdxContent nodes={data.doc.contentNodes} components={mdxComponents} />
+              {:else}
+                {@html data.doc.content}
+              {/if}
+            </DocLayout>
           {/if}
-
-          <Footer config={data.config} />
-        </div>
-
-        {#if data.doc && !data.isCategory && data.config.navigation?.showTableOfContents}
-          <div class="hidden xl:block w-56 shrink-0 ml-8">
-            <div class="sticky top-8">
-              <TableOfContents items={data.toc} config={data.config} />
-            </div>
-          </div>
         {/if}
+
+        <Footer config={data.config} />
       </div>
     </main>
+
+    <!-- Desktop TOC — flush right, full height, border from top -->
+    {#if data.doc && !data.isCategory && data.config.navigation?.showTableOfContents}
+      <div
+        class="hidden xl:block w-56 shrink-0 border-l border-border"
+        style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem)); overflow-y: auto;"
+      >
+        <div class="py-6 px-4">
+          <TableOfContents items={data.toc} config={data.config} />
+        </div>
+      </div>
+    {/if}
   </div>
 </div>
 
