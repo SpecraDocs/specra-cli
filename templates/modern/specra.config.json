@@ -53,12 +53,6 @@
       }
     ]
   },
-  "banner": {
-    "enabled": false,
-    "message": "This is a development build.",
-    "type": "info",
-    "dismissible": true
-  },
   "features": {
     "editUrl": "https://github.com/your-org/your-repo/edit/main/docs",
     "showLastUpdated": true,
