@@ -2,5 +2,6 @@
   "label": "Guide",
   "position": 2,
   "collapsible": false,
-  "collapsed": false
+  "collapsed": false,
+  "tab_group": "guides"
 }

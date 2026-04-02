@@ -31,10 +31,11 @@
     version: string;
     product?: string;
     config: SpecraConfig;
+    activeTabGroup?: string;
     onLinkClick?: () => void;
   }
 
-  let { docs = [], version, product, config, onLinkClick }: Props = $props();
+  let { docs = [], version, product, config, activeTabGroup, onLinkClick }: Props = $props();
 
   let docsBase = $derived(
     product && product !== '_default_'
@@ -44,8 +45,46 @@
 
   let pathname = $derived($page.url.pathname.replace(/\/$/, ''));
 
+  // Tab group support
+  let tabGroups = $derived(config.navigation?.tabGroups || []);
+  let hasTabGroups = $derived(tabGroups.length > 0);
+
+  let currentTabGroup = $state(activeTabGroup || '');
+
+  // Initialize tab group from active page or default to first
+  $effect(() => {
+    if (!hasTabGroups) return;
+    if (currentTabGroup) return;
+
+    // Find which tab group the current page belongs to
+    const currentDoc = docs.find((doc) => pathname === `${docsBase}/${doc.slug}`);
+    if (currentDoc) {
+      const docTab = currentDoc.meta?.tab_group || currentDoc.categoryTabGroup;
+      if (docTab) {
+        currentTabGroup = docTab;
+        return;
+      }
+    }
+    // Default to first tab
+    currentTabGroup = tabGroups[0]?.id || '';
+  });
+
+  // Filter docs by active tab group
+  let filteredDocs = $derived.by(() => {
+    if (hasTabGroups && currentTabGroup) {
+      return docs.filter((doc) => {
+        const docTabGroup = doc.meta?.tab_group || doc.categoryTabGroup;
+        if (!docTabGroup) {
+          return currentTabGroup === tabGroups[0]?.id;
+        }
+        return docTabGroup === currentTabGroup;
+      });
+    }
+    return docs;
+  });
+
   let structure = $derived.by(() => {
-    return buildSidebarStructure(docs);
+    return buildSidebarStructure(filteredDocs);
   });
 
   let sortedGroups = $derived(sortSidebarGroups(structure.rootGroups));
@@ -55,16 +94,28 @@
     return pathname === `${docsBase}/${slug}`;
   }
 
-  function isActiveInGroup(group: any): boolean {
-    const hasActiveItem = group.items.some(
-      (doc: any) => pathname === `${docsBase}/${doc.slug}`
-    );
-    if (hasActiveItem) return true;
-    return Object.values(group.children).some((child: any) => isActiveInGroup(child));
+  function switchTab(tabId: string) {
+    currentTabGroup = tabId;
   }
 </script>
 
 <nav class="modern-sidebar">
+  <!-- Tab Group Selector -->
+  {#if hasTabGroups}
+    <div class="tab-selector">
+      {#each tabGroups as tab}
+        <button
+          class="tab-btn"
+          class:active={currentTabGroup === tab.id}
+          onclick={() => switchTab(tab.id)}
+        >
+          {tab.label}
+        </button>
+      {/each}
+    </div>
+  {/if}
+
+  <!-- Standalone items -->
   {#if sortedStandalone.length > 0}
     <div class="sidebar-group">
       {#each sortedStandalone as doc}
@@ -80,6 +131,7 @@
     </div>
   {/if}
 
+  <!-- Groups -->
   {#each sortedGroups as [key, group], groupIndex}
     <div class="sidebar-group" class:has-border={groupIndex < sortedGroups.length - 1 || sortedStandalone.length > 0}>
       <h3 class="sidebar-group-label">{group.label}</h3>
@@ -114,9 +166,40 @@
 
 <style>
   .modern-sidebar {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     font-size: 0.8125rem;
     line-height: 1.75;
+  }
+
+  .tab-selector {
+    display: flex;
+    gap: 0;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .tab-btn:hover {
+    color: var(--foreground);
+    background: var(--accent);
+  }
+
+  .tab-btn.active {
+    color: var(--primary);
+    background: var(--accent);
+    border-color: var(--border);
   }
 
   .sidebar-group {

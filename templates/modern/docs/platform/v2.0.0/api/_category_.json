@@ -2,5 +2,6 @@
   "label": "API Reference",
   "position": 3,
   "collapsible": false,
-  "collapsed": false
+  "collapsed": false,
+  "tab_group": "api"
 }

@@ -78,6 +78,7 @@
           version={data.version}
           product={data.product}
           config={data.config}
+          activeTabGroup={data.categoryTabGroup}
           onLinkClick={closeSidebar}
         />
       </div>
@@ -98,6 +99,7 @@
             version={data.version}
             product={data.product}
             config={data.config}
+            activeTabGroup={data.categoryTabGroup}
           />
         </div>
       </div>
