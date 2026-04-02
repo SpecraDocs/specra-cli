@@ -1,6 +1,5 @@
 <script lang="ts">
   import {
-    TableOfContents,
     Header,
     Footer,
     DocLayout,
@@ -16,6 +15,7 @@
   } from 'specra/components';
   import { sidebarStore } from 'specra/stores';
   import ModernSidebar from './ModernSidebar.svelte';
+  import ModernToc from './ModernToc.svelte';
 
   interface Props {
     data: any;
@@ -44,6 +44,7 @@
     versionBanner={data.versionBanner}
     config={data.config}
     products={data.products}
+    currentProduct={data.product}
   />
 
   <SiteBanner config={data.config} />
@@ -152,12 +153,13 @@
       <!-- Desktop TOC -->
       {#if data.doc && !data.isCategory && data.config.navigation?.showTableOfContents}
         <div
-          class="hidden xl:block w-56 shrink-0 border-l border-border overflow-y-auto"
+          class="hidden xl:block w-56 shrink-0 border-l border-border overflow-y-auto py-6 px-4"
           style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem));"
         >
-          <div class="py-6 px-4">
-            <TableOfContents items={data.toc} config={data.config} />
-          </div>
+          <ModernToc
+            items={data.toc}
+            maxDepth={data.config.navigation?.tocMaxDepth ?? 3}
+          />
         </div>
       {/if}
     </div>
