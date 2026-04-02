@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   import { buildSidebarStructure, sortSidebarGroups, sortSidebarItems } from 'specra';
   import type { SpecraConfig } from 'specra';
+  import SidebarSelect from './SidebarSelect.svelte';
 
   interface DocItem {
     title: string;
@@ -102,17 +103,11 @@
 <nav class="modern-sidebar">
   <!-- Tab Group Selector -->
   {#if hasTabGroups}
-    <div class="tab-selector">
-      {#each tabGroups as tab}
-        <button
-          class="tab-btn"
-          class:active={currentTabGroup === tab.id}
-          onclick={() => switchTab(tab.id)}
-        >
-          {tab.label}
-        </button>
-      {/each}
-    </div>
+    <SidebarSelect
+      options={tabGroups.map((t) => ({ id: t.id, label: t.label }))}
+      value={currentTabGroup}
+      onChange={switchTab}
+    />
   {/if}
 
   <!-- Standalone items -->
@@ -169,37 +164,6 @@
     padding: 0.5rem 0;
     font-size: 0.8125rem;
     line-height: 1.75;
-  }
-
-  .tab-selector {
-    display: flex;
-    gap: 0;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .tab-btn {
-    flex: 1;
-    padding: 0.375rem 0.5rem;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--muted-foreground);
-    background: none;
-    border: 1px solid transparent;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .tab-btn:hover {
-    color: var(--foreground);
-    background: var(--accent);
-  }
-
-  .tab-btn.active {
-    color: var(--primary);
-    background: var(--accent);
-    border-color: var(--border);
   }
 
   .sidebar-group {
