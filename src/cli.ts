@@ -79,6 +79,7 @@ program
           { title: 'Minimal', value: 'minimal', description: 'Minimal setup to get started quickly' },
           { title: 'Book Docs', value: 'book-docs', description: 'Knowledge base style with dark theme and categorized sidebar' },
           { title: 'JBrains Docs', value: 'jbrains-docs', description: 'Reference docs style with light theme and tab groups' },
+          { title: 'Modern', value: 'modern', description: 'Vite-inspired dark theme with flat sidebar and multi-product support' },
         ],
         initial: 0,
       })
