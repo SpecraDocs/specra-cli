@@ -36,7 +36,7 @@
 </script>
 
 <div class="min-h-screen bg-background">
-  <!-- Header spans full width -->
+  <!-- Header -->
   <Header
     currentVersion={data.version}
     versions={data.versions}
@@ -83,82 +83,84 @@
     </div>
   </div>
 
-  <!-- Main three-column layout: sidebar | content | TOC -->
-  <div class="flex">
-    <!-- Desktop Sidebar — flush left, full height, border from top -->
-    <aside
-      class="hidden lg:block w-64 shrink-0 overflow-y-auto border-r border-border"
-      style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem)); background: var(--sidebar);"
-    >
-      <ModernSidebar
-        docs={allDocsCompat}
-        version={data.version}
-        product={data.product}
-        config={data.config}
-      />
-    </aside>
+  <!-- Main layout: same container width as navbar -->
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="flex">
+      <!-- Desktop Sidebar -->
+      <aside
+        class="hidden lg:block w-64 shrink-0 overflow-y-auto border-r border-border"
+        style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem));"
+      >
+        <ModernSidebar
+          docs={allDocsCompat}
+          version={data.version}
+          product={data.product}
+          config={data.config}
+        />
+      </aside>
 
-    <!-- Content -->
-    <main class="flex-1 min-w-0 px-4 md:px-8 py-8">
-      <div class="flex flex-col gap-2 max-w-4xl mx-auto">
-        {#if !data.doc && data.isCategory}
-          <CategoryIndex
-            categoryPath={data.slug}
-            version={data.version}
-            product={data.product}
-            allDocs={allDocsCompat}
-            title={categoryTitle}
-            description={categoryDescription}
-            config={data.config}
-          />
-        {:else if data.isNotFound}
-          <NotFoundContent version={data.version} />
-        {:else if data.doc}
-          {#if data.isCategory}
+      <!-- Content -->
+      <main class="flex-1 min-w-0 py-8 px-4 md:px-8">
+        <div class="flex flex-col gap-2">
+          {#if !data.doc && data.isCategory}
             <CategoryIndex
               categoryPath={data.slug}
               version={data.version}
               product={data.product}
               allDocs={allDocsCompat}
-              title={data.doc.meta.title}
-              description={data.doc.meta.description}
+              title={categoryTitle}
+              description={categoryDescription}
               config={data.config}
             />
-          {:else}
-            <SearchHighlight />
-            <DocLayout
-              meta={data.doc.meta}
-              previousDoc={previousDoc}
-              nextDoc={nextDoc}
-              version={data.version}
-              slug={data.slug}
-              product={data.product}
-              config={data.config}
-            >
-              {#if data.doc.contentNodes}
-                <MdxContent nodes={data.doc.contentNodes} components={mdxComponents} />
-              {:else}
-                {@html data.doc.content}
-              {/if}
-            </DocLayout>
+          {:else if data.isNotFound}
+            <NotFoundContent version={data.version} />
+          {:else if data.doc}
+            {#if data.isCategory}
+              <CategoryIndex
+                categoryPath={data.slug}
+                version={data.version}
+                product={data.product}
+                allDocs={allDocsCompat}
+                title={data.doc.meta.title}
+                description={data.doc.meta.description}
+                config={data.config}
+              />
+            {:else}
+              <SearchHighlight />
+              <DocLayout
+                meta={data.doc.meta}
+                previousDoc={previousDoc}
+                nextDoc={nextDoc}
+                version={data.version}
+                slug={data.slug}
+                product={data.product}
+                config={data.config}
+              >
+                {#if data.doc.contentNodes}
+                  <MdxContent nodes={data.doc.contentNodes} components={mdxComponents} />
+                {:else}
+                  {@html data.doc.content}
+                {/if}
+              </DocLayout>
+            {/if}
           {/if}
-        {/if}
 
-        <Footer config={data.config} />
-      </div>
-    </main>
-
-    <!-- Desktop TOC — flush right, full height, border from top -->
-    {#if data.doc && !data.isCategory && data.config.navigation?.showTableOfContents}
-      <div
-        class="hidden xl:block w-56 shrink-0 border-l border-border"
-        style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem)); overflow-y: auto;"
-      >
-        <div class="py-6 px-4">
-          <TableOfContents items={data.toc} config={data.config} />
+          <Footer config={data.config} />
         </div>
-      </div>
-    {/if}
+      </main>
+
+      <!-- Desktop TOC -->
+      {#if data.doc && !data.isCategory && data.config.navigation?.showTableOfContents}
+        <div
+          class="hidden xl:block w-56 shrink-0 border-l border-border overflow-y-auto"
+          style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem));"
+        >
+          <div class="py-6 px-4">
+            <TableOfContents items={data.toc} config={data.config} />
+          </div>
+        </div>
+      {/if}
+    </div>
   </div>
 </div>
 
