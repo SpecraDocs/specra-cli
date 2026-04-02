@@ -15,7 +15,7 @@
 
 <div class="min-h-screen bg-background">
   <SiteBanner {config} />
-  <header class="border-b border-border">
+  <header class="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
     <div class="container flex h-16 items-center justify-between px-6 mx-auto">
       <a href="/" class="flex items-center gap-2">
         <Logo logo={config.site.logo} alt={config.site.title} class="w-18 object-contain" />
