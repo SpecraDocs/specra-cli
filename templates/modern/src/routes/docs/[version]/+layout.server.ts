@@ -26,7 +26,17 @@ export const load: LayoutServerLoad = async ({ params }) => {
     throw redirect(302, `/docs/${activeVersion}`);
   }
 
-  const allDocs = await getCachedAllDocs(version, defaultLocale);
+  let allDocs = await getCachedAllDocs(version, defaultLocale);
+
+  // Multi-product: if no docs at /docs/{version}/, try loading from the default product
+  // so the layout has data while the page redirects
+  if (allDocs.length === 0) {
+    const defaultProduct = products.find(p => p.default) || products[0];
+    if (defaultProduct) {
+      allDocs = await getCachedAllDocs(version, defaultLocale, defaultProduct.slug);
+    }
+  }
+
   const versions = getCachedVersions();
   const config = getEffectiveConfig(version);
   const versionsMeta = getVersionsMeta(versions);

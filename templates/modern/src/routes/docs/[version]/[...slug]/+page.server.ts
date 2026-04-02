@@ -5,7 +5,9 @@ import {
   getCachedAllDocs,
   getCachedDocBySlug,
   getI18nConfig,
+  getProducts,
 } from 'specra';
+import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -20,6 +22,16 @@ export const load: PageServerLoad = async ({ params }) => {
   }
 
   const allDocs = await getCachedAllDocs(version, locale);
+
+  // Multi-product: if no docs found at /docs/{version}/, redirect to default product
+  if (allDocs.length === 0) {
+    const products = getProducts();
+    const defaultProduct = products.find(p => p.default) || products[0];
+    if (defaultProduct) {
+      redirect(302, `/docs/${defaultProduct.slug}/${version}/${slug}`);
+    }
+  }
+
   const isCategory = isCategoryPage(slug, allDocs);
   const doc = await getCachedDocBySlug(slug, version);
 

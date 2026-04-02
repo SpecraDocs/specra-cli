@@ -15,13 +15,18 @@ export const load: PageServerLoad = async ({ params }) => {
     redirect(302, `/docs/${version}/${activeVersion}`);
   }
 
-  // Standard version route
+  // Standard version route — check non-product docs first
   const docs = await getCachedAllDocs(version);
 
-  if (docs.length === 0) {
-    redirect(302, '/docs/v1.0.0');
+  if (docs.length > 0) {
+    redirect(302, `/docs/${version}/${docs[0].slug}`);
   }
 
-  // Redirect to first doc
-  redirect(302, `/docs/${version}/${docs[0].slug}`);
+  // No docs found at /docs/{version}/ — redirect to default product
+  const defaultProduct = products.find(p => p.default) || products[0];
+  if (defaultProduct) {
+    redirect(302, `/docs/${defaultProduct.slug}/${version}`);
+  }
+
+  redirect(302, '/');
 };
