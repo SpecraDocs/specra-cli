@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../node_modules/specra/config/category.schema.json",
   "label": "Introduction",
   "position": 1,
   "collapsible": false,

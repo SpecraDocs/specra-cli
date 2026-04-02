@@ -1,4 +1,5 @@
 {
+  "$schema": "../../node_modules/specra/config/product.schema.json",
   "label": "Platform",
   "icon": "layout",
   "description": "Core platform documentation",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../../node_modules/specra/config/product.schema.json",
   "label": "CLI",
   "icon": "terminal",
   "description": "Command-line interface documentation",
