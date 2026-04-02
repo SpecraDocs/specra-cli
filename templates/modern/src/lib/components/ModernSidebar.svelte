@@ -17,7 +17,7 @@
     categoryCollapsed?: boolean;
     categoryIcon?: string;
     categoryTabGroup?: string;
-    meta?: {
+    meta: {
       icon?: string;
       tab_group?: string;
       sidebar_position?: number;
@@ -74,7 +74,7 @@
           class:active={isActive(doc.slug)}
           onclick={() => onLinkClick?.()}
         >
-          {doc.meta?.title || doc.title}
+          {doc.meta.title || doc.slug}
         </a>
       {/each}
     </div>
@@ -91,7 +91,7 @@
           class:active={isActive(doc.slug)}
           onclick={() => onLinkClick?.()}
         >
-          {doc.meta?.title || doc.title}
+          {doc.meta.title || doc.slug}
         </a>
       {/each}
 
@@ -104,7 +104,7 @@
             class:active={isActive(doc.slug)}
             onclick={() => onLinkClick?.()}
           >
-            {doc.meta?.title || doc.title}
+            {doc.meta.title || doc.slug}
           </a>
         {/each}
       {/each}

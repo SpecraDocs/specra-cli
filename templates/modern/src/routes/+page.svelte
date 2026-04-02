@@ -3,7 +3,7 @@
   import { Button, SiteBanner, Logo } from 'specra/components';
 
   let { data } = $props();
-  const config = data.config;
+  let config = $derived(data.config);
   const docsUrl = '/docs/platform/v1.0.0/introduction/getting-started';
 </script>
 
@@ -18,7 +18,7 @@
   <header class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" style="border-color: var(--border);">
     <div class="max-w-7xl mx-auto flex h-14 items-center justify-between px-6">
       <a href="/" class="flex items-center gap-2">
-        <Logo logo={config.site.logo} alt={config.site.title} class="w-16 object-contain" />
+        <Logo logo={config.site.logo} alt={config.site.title} className="w-16 object-contain" />
         <span class="font-semibold text-foreground">{config.site.title || 'Modern Docs'}</span>
       </a>
       <div class="flex items-center gap-6">
