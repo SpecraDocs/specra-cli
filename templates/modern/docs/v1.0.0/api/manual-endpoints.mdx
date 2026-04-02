@@ -1,0 +1,155 @@
+---
+title: Manual Endpoints
+description: Hand-crafted API documentation using individual components
+sidebar_position: 2
+icon: code
+tab_group: api
+---
+
+This page shows how to document REST API endpoints using Specra's individual API components.
+
+## Get User
+
+<ApiEndpoint
+  method="GET"
+  path="/api/users/:id"
+  summary="Retrieve a user by ID"
+>
+
+<ApiParams
+  title="Path Parameters"
+  params={[
+    {
+      name: "id",
+      type: "string",
+      required: true,
+      description: "The unique identifier of the user"
+    }
+  ]}
+/>
+
+<ApiParams
+  title="Query Parameters"
+  params={[
+    {
+      name: "fields",
+      type: "string",
+      description: "Comma-separated list of fields to include in the response",
+      default: "all"
+    }
+  ]}
+/>
+
+<ApiResponse
+  status={200}
+  description="User retrieved successfully"
+  example={{
+    "id": "user_123",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "created_at": "2024-01-15T10:30:00Z"
+  }}
+/>
+
+<ApiResponse
+  status={404}
+  description="User not found"
+  example={{
+    "error": "User not found",
+    "code": "USER_NOT_FOUND"
+  }}
+/>
+
+</ApiEndpoint>
+
+## Create User
+
+<ApiEndpoint
+  method="POST"
+  path="/api/users"
+  summary="Create a new user account"
+>
+
+<ApiParams
+  title="Body Parameters"
+  params={[
+    {
+      name: "name",
+      type: "string",
+      required: true,
+      description: "Full name of the user"
+    },
+    {
+      name: "email",
+      type: "string",
+      required: true,
+      description: "Email address (must be unique)"
+    },
+    {
+      name: "role",
+      type: "string",
+      description: "User role assignment",
+      default: "user"
+    }
+  ]}
+/>
+
+<ApiResponse
+  status={201}
+  description="User created successfully"
+  example={{
+    "id": "user_456",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "role": "user",
+    "created_at": "2024-03-20T14:00:00Z"
+  }}
+/>
+
+<ApiResponse
+  status={400}
+  description="Validation error"
+  example={{
+    "error": "Validation failed",
+    "code": "VALIDATION_ERROR",
+    "details": { "email": "Email already exists" }
+  }}
+/>
+
+</ApiEndpoint>
+
+## Delete User
+
+<ApiEndpoint
+  method="DELETE"
+  path="/api/users/:id"
+  summary="Delete a user account"
+>
+
+<ApiParams
+  title="Path Parameters"
+  params={[
+    {
+      name: "id",
+      type: "string",
+      required: true,
+      description: "User ID to delete"
+    }
+  ]}
+/>
+
+<ApiResponse
+  status={204}
+  description="User deleted successfully"
+/>
+
+<ApiResponse
+  status={403}
+  description="Forbidden"
+  example={{
+    "error": "Cannot delete admin account",
+    "code": "FORBIDDEN"
+  }}
+/>
+
+</ApiEndpoint>

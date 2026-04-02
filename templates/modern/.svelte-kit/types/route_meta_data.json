@@ -1,0 +1,31 @@
+{
+	"/": [
+		"src/routes/+page.server.ts",
+		"src/routes/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/docs/[product=product]/[version]": [
+		"src/routes/docs/[product=product]/[version]/+page.server.ts",
+		"src/routes/docs/[product=product]/[version]/+layout.server.ts",
+		"src/routes/+layout.server.ts",
+		"src/routes/docs/[product=product]/[version]/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/docs/[product=product]/[version]/[...slug]": [
+		"src/routes/docs/[product=product]/[version]/[...slug]/+page.server.ts",
+		"src/routes/docs/[product=product]/[version]/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/docs/[version]": [
+		"src/routes/docs/[version]/+page.server.ts",
+		"src/routes/docs/[version]/+layout.server.ts",
+		"src/routes/+layout.server.ts",
+		"src/routes/docs/[version]/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/docs/[version]/[...slug]": [
+		"src/routes/docs/[version]/[...slug]/+page.server.ts",
+		"src/routes/docs/[version]/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	]
+}

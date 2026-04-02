@@ -1,0 +1,103 @@
+---
+title: Code Block
+description: Display syntax-highlighted code with line numbers and copy functionality
+sidebar_position: 6
+---
+
+Code blocks display syntax-highlighted code with line numbers, a copy button, and optional filename headers.
+
+## Usage
+
+Code blocks are automatically created when using fenced code blocks with a language specifier:
+
+````mdx
+```javascript
+const greeting = "Hello, World!";
+console.log(greeting);
+```
+````
+
+## Live Examples
+
+### JavaScript
+
+```javascript
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log(fibonacci(10)); // 55
+```
+
+### TypeScript
+
+```typescript
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+function greetUser(user: User): string {
+  return `Hello, ${user.name}!`;
+}
+```
+
+### Python
+
+```python
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+```
+
+### Bash
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### JSON
+
+```json
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^19.0.0",
+    "next": "^16.0.0"
+  }
+}
+```
+
+## Features
+
+<Callout type="info">
+Code blocks include automatic syntax highlighting for many languages including JavaScript, TypeScript, Python, Bash, JSON, CSS, and more.
+</Callout>
+
+- **Syntax Highlighting** - Automatic language detection and highlighting
+- **Line Numbers** - Easy reference for specific lines
+- **Copy Button** - One-click code copying
+- **Filename Header** - Optional filename display
+
+## Supported Languages
+
+Common languages include:
+- `javascript`, `typescript`, `jsx`, `tsx`
+- `python`, `ruby`, `go`, `rust`
+- `bash`, `shell`, `powershell`
+- `html`, `css`, `scss`
+- `json`, `yaml`, `toml`
+- `sql`, `graphql`
+- `markdown`, `mdx`

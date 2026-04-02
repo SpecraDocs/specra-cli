@@ -1,0 +1,92 @@
+---
+title: Tabs
+description: Organize content into tabbed sections
+sidebar_position: 15
+---
+
+Tabs organize content into switchable panels, perfect for showing alternatives like different package managers or language examples.
+
+## Usage
+
+```mdx
+<Tabs defaultValue="npm">
+  <Tab label="npm">
+    npm content here
+  </Tab>
+
+  <Tab label="yarn">
+    yarn content here
+  </Tab>
+
+  <Tab label="pnpm">
+    pnpm content here
+  </Tab>
+</Tabs>
+```
+
+## Live Examples
+
+### Package Manager Selection
+
+<Tabs defaultValue="npm">
+  <Tab label="npm">
+```bash
+npm install my-package
+```
+  </Tab>
+
+  <Tab label="yarn">
+```bash
+yarn add my-package
+```
+  </Tab>
+
+  <Tab label="pnpm">
+```bash
+pnpm add my-package
+```
+  </Tab>
+</Tabs>
+
+### Code Examples
+
+<Tabs defaultValue="JavaScript">
+  <Tab label="JavaScript">
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+  </Tab>
+
+  <Tab label="TypeScript">
+```typescript
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+```
+  </Tab>
+
+  <Tab label="Python">
+```python
+def greet(name):
+    return f"Hello, {name}!"
+```
+  </Tab>
+</Tabs>
+
+## Props
+
+### Tabs
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | required | Tab components |
+| `defaultValue` | `string` | - | Label of initially selected tab (defaults to first tab) |
+
+### Tab
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | required | Tab button label |
+| `children` | `ReactNode` | required | Content shown when tab is active |

@@ -1,0 +1,91 @@
+{
+  "$schema": "./node_modules/specra/config/specra.config.schema.json",
+  "site": {
+    "title": "My Docs",
+    "description": "Documentation for my project",
+    "url": "http://localhost:5173",
+    "baseUrl": "/",
+    "language": "en",
+    "organizationName": "my-org",
+    "projectName": "my-project",
+    "activeVersion": "v1.0.0"
+  },
+  "theme": {
+    "defaultMode": "system",
+    "respectPrefersColorScheme": true
+  },
+  "navigation": {
+    "showSidebar": true,
+    "collapsibleSidebar": true,
+    "showBreadcrumbs": true,
+    "showTableOfContents": true,
+    "tocPosition": "right",
+    "tocMaxDepth": 3,
+    "tabGroups": [
+      {
+        "id": "guides",
+        "label": "Guides",
+        "icon": "book-open"
+      },
+      {
+        "id": "api",
+        "label": "API Reference",
+        "icon": "zap"
+      },
+      {
+        "id": "components",
+        "label": "Components",
+        "icon": "layers"
+      }
+    ]
+  },
+  "social": {
+    "github": "https://github.com/your-org/your-repo"
+  },
+  "search": {
+    "enabled": false
+  },
+  "footer": {
+    "copyright": "Copyright © 2025 My Project. All rights reserved.",
+    "links": [
+      {
+        "title": "Documentation",
+        "items": [
+          {
+            "label": "Getting Started",
+            "href": "/docs/v1.0.0/getting-started"
+          }
+        ]
+      },
+      {
+        "title": "Community",
+        "items": [
+          {
+            "label": "GitHub",
+            "href": "https://github.com/your-org/your-repo"
+          }
+        ]
+      }
+    ],
+    "branding": {
+      "showBranding": true,
+      "logo": "https://specra-docs.com/favicon.svg",
+      "title": "Specra",
+      "url": "https://specra-docs.com"
+    }
+  },
+  "banner": {
+    "enabled": false,
+    "message": "🎉 This is a development version. Some features may not work as expected.",
+    "type": "error",
+    "dismissible": true
+  },
+  "features": {
+    "showLastUpdated": true,
+    "showReadingTime": true,
+    "showAuthors": false,
+    "showTags": true,
+    "versioning": true,
+    "i18n": false
+  }
+}
