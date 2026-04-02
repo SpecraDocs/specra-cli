@@ -8,7 +8,11 @@
     "language": "en",
     "organizationName": "my-org",
     "projectName": "my-project",
-    "activeVersion": "v1.0.0"
+    "activeVersion": "v1.0.0",
+    "defaultProduct": {
+      "label": "Main Docs",
+      "icon": "book-open"
+    }
   },
   "theme": {
     "defaultMode": "dark",
