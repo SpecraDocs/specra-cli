@@ -88,17 +88,19 @@
   <div class="container mx-auto px-4 md:px-6">
     <div class="flex" style="min-height: calc(100vh - var(--header-height, 4rem));">
       <!-- Desktop Sidebar -->
-      <aside
-        class="hidden lg:block w-64 shrink-0 overflow-y-auto border-r border-border"
-        style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem));"
-      >
-        <ModernSidebar
-          docs={allDocsCompat}
-          version={data.version}
-          product={data.product}
-          config={data.config}
-        />
-      </aside>
+      <div class="hidden lg:block w-64 shrink-0 border-r border-border">
+        <div
+          class="overflow-y-auto"
+          style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem));"
+        >
+          <ModernSidebar
+            docs={allDocsCompat}
+            version={data.version}
+            product={data.product}
+            config={data.config}
+          />
+        </div>
+      </div>
 
       <!-- Content -->
       <main class="flex-1 min-w-0 py-8 px-4 md:px-8">
@@ -152,14 +154,16 @@
 
       <!-- Desktop TOC -->
       {#if data.doc && !data.isCategory && data.config.navigation?.showTableOfContents}
-        <div
-          class="hidden xl:block w-56 shrink-0 border-l border-border overflow-y-auto py-6 px-4"
-          style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem));"
-        >
-          <ModernToc
-            items={data.toc}
-            maxDepth={data.config.navigation?.tocMaxDepth ?? 3}
-          />
+        <div class="hidden xl:block w-56 shrink-0 border-l border-border">
+          <div
+            class="overflow-y-auto py-6 px-4"
+            style="position: sticky; top: var(--header-height, 4rem); height: calc(100vh - var(--header-height, 4rem));"
+          >
+            <ModernToc
+              items={data.toc}
+              maxDepth={data.config.navigation?.tocMaxDepth ?? 3}
+            />
+          </div>
         </div>
       {/if}
     </div>
