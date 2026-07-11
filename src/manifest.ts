@@ -69,7 +69,13 @@ export function readTemplateManifest(templateDir: string): TemplateManifest {
 export function readProjectManifest(projectRoot: string): ProjectManifest | null {
   const p = path.join(projectRoot, '.specra', 'manifest.json')
   if (!fs.existsSync(p)) return null
-  return JSON.parse(fs.readFileSync(p, 'utf8')) as ProjectManifest
+  try {
+    return JSON.parse(fs.readFileSync(p, 'utf8')) as ProjectManifest
+  } catch (e) {
+    throw new Error(
+      `.specra/manifest.json is corrupt (${(e as Error).message}). Delete it to re-adopt, or fix the JSON.`
+    )
+  }
 }
 
 export function writeProjectManifest(projectRoot: string, m: ProjectManifest): void {

@@ -86,4 +86,9 @@ check('buildScaffoldManifest hashes exactly the managed files', () => {
   assert.ok(m.files['src/lib/components/A.svelte'].startsWith('sha256:'))
 })
 
+check('readProjectManifest throws a friendly error on corrupt JSON', () => {
+  const root = tmpProject({ '.specra/manifest.json': '{ not valid json' })
+  assert.throws(() => readProjectManifest(root), /corrupt/)
+})
+
 done()

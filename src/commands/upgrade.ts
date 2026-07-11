@@ -155,7 +155,13 @@ export async function runUpgrade(options: {
     process.exit(1)
   }
 
-  const existing = readProjectManifest(projectRoot)
+  let existing
+  try {
+    existing = readProjectManifest(projectRoot)
+  } catch (e) {
+    console.error(pc.red((e as Error).message))
+    process.exit(1)
+  }
   const templateName = existing?.template || options.template || inferTemplate(projectRoot)
   if (!templateName) {
     console.error(pc.red('Could not determine the template. Re-run with --template <name> (minimal | modern | book-docs | jbrains-docs).'))
@@ -192,6 +198,14 @@ export async function runUpgrade(options: {
 
   // empty plan first — "nothing to do" is true regardless of dry-run
   if (created.length + updated.length + review.length === 0) {
+    if (plan.adopt && !options.dryRun) {
+      // Adopt even when nothing needs changing, so future upgrades are precise.
+      writeProjectManifest(projectRoot, {
+        template: manifest.template,
+        templateVersion: version,
+        files: manifest.files,
+      })
+    }
     console.log(pc.green('\nAlready up to date.'))
     return
   }
