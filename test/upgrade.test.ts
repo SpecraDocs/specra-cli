@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { check, done, tmpProject } from './helpers.ts'
 import { hashBytes } from '../src/manifest.ts'
-import { planUpgrade, applyPlan } from '../src/commands/upgrade.ts'
+import { planUpgrade, applyPlan, planAdopt } from '../src/commands/upgrade.ts'
 
 const h = (s: string) => hashBytes(Buffer.from(s))
 
@@ -76,6 +76,33 @@ check('unmanaged files are never touched', () => {
   applyPlan({ projectRoot: proj, templateDir: tpl, plan, manifest, templateVersion: '0.4.0', force: false, dryRun: false })
   assert.equal(fs.readFileSync(path.join(proj, 'src/routes/+page.svelte'), 'utf8'), 'LANDING')
   assert.ok(!plan.items.some(i => i.rel.endsWith('+page.svelte')))
+})
+
+check('adopt mode: differing file → review, manifest baselined to current bytes', () => {
+  const tpl = tmpProject({
+    'specra.template.json': JSON.stringify({ name: 'modern', managed: ['src/lib/components/*.svelte'] }),
+    'src/lib/components/A.svelte': 'TEMPLATE v2 with badges',
+  })
+  const proj = tmpProject({ 'src/lib/components/A.svelte': 'USER EDITED with link()' })
+  const { plan, seededManifest } = planAdopt({ projectRoot: proj, templateDir: tpl })
+  assert.equal(plan.adopt, true)
+  assert.equal(plan.items.find(i => i.rel.endsWith('A.svelte'))!.action, 'review')
+  // baseline is the developer's current bytes, NOT the template's
+  assert.equal(seededManifest.files['src/lib/components/A.svelte'], h('USER EDITED with link()'))
+
+  applyPlan({ projectRoot: proj, templateDir: tpl, plan, manifest: seededManifest, templateVersion: '0.4.0', force: false, dryRun: false })
+  assert.equal(fs.readFileSync(path.join(proj, 'src/lib/components/A.svelte'), 'utf8'), 'USER EDITED with link()')
+  assert.equal(fs.readFileSync(path.join(proj, 'src/lib/components/A.svelte.new'), 'utf8'), 'TEMPLATE v2 with badges')
+})
+
+check('adopt mode: identical file → unchanged', () => {
+  const tpl = tmpProject({
+    'specra.template.json': JSON.stringify({ name: 'modern', managed: ['src/lib/components/*.svelte'] }),
+    'src/lib/components/A.svelte': 'same',
+  })
+  const proj = tmpProject({ 'src/lib/components/A.svelte': 'same' })
+  const { plan } = planAdopt({ projectRoot: proj, templateDir: tpl })
+  assert.equal(plan.items.find(i => i.rel.endsWith('A.svelte'))!.action, 'unchanged')
 })
 
 done()
