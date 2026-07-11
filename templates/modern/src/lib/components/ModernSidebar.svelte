@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { buildSidebarStructure, sortSidebarGroups, sortSidebarItems, resolveBadges } from 'specra';
+  import { buildSidebarStructure, sortSidebarGroups, sortSidebarItems, resolveBadges, renderInlineCode } from 'specra';
   import type { SpecraConfig } from 'specra';
   import { SidebarBadge } from 'specra/components';
   import SidebarSelect from './SidebarSelect.svelte';
@@ -121,7 +121,7 @@
           class:active={isActive(doc.slug)}
           onclick={() => onLinkClick?.()}
         >
-          <span class="sidebar-link-text">{doc.meta.title || doc.slug}</span>
+          <span class="sidebar-link-text">{@html renderInlineCode(doc.meta.title || doc.slug)}</span>
           {#each resolveBadges(doc.meta?.badge) as badge (badge.text)}
             <SidebarBadge {badge} />
           {/each}
@@ -133,7 +133,7 @@
   <!-- Groups -->
   {#each sortedGroups as [key, group], groupIndex}
     <div class="sidebar-group" class:has-border={groupIndex < sortedGroups.length - 1 || sortedStandalone.length > 0}>
-      <h3 class="sidebar-group-label">{group.label}</h3>
+      <h3 class="sidebar-group-label">{@html renderInlineCode(group.label)}</h3>
 
       {#each sortSidebarItems(group.items) as doc}
         <a
@@ -142,7 +142,7 @@
           class:active={isActive(doc.slug)}
           onclick={() => onLinkClick?.()}
         >
-          <span class="sidebar-link-text">{doc.meta.title || doc.slug}</span>
+          <span class="sidebar-link-text">{@html renderInlineCode(doc.meta.title || doc.slug)}</span>
           {#each resolveBadges(doc.meta?.badge) as badge (badge.text)}
             <SidebarBadge {badge} />
           {/each}
@@ -150,7 +150,7 @@
       {/each}
 
       {#each sortSidebarGroups(group.children) as [childKey, childGroup]}
-        <h4 class="sidebar-subgroup-label">{childGroup.label}</h4>
+        <h4 class="sidebar-subgroup-label">{@html renderInlineCode(childGroup.label)}</h4>
         {#each sortSidebarItems(childGroup.items) as doc}
           <a
             href="{docsBase}/{doc.slug}"
@@ -158,7 +158,7 @@
             class:active={isActive(doc.slug)}
             onclick={() => onLinkClick?.()}
           >
-            <span class="sidebar-link-text">{doc.meta.title || doc.slug}</span>
+            <span class="sidebar-link-text">{@html renderInlineCode(doc.meta.title || doc.slug)}</span>
             {#each resolveBadges(doc.meta?.badge) as badge (badge.text)}
               <SidebarBadge {badge} />
             {/each}
