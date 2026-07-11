@@ -193,6 +193,19 @@ program
     await doctor(options)
   })
 
+program
+  .command('upgrade')
+  .description('Update template-managed files from the current CLI version')
+  .option('-d, --dir <directory>', 'Project directory to upgrade', '.')
+  .option('-t, --template <name>', 'Template name (for sites with no manifest)')
+  .option('--dry-run', 'Show the plan without writing anything')
+  .option('--force', 'Overwrite edited files in place (backs up to .bak)')
+  .option('-y, --yes', 'Skip the confirmation prompt')
+  .action(async (options) => {
+    const { runUpgrade } = await import('./commands/upgrade.js')
+    await runUpgrade(options)
+  })
+
 program.parse()
 
 // Handle unhandled rejections

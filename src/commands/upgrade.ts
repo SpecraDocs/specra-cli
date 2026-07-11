@@ -1,8 +1,11 @@
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
+import prompts from 'prompts'
+import pc from 'picocolors'
 import {
   ProjectManifest, hashFile, hashBytes, readTemplateManifest,
-  listManagedFiles, writeProjectManifest,
+  listManagedFiles, writeProjectManifest, readProjectManifest,
 } from '../manifest.js'
 
 export type FileAction = 'create' | 'update' | 'review' | 'unchanged'
@@ -124,5 +127,88 @@ export function applyPlan(args: {
       templateVersion,
       files: nextFiles,
     })
+  }
+}
+
+function resolveTemplateDir(templateName: string): string {
+  const here = path.dirname(fileURLToPath(import.meta.url))
+  // dist/cli.js (tsup bundles everything into one file) → ../templates/<name>
+  return path.join(here, '..', 'templates', templateName)
+}
+
+function cliVersion(): string {
+  const here = path.dirname(fileURLToPath(import.meta.url))
+  return JSON.parse(fs.readFileSync(path.join(here, '..', 'package.json'), 'utf8')).version
+}
+
+function inferTemplate(projectRoot: string): string | null {
+  if (fs.existsSync(path.join(projectRoot, 'src/lib/components/ModernSidebar.svelte'))) return 'modern'
+  return null
+}
+
+export async function runUpgrade(options: {
+  dir?: string; template?: string; dryRun?: boolean; force?: boolean; yes?: boolean
+}): Promise<void> {
+  const projectRoot = path.resolve(options.dir || '.')
+  if (!fs.existsSync(path.join(projectRoot, 'package.json'))) {
+    console.error(pc.red('Not a project directory (no package.json). Run this from your docs site root.'))
+    process.exit(1)
+  }
+
+  const existing = readProjectManifest(projectRoot)
+  const templateName = existing?.template || options.template || inferTemplate(projectRoot)
+  if (!templateName) {
+    console.error(pc.red('Could not determine the template. Re-run with --template <name> (minimal | modern | book-docs | jbrains-docs).'))
+    process.exit(1)
+  }
+
+  const templateDir = resolveTemplateDir(templateName)
+  if (!fs.existsSync(templateDir)) {
+    console.error(pc.red(`Template ${pc.cyan(templateName)} not found in this CLI version.`))
+    process.exit(1)
+  }
+
+  const version = cliVersion()
+  let plan, manifest
+  if (existing) {
+    plan = planUpgrade({ projectRoot, templateDir, manifest: existing })
+    manifest = existing
+  } else {
+    console.log(pc.yellow(`No .specra/manifest.json found — adopting this site as a ${pc.cyan(templateName)} project.`))
+    const adopted = planAdopt({ projectRoot, templateDir })
+    plan = adopted.plan
+    manifest = adopted.seededManifest
+  }
+
+  const created = plan.items.filter(i => i.action === 'create')
+  const updated = plan.items.filter(i => i.action === 'update')
+  const review = plan.items.filter(i => i.action === 'review')
+
+  console.log()
+  console.log(pc.bold('Upgrade plan:'))
+  console.log(`  ${pc.green(String(created.length))} to create, ${pc.green(String(updated.length))} to update, ${pc.yellow(String(review.length))} need review${options.force ? ' (will overwrite with .bak)' : ' (.new)'}`)
+  for (const i of [...created, ...updated]) console.log(`    ${pc.dim(i.action)} ${i.rel}`)
+  for (const i of review) console.log(`    ${pc.yellow(options.force ? 'overwrite' : 'review')} ${i.rel}`)
+
+  // empty plan first — "nothing to do" is true regardless of dry-run
+  if (created.length + updated.length + review.length === 0) {
+    console.log(pc.green('\nAlready up to date.'))
+    return
+  }
+  if (options.dryRun) {
+    console.log(pc.dim('\nDry run — nothing written.'))
+    return
+  }
+
+  if (!options.yes) {
+    const { go } = await prompts({ type: 'confirm', name: 'go', message: 'Apply these changes?', initial: true })
+    if (!go) { console.log('Aborted.'); return }
+  }
+
+  applyPlan({ projectRoot, templateDir, plan, manifest, templateVersion: version, force: !!options.force, dryRun: false })
+
+  console.log(pc.green('\nDone.'))
+  if (review.length && !options.force) {
+    console.log(pc.yellow(`${review.length} file(s) written as .new next to your edited copies — review and merge them.`))
   }
 }
