@@ -77,3 +77,16 @@ export function writeProjectManifest(projectRoot: string, m: ProjectManifest): v
   fs.mkdirSync(dir, { recursive: true })
   fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(m, null, 2) + '\n')
 }
+
+export function buildScaffoldManifest(
+  projectRoot: string,
+  templateDir: string,
+  templateVersion: string,
+): ProjectManifest {
+  const { name, managed } = readTemplateManifest(templateDir)
+  const files: Record<string, string> = {}
+  for (const rel of listManagedFiles(projectRoot, managed)) {
+    files[rel] = hashFile(path.join(projectRoot, rel))
+  }
+  return { template: name, templateVersion, files }
+}

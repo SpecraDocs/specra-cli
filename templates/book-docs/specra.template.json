@@ -1,0 +1,1 @@
+{ "name": "book-docs", "managed": ["src/routes/docs/**"] }

@@ -5,6 +5,7 @@ import { check, done, tmpProject } from './helpers.ts'
 import {
   hashBytes, globToRegExp, matchesAny, listFilesRecursive,
   listManagedFiles, readTemplateManifest, readProjectManifest, writeProjectManifest,
+  buildScaffoldManifest,
 } from '../src/manifest.ts'
 
 check('hashBytes is stable and prefixed', () => {
@@ -70,6 +71,19 @@ check('project manifest round-trips', () => {
 
 check('readProjectManifest returns null when absent', () => {
   assert.equal(readProjectManifest(tmpProject({})), null)
+})
+
+check('buildScaffoldManifest hashes exactly the managed files', () => {
+  const tpl = tmpProject({
+    'specra.template.json': JSON.stringify({ name: 'modern', managed: ['src/lib/components/*.svelte'] }),
+    'src/lib/components/A.svelte': 'alpha',
+    'src/routes/+page.svelte': 'landing', // unmanaged
+  })
+  const m = buildScaffoldManifest(tpl, tpl, '0.4.0')
+  assert.equal(m.template, 'modern')
+  assert.equal(m.templateVersion, '0.4.0')
+  assert.deepEqual(Object.keys(m.files), ['src/lib/components/A.svelte'])
+  assert.ok(m.files['src/lib/components/A.svelte'].startsWith('sha256:'))
 })
 
 done()

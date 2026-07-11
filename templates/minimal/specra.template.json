@@ -1,0 +1,1 @@
+{ "name": "minimal", "managed": ["src/routes/docs/**"] }

@@ -10,6 +10,7 @@ import {
   tryGitInit,
   copyRecursive,
 } from './utils.js'
+import { buildScaffoldManifest, writeProjectManifest } from './manifest.js'
 
 interface CreateProjectOptions {
   projectName: string
@@ -68,6 +69,13 @@ export async function createProject({
 
   // Copy template files
   copyRecursive(templateDir, root)
+
+  // Record which template files this project came from, so `specra upgrade`
+  // can tell later which managed files the developer has since edited.
+  const cliPkg = JSON.parse(
+    fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')
+  )
+  writeProjectManifest(root, buildScaffoldManifest(root, templateDir, cliPkg.version))
 
   // Update package.json with project name
   const packageJsonPath = path.join(root, 'package.json')
