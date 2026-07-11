@@ -77,6 +77,10 @@ export async function createProject({
   )
   writeProjectManifest(root, buildScaffoldManifest(root, templateDir, cliPkg.version))
 
+  // specra.template.json describes managed globs for `specra upgrade`; it is a
+  // CLI-internal template descriptor and must not ship inside user projects.
+  fs.rmSync(path.join(root, 'specra.template.json'), { force: true })
+
   // Update package.json with project name
   const packageJsonPath = path.join(root, 'package.json')
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'))
