@@ -13,7 +13,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "tsx test/manifest.test.ts && tsx test/upgrade.test.ts"
   },
   "keywords": [
     "documentation",
@@ -45,6 +46,7 @@
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2",
     "tsup": "^8.3.5",
+    "tsx": "^4.19.0",
     "typescript": "^5"
   }
 }
