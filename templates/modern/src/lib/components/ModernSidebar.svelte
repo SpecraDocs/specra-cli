@@ -1,7 +1,8 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { buildSidebarStructure, sortSidebarGroups, sortSidebarItems } from 'specra';
+  import { buildSidebarStructure, sortSidebarGroups, sortSidebarItems, resolveBadges } from 'specra';
   import type { SpecraConfig } from 'specra';
+  import { SidebarBadge } from 'specra/components';
   import SidebarSelect from './SidebarSelect.svelte';
 
   interface DocItem {
@@ -120,7 +121,10 @@
           class:active={isActive(doc.slug)}
           onclick={() => onLinkClick?.()}
         >
-          {doc.meta.title || doc.slug}
+          <span class="sidebar-link-text">{doc.meta.title || doc.slug}</span>
+          {#each resolveBadges(doc.meta?.badge) as badge (badge.text)}
+            <SidebarBadge {badge} />
+          {/each}
         </a>
       {/each}
     </div>
@@ -138,7 +142,10 @@
           class:active={isActive(doc.slug)}
           onclick={() => onLinkClick?.()}
         >
-          {doc.meta.title || doc.slug}
+          <span class="sidebar-link-text">{doc.meta.title || doc.slug}</span>
+          {#each resolveBadges(doc.meta?.badge) as badge (badge.text)}
+            <SidebarBadge {badge} />
+          {/each}
         </a>
       {/each}
 
@@ -151,7 +158,10 @@
             class:active={isActive(doc.slug)}
             onclick={() => onLinkClick?.()}
           >
-            {doc.meta.title || doc.slug}
+            <span class="sidebar-link-text">{doc.meta.title || doc.slug}</span>
+            {#each resolveBadges(doc.meta?.badge) as badge (badge.text)}
+              <SidebarBadge {badge} />
+            {/each}
           </a>
         {/each}
       {/each}
@@ -196,12 +206,22 @@
   }
 
   .sidebar-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.25rem 1.5rem;
     color: var(--sidebar-foreground);
     text-decoration: none;
     transition: color 0.15s;
     border-left: 2px solid transparent;
+  }
+
+  .sidebar-link-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .sidebar-link:hover {
