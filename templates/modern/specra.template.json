@@ -1,0 +1,4 @@
+{
+  "name": "modern",
+  "managed": ["src/routes/docs/**", "src/lib/components/*.svelte"]
+}
