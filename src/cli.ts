@@ -206,6 +206,34 @@ program
     await runUpgrade(options)
   })
 
+const searchCmd = program
+  .command('search')
+  .description('Manage documentation search (Meilisearch)')
+
+searchCmd
+  .command('index')
+  .description('Index your docs into Meilisearch')
+  .option('-d, --dir <directory>', 'Project directory', '.')
+  .option('--host <url>', 'Override the Meilisearch host from config')
+  .option('--api-key <key>', 'Override the Meilisearch API key from config')
+  .option('--index-name <name>', 'Override the index name from config')
+  .action(async (options) => {
+    const { searchIndex } = await import('./commands/search.js')
+    await searchIndex(options)
+  })
+
+searchCmd
+  .command('test')
+  .description('Check the Meilisearch index and run sample queries')
+  .option('-d, --dir <directory>', 'Project directory', '.')
+  .option('--host <url>', 'Override the Meilisearch host from config')
+  .option('--api-key <key>', 'Override the Meilisearch API key from config')
+  .option('--index-name <name>', 'Override the index name from config')
+  .action(async (options) => {
+    const { searchTest } = await import('./commands/search.js')
+    await searchTest(options)
+  })
+
 program.parse()
 
 // Handle unhandled rejections
